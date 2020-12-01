@@ -1,0 +1,11 @@
+package com.test.webPrac.service;
+
+import java.util.ArrayList;
+
+import com.test.web2st.vo.AccountVO;
+
+
+public interface Board {
+	
+	ArrayList<AccountVO> getAccountMemberList();
+}

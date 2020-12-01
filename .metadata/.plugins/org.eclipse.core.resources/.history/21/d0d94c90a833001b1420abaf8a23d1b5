@@ -1,0 +1,16 @@
+package com.test.webPrac.dao;
+
+import java.util.ArrayList;
+
+
+import org.springframework.stereotype.Repository;
+
+import com.test.webPrac.vo.AccountVO;
+
+@Repository
+public interface BoardDaoMapper {
+	
+	//ArrayList<AccountVO> getAccountMemberList();
+	void getAccountMemberList();
+	
+}

@@ -1,0 +1,14 @@
+package com.test.web2st.dao;
+
+import java.util.ArrayList;
+
+import org.springframework.stereotype.Repository;
+
+import com.test.web2st.vo.AccountVO;
+
+@Repository
+public interface BoardDaoMapper {
+	
+	ArrayList<AccountVO> getAccountMemberList();
+	
+}

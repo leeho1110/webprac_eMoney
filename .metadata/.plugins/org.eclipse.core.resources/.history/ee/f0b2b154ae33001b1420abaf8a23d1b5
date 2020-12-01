@@ -1,0 +1,46 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>이름 약자별 데이터 노출</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+</head>
+<body>
+	<div style="width:1100px; margin:50px auto;">
+		<table class="table table-bordered" style="width:300px; text-align: left; margin:0px auto;">
+			<h3>이름 약자별 데이터 노출</h3>
+			<tr>
+				<td>회원 ID</td>
+				<td>${accntInfo.accnt_id}</td>
+			</tr>
+			<tr>
+				<td>닉네임</td>
+				<td>${accntInfo.nickname}</td>
+			</tr>
+			<tr>
+				<td>이름</td>
+				<td>${accntInfo.name}</td>
+			</tr>
+			<tr>
+				<td>회원 유형</td>
+				<td>${accntInfo.user_type}</td>
+			</tr>
+			<tr>
+				<td>휴대폰 번호</td>
+				<td>${accntInfo.phone}</td>
+			</tr>
+			<tr>
+				<td>아이디</td>
+				<td>${accntInfo.id}</td>
+			</tr>
+			<tr>
+				<td>패스워드</td>
+				<td>${accntInfo.s_passwd}</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

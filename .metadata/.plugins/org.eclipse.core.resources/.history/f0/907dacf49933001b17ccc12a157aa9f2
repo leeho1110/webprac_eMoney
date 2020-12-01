@@ -1,0 +1,26 @@
+package com.test.webPrac.service;
+
+import java.util.ArrayList;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.test.webPrac.dao.BoardDaoMapper;
+import com.test.webPrac.vo.AccountVO;
+
+@Service
+public class BoardImpl implements Board {
+
+	private BoardDaoMapper BoardMapper;
+	
+	public BoardImpl(BoardDaoMapper) {
+		// TODO Auto-generated constructor stub
+	}
+	
+	@Override
+	public ArrayList<AccountVO> getAccountMemberList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}
