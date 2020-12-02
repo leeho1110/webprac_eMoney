@@ -11,5 +11,7 @@ import com.test.webPrac.vo.AccountVO;
 public interface BoardDaoMapper {
 	
 	AccountVO getAccountMemberInfo(String nickname);
+
+	int getIdCheck(String idinput);
 	
 }

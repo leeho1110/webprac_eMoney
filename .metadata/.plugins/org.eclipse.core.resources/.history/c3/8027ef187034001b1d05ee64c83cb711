@@ -1,0 +1,11 @@
+package com.test.webPrac.util;
+
+public class RSAUtil {
+
+	private KeyPairGenerator generator;
+    private KeyFactory keyFactory;
+    private KeyPair keyPair;
+    private Cipher cipher;
+
+
+}	

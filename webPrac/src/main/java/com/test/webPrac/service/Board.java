@@ -10,4 +10,6 @@ public interface Board {
 	
 	AccountVO getAccountMemberInfo(String nickname);
 
+	int getIdCheck(String idinput);
+
 }

@@ -1,0 +1,35 @@
+package com.test.webPrac.util;
+
+import java.security.KeyFactory;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+
+import javax.crypto.Cipher;
+
+// Reference -> https://vip00112.tistory.com/40 
+public class RSAUtil {
+	
+	// 암호화에 필요한 객체들 생성 
+	private KeyPairGenerator generator;
+    private KeyFactory keyFactory;
+    private KeyPair keyPair;
+    private Cipher cipher;
+    
+    // 생성자에서 필요한 
+    public RSAUtil() {
+    	try {
+            generator = KeyPairGenerator.getInstance("RSA");
+            generator.initialize(1024);
+            keyFactory = KeyFactory.getInstance("RSA");
+            cipher = Cipher.getInstance("RSA");
+        } catch (Exception e) {
+            logger.warn("RSAUtil 생성 실패.", e);
+        }
+
+
+출처: https://vip00112.tistory.com/40 [GT's Funny Coding]
+	}
+
+    
+    
+}	

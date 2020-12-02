@@ -11,3 +11,7 @@
 1606805126933	Delete element
 1606807075154	Delete element
 1606812529598	Delete element
+1606886897385	Delete element
+1606887781280	Move 'jquery-1.12.4.js' to 'js'
+1606894498678	Encapsulate field 'last_loginDATE'
+1606897456545	Move 4 resources to 'rsa'

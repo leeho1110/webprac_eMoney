@@ -42,4 +42,6 @@
 <fullyQualifiedTypeName name="com.test.webPrac.service.Board"/>
 <fullyQualifiedTypeName name="com.test.webPrac.service.BoardImpl"/>
 <fullyQualifiedTypeName name="com.test.webPrac.dao.BoardDaoMapper"/>
+<fullyQualifiedTypeName name="com.test.webPrac.vo.AccountVO"/>
+<fullyQualifiedTypeName name="java.lang.NullPointerException"/>
 </qualifiedTypeNameHistroy>

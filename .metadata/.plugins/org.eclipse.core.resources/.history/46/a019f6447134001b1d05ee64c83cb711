@@ -1,0 +1,71 @@
+package com.test.webPrac.util;
+
+import java.security.KeyFactory;
+import java.security.KeyPair;
+import java.security.KeyPairGenerator;
+
+import javax.crypto.Cipher;
+
+// Reference -> https://vip00112.tistory.com/40 
+public class RSAUtil {
+
+	// 암호화에 필요한 객체들 생성
+	private KeyPairGenerator generator;
+	private KeyFactory keyFactory;
+	private KeyPair keyPair;
+	private Cipher cipher;
+
+	// 생성자에서 필요한
+	public RSAUtil() {
+		try {
+			generator = KeyPairGenerator.getInstance("RSA");
+			generator.initialize(1024);
+			keyFactory = KeyFactory.getInstance("RSA");
+			cipher = Cipher.getInstance("RSA");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	public static void main(String[] args) {
+		RSAUtil rsa = new RSAUtil();
+//		System.out.println(rsa.getCipher());
+//		System.out.println(rsa.getGenerator());
+//		System.out.println(rsa.getKeyFactory());
+//		System.out.println(rsa.getKeyPair());
+	}
+
+	public KeyPairGenerator getGenerator() {
+		return generator;
+	}
+
+	public void setGenerator(KeyPairGenerator generator) {
+		this.generator = generator;
+	}
+
+	public KeyFactory getKeyFactory() {
+		return keyFactory;
+	}
+
+	public void setKeyFactory(KeyFactory keyFactory) {
+		this.keyFactory = keyFactory;
+	}
+
+	public KeyPair getKeyPair() {
+		return keyPair;
+	}
+
+	public void setKeyPair(KeyPair keyPair) {
+		this.keyPair = keyPair;
+	}
+
+	public Cipher getCipher() {
+		return cipher;
+	}
+
+	public void setCipher(Cipher cipher) {
+		this.cipher = cipher;
+	}
+
+}

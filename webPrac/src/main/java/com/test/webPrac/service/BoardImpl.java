@@ -20,4 +20,9 @@ public class BoardImpl implements Board {
 	public AccountVO getAccountMemberInfo(String nickname) {
 		return BoardMapper.getAccountMemberInfo(nickname);
 	}
+
+	@Override
+	public int getIdCheck(String idinput) {
+		return BoardMapper.getIdCheck(idinput);
+	}
 }
