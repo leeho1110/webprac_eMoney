@@ -4,6 +4,70 @@
     text-align: center;
 }
 
+/* Terms and Conditions */
+#agreeAllMent {
+    display: flex;
+    flex-direction: column;
+    color: #463959;
+}
+
+/* 모든 약관 체크박스 */
+#agreeAllLabel {
+    font-size: 15px;
+}
+
+#agreeAlldiv {
+    margin: 10px auto;
+}
+
+#agreeAll {
+    width: 12px;
+    height: 12px;
+}
+
+/* 약관 동의 멘트 */
+label {
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* 각 체크박스 지정 클래스 */
+.agreeEachCbox {
+    width: 12px;
+    height: 12px;
+    margin-top: 10px;
+}
+
+/* 약관별 동의 체크박스 div */
+.agreeEachdiv {
+    text-align: left;
+}
+
+#termsAndConditions {
+    display: flex;
+    width: 980px;
+    margin: 25px auto;
+}
+
+/* 모두 동의 하단 약관 본문 div */
+.TACdiv:first-child {
+    margin-right: 35px;
+}
+
+.TACcontent {
+    overflow-y: scroll;
+    width: 450px;
+    height: 150px;
+    border:1px solid #cdcdcd;
+}
+
+.TACcontent p {
+    text-align: justify;
+    color: #a3a0a8;
+    font-size: 12px;
+}
+
 /* table setting  */
 #infoTbl {
     border-top: 2px solid black;
@@ -27,7 +91,6 @@ input {
     background-color: #f5f4f3;
     font-size: 14px;
 }
-
 em {
     color: #dc0082;
 }
@@ -40,14 +103,22 @@ em {
     border-bottom: 1px solid #cdcdcd;
 }
 
+img {
+    cursor: pointer;
+}
+
 /* id part */
-#duplicheck {
+#idduplicheck, #nicknameduplicheck {
     margin-left: 5px;
     cursor: pointer;
 }
 
+.duplicateboxdiv {
+    display: flex;
+    width: 725px;
+}
 
-.iddupliment {
+.duplimentFormMent {
     font-weight: bold;
     color: #a3a0a8;
     font-size: 12px;
@@ -78,3 +149,19 @@ em {
 #submitdiv {
     margin: 20px auto;
 }
+
+/* Nickname */
+#nicknamedupliok {
+    display: none;
+    color: green;
+}
+
+/* phone */
+
+.phoneinput {
+    border: 1px solid #cdcdcd;
+    outline: none;
+    width: 100px;
+    height: 25px;
+}
+

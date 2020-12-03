@@ -12,4 +12,6 @@ public interface Board {
 
 	int getIdCheck(String idinput);
 
+	int getNicknameCheck(String nickname);
+
 }

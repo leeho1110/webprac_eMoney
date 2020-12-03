@@ -11,7 +11,6 @@
 <fullyQualifiedTypeName name="javax.jws.WebService"/>
 <fullyQualifiedTypeName name="javax.servlet.annotation.WebServlet"/>
 <fullyQualifiedTypeName name="javax.servlet.http.HttpServlet"/>
-<fullyQualifiedTypeName name="java.io.PrintWriter"/>
 <fullyQualifiedTypeName name="java.util.Scanner"/>
 <fullyQualifiedTypeName name="java.lang.Comparable"/>
 <fullyQualifiedTypeName name="java.sql.Connection"/>
@@ -42,6 +41,23 @@
 <fullyQualifiedTypeName name="com.test.webPrac.service.Board"/>
 <fullyQualifiedTypeName name="com.test.webPrac.service.BoardImpl"/>
 <fullyQualifiedTypeName name="com.test.webPrac.dao.BoardDaoMapper"/>
-<fullyQualifiedTypeName name="com.test.webPrac.vo.AccountVO"/>
 <fullyQualifiedTypeName name="java.lang.NullPointerException"/>
+<fullyQualifiedTypeName name="com.fasterxml.jackson.databind.util.JSONPObject"/>
+<fullyQualifiedTypeName name="net.sf.json.JSONObject"/>
+<fullyQualifiedTypeName name="java.io.PrintWriter"/>
+<fullyQualifiedTypeName name="com.test.webPrac.vo.AccountVO"/>
+<fullyQualifiedTypeName name="java.security.KeyPairGenerator"/>
+<fullyQualifiedTypeName name="java.security.KeyFactory"/>
+<fullyQualifiedTypeName name="java.security.PublicKey"/>
+<fullyQualifiedTypeName name="java.security.interfaces.RSAPublicKey"/>
+<fullyQualifiedTypeName name="java.security.spec.RSAPublicKeySpec"/>
+<fullyQualifiedTypeName name="org.omg.CORBA.OMGVMCID"/>
+<fullyQualifiedTypeName name="javax.crypto.Cipher"/>
+<fullyQualifiedTypeName name="java.lang.Exception"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+<fullyQualifiedTypeName name="java.security.PrivateKey"/>
+<fullyQualifiedTypeName name="org.springframework.web.context.request.SessionScope"/>
+<fullyQualifiedTypeName name="com.test.webPrac.util.RSA"/>
+<fullyQualifiedTypeName name="com.test.webPrac.util.RSAUtil"/>
+<fullyQualifiedTypeName name="org.apache.commons.collections.set.SynchronizedSet"/>
 </qualifiedTypeNameHistroy>

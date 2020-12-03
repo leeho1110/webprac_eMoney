@@ -25,4 +25,9 @@ public class BoardImpl implements Board {
 	public int getIdCheck(String idinput) {
 		return BoardMapper.getIdCheck(idinput);
 	}
+
+	@Override
+	public int getNicknameCheck(String nicknameinput) {
+		return BoardMapper.getNicknameCheck(nicknameinput);
+	}
 }

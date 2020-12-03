@@ -13,5 +13,7 @@ public interface BoardDaoMapper {
 	AccountVO getAccountMemberInfo(String nickname);
 
 	int getIdCheck(String idinput);
+
+	int getNicknameCheck(String nicknameinput);
 	
 }
