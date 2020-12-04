@@ -13,4 +13,8 @@
 	<select id="getNicknameCheck" parameterType="String" resultType="_int">
 		SELECT count(*) AS cnt FROM ACCOUNT WHERE nickname = #{1}
 	</select>
+	
+	<insert id="insertAcctMember" parameterType=""">
+	
+	</insert>
 </mapper>

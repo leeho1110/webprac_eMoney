@@ -14,4 +14,6 @@ public interface Board {
 
 	int getNicknameCheck(String nickname);
 
+	int insertAcctMember(AccountVO accnt);
+
 }

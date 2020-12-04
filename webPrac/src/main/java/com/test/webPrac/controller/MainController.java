@@ -20,6 +20,7 @@ import org.springframework.web.context.request.SessionScope;
 import com.test.webPrac.service.Board;
 import com.test.webPrac.util.RSA;
 import com.test.webPrac.util.RSAUtil;
+import com.test.webPrac.util.SHA256Util;
 import com.test.webPrac.vo.AccountVO;
 
 import net.sf.json.JSONObject;
@@ -68,12 +69,13 @@ public class MainController {
 		
 		// rsa도 새로운 키가 계속 생성되고있음
 		RSA rsa = rsaUtil.creatRSA();
-		System.out.println(rsa.getModulas());
-		System.out.println(rsa.getExponent());
 		
-		req.setAttribute("modulus", rsa.getModulas());
-		req.setAttribute("exponent", rsa.getExponent());
-		session.setAttribute("RSAprivateKey", rsa.getPrivatekey());
+//		System.out.println("Modulas:" + rsa.getModulas());
+//		System.out.println("Exponent:" +rsa.getExponent());
+		
+//		req.setAttribute("modulus", rsa.getModulas());
+//		req.setAttribute("exponent", rsa.getExponent());
+//		session.setAttribute("RSAprivateKey", rsa.getPrivatekey());
 		
 		return "regit";
 	}
@@ -125,13 +127,23 @@ public class MainController {
 	@RequestMapping(value = "register.submit.do", method = RequestMethod.POST)
 	public void register_submit(HttpServletRequest req, HttpServletResponse resp, AccountVO accnt){
 		
-		accnt.setUser_type("일반회원");
+		// 전달된 아이디 비밀번호 decoding 
 		
-		System.out.println(accnt.getId());
-		System.out.println(accnt.getName());
-		System.out.println(accnt.getNickname());
-		System.out.println(accnt.getPhone() );
-		System.out.println(accnt.getS_passwd());
+		// -----------------------
+		
+		// SHA-256 비밀번호 암호화
+		SHA256Util sha256 = new SHA256Util();
+		
+		// 암호화에 필요한  salt값 및 암호화
+		String salt = sha256.generateSalt();
+		String newPwd = sha256.getEncrypt(accnt.getS_passwd(), salt);
+		
+		// 값 입력 
+		accnt.setSalt(salt);
+		accnt.setS_passwd(newPwd);
+		
+		int regitResult = bServ.insertAcctMember(accnt);
+		
 		
 	}
 	

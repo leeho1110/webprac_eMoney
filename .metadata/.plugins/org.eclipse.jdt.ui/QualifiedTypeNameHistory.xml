@@ -54,10 +54,10 @@
 <fullyQualifiedTypeName name="org.omg.CORBA.OMGVMCID"/>
 <fullyQualifiedTypeName name="javax.crypto.Cipher"/>
 <fullyQualifiedTypeName name="java.lang.Exception"/>
-<fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
 <fullyQualifiedTypeName name="java.security.PrivateKey"/>
 <fullyQualifiedTypeName name="org.springframework.web.context.request.SessionScope"/>
 <fullyQualifiedTypeName name="com.test.webPrac.util.RSA"/>
-<fullyQualifiedTypeName name="com.test.webPrac.util.RSAUtil"/>
 <fullyQualifiedTypeName name="org.apache.commons.collections.set.SynchronizedSet"/>
+<fullyQualifiedTypeName name="com.test.webPrac.util.RSAUtil"/>
+<fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
 </qualifiedTypeNameHistroy>

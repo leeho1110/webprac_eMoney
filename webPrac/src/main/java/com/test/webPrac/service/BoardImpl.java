@@ -30,4 +30,9 @@ public class BoardImpl implements Board {
 	public int getNicknameCheck(String nicknameinput) {
 		return BoardMapper.getNicknameCheck(nicknameinput);
 	}
+
+	@Override
+	public int insertAcctMember(AccountVO accnt) {
+		return BoardMapper.insertAcctMember(accnt);
+	}
 }

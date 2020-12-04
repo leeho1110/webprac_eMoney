@@ -10,6 +10,7 @@ public class AccountVO {
 	private String id;
 	private String s_passwd;
 	private String last_loginDATE;
+	private String salt;
 	
 	public int getAccnt_id() {
 		return accnt_id;
@@ -58,5 +59,11 @@ public class AccountVO {
 	}
 	public void setLast_loginDATE(String last_loginDATE) {
 		this.last_loginDATE = last_loginDATE;
+	}
+	public String getSalt() {
+		return salt;
+	}
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 }
