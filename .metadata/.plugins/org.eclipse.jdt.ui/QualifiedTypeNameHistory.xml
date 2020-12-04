@@ -1,16 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.util.Locale"/>
-<fullyQualifiedTypeName name="java.util.logging.Logger"/>
-<fullyQualifiedTypeName name="org.slf4j.LoggerFactory"/>
-<fullyQualifiedTypeName name="java.security.Signature"/>
-<fullyQualifiedTypeName name="com.test.mavenTest.SingletonPrac"/>
-<fullyQualifiedTypeName name="java.lang.Thread"/>
-<fullyQualifiedTypeName name="com.test.mavenTest.ThreadPrac"/>
-<fullyQualifiedTypeName name="com.test.mavenTest.Syncho"/>
-<fullyQualifiedTypeName name="javax.jws.WebService"/>
-<fullyQualifiedTypeName name="javax.servlet.annotation.WebServlet"/>
-<fullyQualifiedTypeName name="javax.servlet.http.HttpServlet"/>
 <fullyQualifiedTypeName name="java.util.Scanner"/>
 <fullyQualifiedTypeName name="java.lang.Comparable"/>
 <fullyQualifiedTypeName name="java.sql.Connection"/>
@@ -44,7 +33,6 @@
 <fullyQualifiedTypeName name="java.lang.NullPointerException"/>
 <fullyQualifiedTypeName name="com.fasterxml.jackson.databind.util.JSONPObject"/>
 <fullyQualifiedTypeName name="net.sf.json.JSONObject"/>
-<fullyQualifiedTypeName name="java.io.PrintWriter"/>
 <fullyQualifiedTypeName name="com.test.webPrac.vo.AccountVO"/>
 <fullyQualifiedTypeName name="java.security.KeyPairGenerator"/>
 <fullyQualifiedTypeName name="java.security.KeyFactory"/>
@@ -59,5 +47,17 @@
 <fullyQualifiedTypeName name="com.test.webPrac.util.RSA"/>
 <fullyQualifiedTypeName name="org.apache.commons.collections.set.SynchronizedSet"/>
 <fullyQualifiedTypeName name="com.test.webPrac.util.RSAUtil"/>
+<fullyQualifiedTypeName name="oracle.jdbc.driver.Message"/>
+<fullyQualifiedTypeName name="java.security.MessageDigest"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="java.security.NoSuchAlgorithmException"/>
+<fullyQualifiedTypeName name="javax.xml.crypto.dsig.keyinfo.RetrievalMethod"/>
+<fullyQualifiedTypeName name="java.util.Random"/>
+<fullyQualifiedTypeName name="java.lang.StringBuffer"/>
+<fullyQualifiedTypeName name="java.io.PrintWriter"/>
+<fullyQualifiedTypeName name="org.springframework.web.servlet.handler.HandlerInterceptorAdapter"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="com.test.webPrac.util.SHA256Util"/>
+<fullyQualifiedTypeName name="javax.servlet.http.Cookie"/>
 <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
 </qualifiedTypeNameHistroy>

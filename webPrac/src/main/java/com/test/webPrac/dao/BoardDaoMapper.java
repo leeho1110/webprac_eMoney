@@ -1,7 +1,7 @@
 package com.test.webPrac.dao;
 
 import java.util.ArrayList;
-
+import java.util.HashMap;
 
 import org.springframework.stereotype.Repository;
 
@@ -17,5 +17,7 @@ public interface BoardDaoMapper {
 	int getNicknameCheck(String nicknameinput);
 
 	int insertAcctMember(AccountVO accnt);
+
+	HashMap<String, String> getPwdandSalt(String id);
 	
 }

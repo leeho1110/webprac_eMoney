@@ -18,6 +18,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="typeAliasesPackage" value="com.test.webPrac.dao" />
 		<property name="mapperLocations" value="classpath*:mapper/*.xml" />
+		<property name="configLocation" value="/WEB-INF/mybatis.xml" />
 	</bean>
 	
 	<!-- sqlSession -->

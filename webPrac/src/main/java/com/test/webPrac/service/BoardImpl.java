@@ -2,7 +2,7 @@ package com.test.webPrac.service;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
-
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,5 +34,10 @@ public class BoardImpl implements Board {
 	@Override
 	public int insertAcctMember(AccountVO accnt) {
 		return BoardMapper.insertAcctMember(accnt);
+	}
+
+	@Override
+	public HashMap<String, String> getPwdandSalt(String id) {
+		return BoardMapper.getPwdandSalt(id);
 	}
 }

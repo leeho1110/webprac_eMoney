@@ -1,0 +1,32 @@
+package com.test.webPrac.util;
+
+import java.util.HashMap;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+public class BoardInterceptor extends HandlerInterceptorAdapter {
+	
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+		
+		// 세션 가져오기 ( 세션이 이미 존재하면 기존 것을 반환, 없다면 새로운 세션 생성)
+		HttpSession session = request.getSession();
+		
+		// 브라우저의 세션이 로그인한 적이 있는지 확인
+		if(session.getAttribute("MemberVO") == null	){
+			return true
+		} else {
+			
+		}
+		
+		
+		
+		return true;
+	}
+
+}

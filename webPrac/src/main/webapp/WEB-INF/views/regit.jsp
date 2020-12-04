@@ -46,7 +46,7 @@
 					<div id="agreeAllMent">
 						<strong>“아래의 '서비스 약관, 개인정보 보호정책 및 수집 이용 안내'에 모두 동의합니다.”</strong>
 						<div id="agreeAlldiv">
-							<input type="checkbox" id="agreeAll" class="agreeEachCbox">
+							<input type="checkbox" id="agreeAll" class="agreeEachCbox" onclick="agreementAllClick();">
 							<label id="agreeAllLabel" for="agreeAll">모든 약관에 동의합니다.</label>
 						</div>
 					</div>
@@ -77,7 +77,7 @@
 							</p>
 						</div>
 						<div class="agreeEachdiv">
-							<input type="checkbox" id="agreeEach1" class="agreeEachCbox">
+							<input type="checkbox" id="agreeEach1" class="agreeEachCbox" onchange="agreementEachClick(this);">
 							<label id="each1Label" for="agreeEach1">약관에 동의합니다.</label>
 				   
 						</div>
@@ -108,7 +108,7 @@
 							</p>
 						</div>
 						<div class="agreeEachdiv">
-							<input type="checkbox" id="agreeEach2" class="agreeEachCbox">
+							<input type="checkbox" id="agreeEach2" class="agreeEachCbox" onchange="agreementEachClick(this);">
 							<label id="each2Label" for="agreeEach2">약관에 동의합니다.</label>
 						</div>
 					</div>
@@ -121,9 +121,9 @@
 										<th>아이디 <em>*</em></th>
 										<td>
 											<div class="duplicateboxdiv">
-												<input type="text" id="idinput"> 
+												<input type="text" id="idinput" onkeyup="idFormCheck();"> 
 												<input type="hidden" id="idhiddeninput" name="id"> 
-												<img src="//img.x1.co.kr/x1/images/btn/btn_duplication.gif" id="idduplicheck"> 
+												<img src="//img.x1.co.kr/x1/images/btn/btn_duplication.gif" id="idduplicheck" onclick="duplicheckAjax(this);"> 
 												<span class="duplimentFormMent" id="idduplino">4자이상 12자이하 영문,숫자(띄어쓰기, 특수문자 불가)<span style="color: red;"> 중복확인을 해주세요</span></span> 
 												<span class="duplimentFormMent" id="iddupliok">사용가능합니다.</span>
 											</div>
@@ -131,25 +131,25 @@
 									</tr>
 									<tr>
 										<th>비밀번호 <em>*</em></th>
-										<td><input type="password" id="pwinput">
+										<td><input type="password" id="pwinput" onkeyup="pwFormCheck();">
 											<input type="hidden" id="pwhiddeninput" name="s_passwd">
 											<span class="pwdment" id="pwduplino">영어 대/소문자, 숫자, 특수문자 중 2가지 이상 조합 6자~12자(띄어쓰기 불가)</span> 
 											<span class="pwdment" id="pwdupliok">사용가능합니다.</span></td>
 										</tr>
 										<tr>
 											<th>비밀번호 확인 <em>*</em></th>
-											<td><input type="password" id="pwreinput"></td>
+											<td><input type="password" id="pwreinput" onkeyup="pwCorrectcheck();"></td>
 										</tr>
 										<tr>
 											<th>성명 <em>*</em></th>
-											<td><input type="text" id="nameinput" name="name"></td>
+											<td><input type="text" id="nameinput" name="name" onkeyup="nameFormCheck();"></td>
 										</tr>
 										<tr>
 										<th>닉네임(필명) <em>*</em></th>
 										<td>
 											<div class="duplicateboxdiv">
-												<input type="text" id="nicknameinput" name="nickname">
-												<img src="//img.x1.co.kr/x1/images/btn/btn_duplication.gif" id="nicknameduplicheck"> 
+												<input type="text" id="nicknameinput" name="nickname" onkeyup="nicknameFormCheck();">
+												<img src="//img.x1.co.kr/x1/images/btn/btn_duplication.gif" id="nicknameduplicheck" onclick="duplicheckAjax(this);"> 
 												<span class="duplimentFormMent" id="nicknameduplino">영문 4자~12자,한글 2자~6자(띄어쓰기, 특수문자 불가)<span style="color: red;"> 중복확인을 해주세요</span></span> 
 												<span class="duplimentFormMent" id="nicknamedupliok">사용가능합니다.</span></td>
 											</div>
@@ -181,8 +181,9 @@
 						<!-- submit btn -->
 						<div id="submitdiv">
 							<img id="cancelbtn"
-								src="//img.x1.co.kr/x1/images/btn/btn_cancel.gif"> <img
-								id="submitbtn" src="//img.x1.co.kr/x1/images/btn/btn_confirm.gif">
+								src="//img.x1.co.kr/x1/images/btn/btn_cancel.gif"> 
+								<img
+								id="submitbtn" src="//img.x1.co.kr/x1/images/btn/btn_confirm.gif" onclick="regitCtgSubmit();">
 						</div>
 	
 					</div>
