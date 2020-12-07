@@ -1,0 +1,11 @@
+
+function loginInputCheck() {
+    
+	if($("#idBox").val() == null){
+		alert("아이디 입력을 확인해주세요")
+	}
+
+    if(tempFlag){
+        $("#loginForm").submit();
+    }
+}

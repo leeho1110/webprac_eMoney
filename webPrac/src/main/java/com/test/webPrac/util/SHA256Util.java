@@ -15,7 +15,6 @@ public class SHA256Util {
 	}
 	
 	public String getEncrypt(String source, byte[] salt){
-		
 		String result = "";
 		
 		byte[] sourceByte = source.getBytes();

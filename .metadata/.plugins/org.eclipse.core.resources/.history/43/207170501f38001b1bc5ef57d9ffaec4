@@ -1,0 +1,11 @@
+
+function loginInputCheck() {
+    
+	if($("#idBox").val() == null){
+		alert("아이디 입력을 확인해주세요");
+	} else if ($("#pwBox").val() == null){
+		alert("비밀번호 입력을 확인해주세요");
+	} else {
+		$("#loginForm").submit();
+	}
+}

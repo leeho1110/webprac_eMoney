@@ -1,0 +1,30 @@
+package com.test.webPrac.service;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.test.webPrac.dao.BoardDaoMapper;
+import com.test.webPrac.vo.LoginVO;
+import com.test.webPrac.vo.MemberVO;
+
+public class LoginImpl implements Login{
+	
+	private BoardDaoMapper BoardMapper;
+	
+	public void insertTest() {
+		BoardMapper.insertTest();
+		System.out.println("실행완료");
+		throw new NullPointerException();
+	}
+
+	public void updateTest() {
+		BoardMapper.updateTest();
+	}
+
+	@Override
+	public MemberVO loginLogic(MemberVO member, HttpServletRequest request, HttpServletResponse response,
+			LoginVO loginVO) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

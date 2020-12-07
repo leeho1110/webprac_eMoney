@@ -1,0 +1,16 @@
+1607297600215	Rename type 'AccountVO'
+1607297622184	Rename local variable 'accnt'
+1607307264459	Encapsulate field 'accnt_id'
+1607307324504	Encapsulate field 'os'
+1607307326245	Encapsulate field 'is_mobile'
+1607307328308	Encapsulate field 'browser'
+1607308156444	Rename method 'updateLastloginhistory'
+1607316034596	Encapsulate field 'ip'
+1607329400727	Delete element
+1607331546886	Delete element
+1607331558919	Rename compilation unit 'BoardImpl2.java'
+1607332281372	Rename type 'Board'
+1607332296168	Rename compilation unit 'BoardImpl.java'
+1607332311459	Rename field 'bServ'
+1607332364065	Move compilation unit
+1607332419558	Delete element

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.test.webPrac.dao.BoardDaoMapper">
-	<select id="getAccountMemberInfo" parameterType="String" resultType="com.test.webPrac.vo.AccountVO">
+	<select id="getAccountMemberInfo" parameterType="String" resultType="MemberVO">
 		SELECT * FROM account where nickname = #{1}
 	</select>
 	
@@ -14,10 +14,20 @@
 		SELECT count(*) AS cnt FROM ACCOUNT WHERE nickname = #{1}
 	</select>
 	
-	<insert id="insertAcctMember" parameterType="memberVO">
-		insert into ACCount (ACCNT_ID, nickname, name, user_type, phone, id, s_passwd, salt) values (seq_account.nextval, #{nickname}, #{name}, default, #{phone}, #{id}, #{s_passwd}, #{salt} )
+	<insert id="insertAcctMember" parameterType="MemberVO">
+		insert into ACCOUNT (ACCNT_ID, nickname, name, user_type, phone, id, s_passwd, salt) values (seq_account.nextval, #{nickname}, #{name}, default, #{phone}, #{id}, #{s_passwd}, #{salt} )
 	</insert>
 	
-	<select id="getPwdandSalt" parameterType="String" resultType="java.util.HashMap">
+	<select id="checkLoginInfo" parameterType="LoginVO" resultType="MemberVO">
+		SELECT * FROM ACCOUNT WHERE id = #{id}
 	</select>
+	
+	<update id="updateLastlogin" parameterType="_int">
+		UPDATE ACCOUNT SET LAST_LOGINDATE = sysdate WHERE ACCNT_ID = #{1}
+	</update>
+	
+	<insert id="updateLastloginhistory" parameterType="LoginVO">
+		INSERT INTO login_history VALUES (seq_loginHistory.nextval, #{accnt_id}, sysdate, #{is_mobile}, #{ip}, #{browser}, #{os})
+	</insert>
+	
 </mapper>

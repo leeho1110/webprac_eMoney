@@ -1,0 +1,6 @@
+package com.test.webPrac.util;
+
+@EnableTransactionManagement
+public class AppConfig {
+
+}

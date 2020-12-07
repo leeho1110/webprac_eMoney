@@ -1,0 +1,21 @@
+package com.test.webPrac.service;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.test.webPrac.vo.LoginVO;
+import com.test.webPrac.vo.MemberVO;
+
+public interface Login {
+	
+	boolean checkLoginPw(LoginVO loginVO, MemberVO member );
+	
+	MemberVO checkLoginInfo(LoginVO loginVO);
+	
+	void updateLastlogin(MemberVO member);
+
+	void insertLastloginhistory(LoginVO loginVO);
+	
+	MemberVO loginLogic( MemberVO member, HttpServletRequest request,HttpServletResponse response, LoginVO loginVO) throws Exception;
+}	
+

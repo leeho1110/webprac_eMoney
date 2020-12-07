@@ -35,19 +35,19 @@
 		<div id="container">
 			<div id="cont_inner">
 				<div id="infobox">
-					<form action="loginCheck.do" action="POST">
+					<form id="loginForm" action="loginCheck.do" method="POST">
 						<h2>로그인</h2>
 						<div class="info_area">
-							<input type="text" name="accnt_id" placeholder="아이디를 입력해주세요">
+							<input type="text" id="idBox" name="id"  placeholder="아이디를 입력해주세요">
 						</div>
 						<div class="info_area">
-							<input type="password" name="accnt_passwd" placeholder="비밀번호를 입력해주세요">
+							<input type="password" id="pwBox" name="pw" placeholder="비밀번호를 입력해주세요">
 						</div>
 					</form>
 					
 					<!-- submit btn -->
 					<div>
-						<input type="submit" id="loginbox" value="로그인">
+						<input type="button" id="loginbox" value="로그인" onclick="loginInputCheck();")>
 					</div>
 				</div>
 			</div>
@@ -56,6 +56,17 @@
 		<!-- 여기까지 -->
 		<div id="footer"></div>
 	</div>
+	<script>
+	function loginInputCheck() {
+		if($("#idBox").val() == ""){
+			alert("아이디 입력을 확인해주세요");
+		} else if ($("#pwBox").val() == ""){
+			alert("비밀번호 입력을 확인해주세요");
+		} else {
+			$("#loginForm").submit();
+		}
+	}
+	</script>
 </body>
 
 </html>

@@ -1,0 +1,8 @@
+package com.test.webPrac.vo;
+
+public class LoginVO {
+	
+	private String id;
+	private String pw;
+	
+}

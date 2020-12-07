@@ -1,0 +1,15 @@
+// 각 항목별 통과 여부와 안내멘트 딕셔너리
+ const loginCategory = {};
+
+ loginCategory['idInput'] = [false, "아이디를 입력해주세요"];
+ loginCategory['pwInput'] = [false,  "비밀번호를 입력해주세요"];
+
+
+function loginInputCheck() {
+    
+	if()
+
+    if(tempFlag){
+        $("#loginForm").submit();
+    }
+}

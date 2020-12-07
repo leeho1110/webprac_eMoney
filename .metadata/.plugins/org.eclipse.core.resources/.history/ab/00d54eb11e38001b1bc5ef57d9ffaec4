@@ -1,0 +1,38 @@
+// 각 항목별 통과 여부와 안내멘트 딕셔너리
+ const loginCategory = {};
+
+ loginCategory['idInput'] = [false, "아이디를 입력해주세요"];
+ loginCategory['pwInput'] = [false,  "비밀번호를 입력해주세요"];
+
+function idInputCheck() {
+    if($("#idBox").val().length() > 0){
+        loginCategory['idInput'][0] = true;
+    } else {
+        loginCategory['idInput'][0] = false;
+    }
+    
+}
+
+function pwInputCheck() {
+    if($("#idBox").val().length() > 0){
+        loginCategory['pwInput'][0] = true;
+    } else {
+        loginCategory['pwInput'][0] = false;
+    }
+}
+
+function loginInputCheck() {
+    alert("login subit");
+    var tempFlag = true;
+    for(var key in loginCategory){
+        if(loginCategory[key][0] == false){
+            alert(loginCategory[key][1]);
+            tempFlag=false;
+            break;
+        }
+    }
+
+    if(tempFlag){
+        $("#loginForm").submit();
+    }
+}
