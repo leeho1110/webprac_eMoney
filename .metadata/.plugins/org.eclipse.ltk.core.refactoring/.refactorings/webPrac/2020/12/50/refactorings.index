@@ -14,3 +14,15 @@
 1607332311459	Rename field 'bServ'
 1607332364065	Move compilation unit
 1607332419558	Delete element
+1607383911001	Rename field 'BoardMapper'
+1607383991998	Rename type 'BoardDaoMapper'
+1607384012552	Rename field 'BoardMapper'
+1607384045505	Rename resource 'board.xml'
+1607411490066	Delete element
+1607412317353	Rename type 'Login'
+1607412322031	Rename type 'Register'
+1607413219484	Delete element
+1607413880974	Delete element
+1607414762906	Delete element
+1607414763775	Delete element
+1607414764589	Delete element

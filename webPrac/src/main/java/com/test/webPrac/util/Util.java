@@ -1,16 +1,18 @@
 package com.test.webPrac.util;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import com.test.webPrac.vo.LoginVO;
+import com.test.webPrac.vo.MemberVO;
 
 public class Util {
 
-	public static LoginVO getInfoFromRequest(HttpServletRequest request, LoginVO loginVO) {
+	public static MemberVO getInfoFromRequest(HttpServletRequest request, MemberVO member) {
 
 		// IP 가져오기
 		String ip = request.getHeader("X-Forwarded-For");
-
+		
 		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
 			ip = request.getHeader("Proxy-Client-IP");
 		}
@@ -29,14 +31,14 @@ public class Util {
 		
 		// Set Ip address (IPv4)
 		// Run -> Run Configurations -> Tomcat -> Arguments -> -Djava.net.preferIPv4Stack=true (IPv6 -> IPv4)
-		loginVO.setIp(ip);
+		member.setIp(ip);
 
 		// 브라우저 및 OS 정보 가져오기
 		String browserAndOs = request.getHeader("User-Agent");
 		
 		// is_Mobile default -> false;
 		String browser = "";
-		loginVO.setIs_mobile(false);
+		member.setIs_mobile(false);
 		
 		if (browserAndOs != null) {
 			if (browserAndOs.indexOf("Trident") > -1) {
@@ -49,15 +51,15 @@ public class Util {
 				browser = "Opera";
 			} else if (browserAndOs.indexOf("iPhone") > -1 && browserAndOs.indexOf("Mobile") > -1) {
 				browser = "iPhone";
-				loginVO.setIs_mobile(true);
+				member.setIs_mobile(true);
 			} else if (browserAndOs.indexOf("Android") > -1 && browserAndOs.indexOf("Mobile") > -1) {
 				browser = "Android";
-				loginVO.setIs_mobile(true);
+				member.setIs_mobile(true);
 			}
 		}
 		
 		// set Browser
-		loginVO.setBrowser(browser);
+		member.setBrowser(browser);
 		
 		String os = null;
 		if(browserAndOs.indexOf("NT 6.0") != -1) os = "Windows Vista/Server 2008";
@@ -76,12 +78,9 @@ public class Util {
 		else os = ""; 
 		
 		// set OS
-		loginVO.setOs(os);
-		
-		
+		member.setOs(os);
 
-
-		return loginVO;
+		return member;
 	}
 
 }

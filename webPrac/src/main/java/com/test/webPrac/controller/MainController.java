@@ -5,36 +5,51 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import com.test.webPrac.service.Login;
-import com.test.webPrac.service.Register;
+import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.test.webPrac.service.LoginService;
+import com.test.webPrac.service.RegisterService;
 import com.test.webPrac.util.SHA256Util;
 import com.test.webPrac.vo.LoginVO;
 import com.test.webPrac.vo.MemberVO;
+import com.test.webPrac.vo.NaverLoginBO;
 
 @Controller
 public class MainController {
-	
-	@Autowired
-	private Register registerServ;
-	
-	@Autowired
-	private Login loginServ;
 
-	// Basic Part -----------------------------------------------------------------
-	
+	@Autowired
+	private RegisterService registerServ;
+
+	@Autowired
+	private LoginService loginServ;
+
+	// Naver Login
+	private NaverLoginBO naverLoginBO;
+	private String apiResult = null;
+
+	@Autowired
+	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
+		this.naverLoginBO = naverLoginBO;
+	}
+
+	// Basic Part
+	// -----------------------------------------------------------------
+
 	// 한글 이름, 영문 이름, 생일, 현재 날짜 및 시간 출력 (index.jsp)
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
 	public String home(HttpServletRequest req, HttpServletResponse resp) {
-		
+
 		SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분 ss초");
 		Date time = new Date();
 
@@ -48,13 +63,17 @@ public class MainController {
 	public String getInfo(HttpServletRequest req, HttpServletResponse resp) {
 
 		// account URL 파싱 처리
-		String nickname = req.getRequestURI().replace("/account.", "").replace(".do", "");
+		String url = req.getRequestURI();
+		String parsedUrl = url.substring(url.indexOf("/account"), url.length());
+		String nickname = parsedUrl.replace("/account.", "").replace(".do", "");
+
 		req.setAttribute("accntNickname", nickname);
 		req.setAttribute("accntInfo", registerServ.getAccountMemberInfo(nickname));
 		return "accountInfo";
 	}
-	
-	// Register -------------------------------------------------------------------
+
+	// Register
+	// -------------------------------------------------------------------
 
 	// 회원가입
 	// 테이블에 있는 모든 데이터를 가져와서 노출 (account.이름약자) - http://ip/account.sj
@@ -146,44 +165,98 @@ public class MainController {
 
 		// 회원가입 시 로그인 성공
 		if (regitResult > 0) {
+			try {
 
+				resp.sendRedirect("main.do");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
-	
-	// login Part  -------------------------------------------------------------------
+
+	// login Part
+	// -------------------------------------------------------------------
 
 	@RequestMapping(value = "login.do", method = RequestMethod.GET)
-	public String login() {
+	public String login(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+
+		// System.out.println("======== Cookies Info =========");
+		// if(request.getCookies() != null){
+		// for(Cookie c : request.getCookies()){
+		// System.out.println(c.getName());
+		// System.out.println(c.getValue());
+		// System.out.println(c.getMaxAge());
+		// }
+		// }
+		// System.out.println("==========================");
+
+		// Naver Login Api
+		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+		request.setAttribute("url", naverAuthUrl);
+
 		return "login";
 
 	}
+
+	@RequestMapping(value = "naverCallback.do", method = RequestMethod.GET)
+	public String naverLogin(Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
+			throws IOException {
+
+		OAuth2AccessToken oauthToken;
+		oauthToken = naverLoginBO.getAccessToken(session, code, state);
+		// 로그인 사용자 정보를 읽어온다.
+		apiResult = naverLoginBO.getUserProfile(oauthToken);
+		model.addAttribute("result", apiResult);
+
+		return "callback";
+	}
+
 	@RequestMapping(value = "loginCheck.do", method = RequestMethod.POST)
-	public void loginCheck(HttpServletRequest request, HttpServletResponse response, HttpSession session, LoginVO loginVO){
-		
-//		// 이미 로그인 값이 들어가있다면 해당 값은 삭제
+	public void loginCheck(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			LoginVO loginVO) {
+
+		// // 이미 로그인 값이 들어가있다면 해당 값은 삭제
 		response.setCharacterEncoding("UTF-8");
 
 		if (session.getAttribute("loginStatus") != null) {
 			session.removeAttribute("loginstatus");
 		}
-		
+
 		// 사용자가 로그인한 값과 일치하는지 확인
 		MemberVO member = null;
-		
-		
+
 		try {
-			member = loginServ.loginLogic(member, request, response, loginVO) ;
+			member = loginServ.loginLogic(member, request, response, loginVO);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
+
+	}
+
+	@RequestMapping(value = "logout.do", method = RequestMethod.GET)
+	public void logout(HttpServletRequest request, HttpServletResponse response) {
+
+		// 세션에서 loginStatus 제거
+		HttpSession session = request.getSession();
+		session.removeAttribute("loginStatus");
+
+		try {
+			// login 화면으로 redirect
+			response.sendRedirect("login.do");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@RequestMapping(value = "main.do", method = RequestMethod.GET)
 	public String main() {
 		return "main";
 	}
-	
-	
+
+	@RequestMapping(value = "testTransac.do", method = RequestMethod.GET)
+	public String testTransac() {
+		loginServ.transactest();
+		return "main";
+	}
+
 }

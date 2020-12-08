@@ -7,17 +7,16 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>eMoney Web 실습</title>
-	<link rel="stylesheet" href="/resources/css/webPrac.css">
-	<link rel="stylesheet" href="/resources/css/regit.css">
+	<link rel="stylesheet" href="resources/css/webPrac.css?">
+	<link rel="stylesheet" href="resources/css/regit.css?">
 	
 	<!-- RSA 암호화 JavaScript -->
-	<script src="/resources/js/jquery-1.12.4.js"></script>
+	<script src="resources/js/jquery-1.12.4.js"></script>
 	
-	<script src="/resources/js/rsa/jsbn.js"></script>
-	<script src="/resources/js/rsa/prng4.js"></script>
-	<script src="/resources/js/rsa/rng.js"></script>
-	<script src="/resources/js/rsa/rsa.js"></script>
-	
+	<script src="resources/js/rsa/jsbn.js"></script>
+	<script src="resources/js/rsa/prng4.js"></script>
+	<script src="resources/js/rsa/rng.js"></script>
+	<script src="resources/js/rsa/rsa.js"></script>
 	</head>
 	
 	<body>
@@ -195,7 +194,7 @@
 		</div>
 		
 		<!-- JS load -->
-		<script src="/resources/js/regit.js"></script>
+		<script src="resources/js/regit.js"></script>
 	</body>
 	
 	</html>

@@ -1,0 +1,14 @@
+package com.test.webPrac.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.test.webPrac.util.NaverLoginBO;
+
+public class NaverController {
+	
+	private NaverLoginBO naverLoginBO;
+	@Autowired
+	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
+		this.naverLoginBO = naverLoginBO;
+	}
+}
