@@ -1,8 +1,8 @@
 <%@ page import="java.net.URLEncoder"%>
 <%@ page import="java.security.SecureRandom"%>
 <%@ page import="java.math.BigInteger"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 
@@ -19,7 +19,6 @@
 <link rel="stylesheet" href="resources/css/webPrac.css">
 <link rel="stylesheet" href="resources/css/login.css">
 </head>
-
 <body>
 	<!-- wrapper -->
 	<div id="wrap">
@@ -33,9 +32,7 @@
 			</div>
 			<!-- header menu -->
 			<div id="category">
-				<img id="emoneyLogo"
-					src="https://pds.saramin.co.kr/company/logo/201902/26/pnj7pp_2uf9-0_logo.jpg"
-					alt="">
+				<img id="emoneyLogo" src="https://pds.saramin.co.kr/company/logo/201902/26/pnj7pp_2uf9-0_logo.jpg" alt="">
 			</div>
 		</div>
 
@@ -49,18 +46,16 @@
 							<input type="text" id="idBox" name="id" placeholder="아이디를 입력해주세요">
 						</div>
 						<div class="info_area">
-							<input type="password" id="pwBox" name="pw"
-								placeholder="비밀번호를 입력해주세요">
+							<input type="password" id="pwBox" name="pw" placeholder="비밀번호를 입력해주세요">
 						</div>
 					</form>
 
 					<!-- submit btn -->
 					<div>
-						<input type="button" id="loginbox" value="로그인"
-							onclick="loginInputCheck();")>
+						<input type="button" id="loginbox" value="로그인" onclick="loginInputCheck();")>
 
 					</div>
-					<div id="naver_id_login" style="text-align:center"><a href="${url}"><img width="110" height="40" style="margin-top: 15px;"src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a></div>
+					<div  style="text-align:center"><a href="${url}"><img width="110" height="40" style="margin-top: 15px;"src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a></div>
 				</div>
 			</div>
 		</div>
@@ -68,7 +63,9 @@
 		<!-- 여기까지 -->
 		<div id="footer"></div>
 	</div>
+	
 	<script>
+	 	
 		function loginInputCheck() {
 			if ($("#idBox").val() == "") {
 				alert("아이디 입력을 확인해주세요");

@@ -1,0 +1,39 @@
+package com.test.webPrac.vo;
+
+public class MemberVO {
+
+	private int accnt_id;
+	private String nickname;
+	private String name;
+	private String user_type;
+	private String phone;
+	private String id;
+	private String s_passwd;
+	private String last_loginDATE;
+	private String salt;
+	private char is_mobile;
+	private String ip;
+	private String browser;
+	private String os;
+
+	
+//	public boolean getIs_mobile() {
+//        // true : 1 / false : 0
+//        return is_mobile == '1' ? true : false;
+//	}
+//	public void setIs_mobile(Boolean is_mobile) {
+//        // true : 1 / false : 0
+//        if(is_mobile){ this.is_mobile = '1'; } 
+//        else { this.is_mobile = '0'; }
+//	}
+	
+	
+	
+//	@Override
+//	public String toString() {
+//		return "MemberVO [accnt_id=" + accnt_id + ", nickname=" + nickname + ", name=" + name + ", user_type="
+//				+ user_type + ", phone=" + phone + ", id=" + id + ", s_passwd=" + s_passwd + ", last_loginDATE="
+//				+ last_loginDATE + ", salt=" + salt + ", is_mobile=" + getIs_mobile() + ", ip=" + ip + ", browser=" + browser
+//				+ ", os=" + os + "]";
+//	}
+}

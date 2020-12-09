@@ -5,6 +5,7 @@ public class LoginVO {
 	private String id;
 	private String pw;
 	private int accnt_id;
+	private String loginApi;
 	
 	public String getId() {
 		return id;
@@ -23,6 +24,12 @@ public class LoginVO {
 	}
 	public void setAccnt_id(int accnt_id) {
 		this.accnt_id = accnt_id;
+	}
+	public String getLoginApi() {
+		return loginApi;
+	}
+	public void setLoginApi(String loginApi) {
+		this.loginApi = loginApi;
 	}
 	
 	

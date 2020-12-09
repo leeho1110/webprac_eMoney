@@ -1,9 +1,7 @@
 package com.test.webPrac.util;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
-import com.test.webPrac.vo.LoginVO;
 import com.test.webPrac.vo.MemberVO;
 
 public class Util {
@@ -38,7 +36,7 @@ public class Util {
 		
 		// is_Mobile default -> false;
 		String browser = "";
-		member.setIs_mobile(false);
+		member.setIs_mobile('0');
 		
 		if (browserAndOs != null) {
 			if (browserAndOs.indexOf("Trident") > -1) {
@@ -51,12 +49,13 @@ public class Util {
 				browser = "Opera";
 			} else if (browserAndOs.indexOf("iPhone") > -1 && browserAndOs.indexOf("Mobile") > -1) {
 				browser = "iPhone";
-				member.setIs_mobile(true);
+				member.setIs_mobile('1');
 			} else if (browserAndOs.indexOf("Android") > -1 && browserAndOs.indexOf("Mobile") > -1) {
 				browser = "Android";
-				member.setIs_mobile(true);
+				member.setIs_mobile('1');
 			}
 		}
+		
 		
 		// set Browser
 		member.setBrowser(browser);

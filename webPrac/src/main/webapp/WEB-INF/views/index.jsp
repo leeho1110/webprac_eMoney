@@ -10,6 +10,5 @@
 	<div>
 		<h3>¿Ã»£, Lee ho, 1995-11-10, ${time}</h3>
 	</div>
-	
 </body>
 </html>

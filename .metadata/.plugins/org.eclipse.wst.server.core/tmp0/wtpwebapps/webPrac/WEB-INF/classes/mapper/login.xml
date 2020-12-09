@@ -23,4 +23,7 @@
 		insert into test values (#{1}, #{1})
 	</insert>
 	
+	<select id="setInfoOfMember" parameterType="MemberVO" resultType="MemberVO">
+		select * from account where accnt_id = #{accnt_id}
+	</select>
 </mapper>

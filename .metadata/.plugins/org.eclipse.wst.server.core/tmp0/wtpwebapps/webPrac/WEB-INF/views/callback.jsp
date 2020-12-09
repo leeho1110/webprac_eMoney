@@ -14,15 +14,23 @@
 <title>Insert title here</title>
 </head>
 <body>
- <h2 style="text-align: center" id="name"></h2>
+ 	<h2 style="text-align: center" id="name"></h2>
     <h4 style="text-align: center" id="email"></h4>
+    <h4 style="text-align: center" id="nickname"></h4>
+    <h4 style="text-align: center" id="id"></h4>
 
 <script type="text/javascript">
+	console.log(${result});
     $(document).ready(function() {
         var name = ${result}.response.name;
         var email = ${result}.response.email;
+        var nickname = ${result}.response.nickname;
+        var id = ${result}.response.id;
+        
         $("#name").html("환영합니다. "+name+"님");
         $("#email").html(email);
+        $("#nickname").html(nickname);
+        $("#id").html(id);
       });
 </script>
 </body>

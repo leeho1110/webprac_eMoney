@@ -27,9 +27,20 @@
     <url-pattern>*.do</url-pattern>
   </servlet-mapping>
   
+   <!-- ERROR PAGE CUSTOM -->
    <error-page>
         <error-code>404</error-code>
-        <location>/error-404.html</location>
+        <location>/WEB-INF/errorCustom/error_404.jsp</location>
+    </error-page>
+
+    <error-page>
+        <error-code>500</error-code>
+        <location>/WEB-INF/errorCustom/error_500.jsp</location>
+    </error-page>
+
+    <error-page>
+        <error-code>403</error-code>
+        <location>/WEB-INF/errorCustom/error_403.jsp</location>
     </error-page>
   
   <!-- 인코딩 필터 (POST -> UTF-8) -->

@@ -26,3 +26,16 @@
 1607414762906	Delete element
 1607414763775	Delete element
 1607414764589	Delete element
+1607469918170	Delete element
+1607470132883	Rename type 'NaverLoginBO'
+1607470141831	Rename field 'naverLoginBO'
+1607470156027	Move compilation unit
+1607470160490	Rename type 'NaverLoginServ'
+1607470819335	Rename local variable 'resp'
+1607476322399	Encapsulate field 'is_mobile'
+1607493844410	Encapsulate field 'loginApi'
+1607497930350	Rename local variable 'oauthService'
+1607499231847	Rename resource 'apiRegit.html'
+1607500544808	Delete element
+1607500598332	Copy file
+1607502453791	Rename local variable 'oauthService1'

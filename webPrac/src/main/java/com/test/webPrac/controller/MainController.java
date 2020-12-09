@@ -9,21 +9,23 @@ import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.swing.plaf.synth.SynthSpinnerUI;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.test.webPrac.service.LoginService;
+import com.test.webPrac.service.NaverLoginService;
 import com.test.webPrac.service.RegisterService;
 import com.test.webPrac.util.SHA256Util;
 import com.test.webPrac.vo.LoginVO;
 import com.test.webPrac.vo.MemberVO;
-import com.test.webPrac.vo.NaverLoginBO;
 
 @Controller
 public class MainController {
@@ -34,14 +36,8 @@ public class MainController {
 	@Autowired
 	private LoginService loginServ;
 
-	// Naver Login
-	private NaverLoginBO naverLoginBO;
-	private String apiResult = null;
-
 	@Autowired
-	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
-		this.naverLoginBO = naverLoginBO;
-	}
+	private NaverLoginService naverLoginServ;
 
 	// Basic Part
 	// -----------------------------------------------------------------
@@ -75,8 +71,6 @@ public class MainController {
 	// Register
 	// -------------------------------------------------------------------
 
-	// 회원가입
-	// 테이블에 있는 모든 데이터를 가져와서 노출 (account.이름약자) - http://ip/account.sj
 	@RequestMapping(value = "register.do", method = RequestMethod.GET)
 	public String register(HttpSession session, HttpServletRequest req, HttpServletResponse resp) {
 
@@ -101,42 +95,48 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "register.idcheck.do", method = RequestMethod.POST)
-	public void register_idcheck(HttpServletRequest req, HttpServletResponse resp, String dupliinput) {
+	public void register_idcheck(HttpServletRequest request, HttpServletResponse response, String dupliinput)
+			throws IOException {
 
 		// 인코딩
-		resp.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 
 		// 값 반환
-		try {
-			PrintWriter writer = resp.getWriter();
+		String result = "";
 
-			// 일치하는 아이디가 1개라도 존재하면 중복
-			if (registerServ.getIdCheck(dupliinput) > 0) {
-				writer.write("duplicated");
-			} else {
-				writer.write("ok");
-			}
+		// 일치하는 아이디가 1개라도 존재하면 중복
+		if (registerServ.getIdCheck(dupliinput) > 0) {
+			result = "duplicated";
+		} else {
+			result = "ok";
+		}
+
+		try {
+			response.getOutputStream().print(result);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
 	}
 
 	@RequestMapping(value = "register.nicknamecheck.do", method = RequestMethod.POST)
-	public void register_nicknamecheck(HttpServletRequest req, HttpServletResponse resp, String dupliinput) {
+	public void register_nicknamecheck(HttpServletRequest request, HttpServletResponse response, String dupliinput) {
 
 		// 인코딩
-		resp.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
 
 		// 값 반환
-		try {
-			PrintWriter writer = resp.getWriter();
+		String result = "";
 
-			// 일치하는 닉네임이 1개라도 존재하면 중복
-			if (registerServ.getNicknameCheck(dupliinput) > 0) {
-				writer.write("duplicated");
-			} else {
-				writer.write("ok");
-			}
+		// 일치하는 닉네임이 1개라도 존재하면 중복
+		if (registerServ.getNicknameCheck(dupliinput) > 0) {
+			result = "duplicated";
+		} else {
+			result = "ok";
+		}
+
+		try {
+			response.getOutputStream().print(result);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -173,13 +173,17 @@ public class MainController {
 			}
 		}
 	}
+	
+	@RequestMapping(value = "register.extraSubmit.do", method = RequestMethod.POST)
+	public void regit_extraSubmit(HttpServletRequest req, HttpServletResponse resp, String nickname, String phone) {
+		
+	}
 
 	// login Part
 	// -------------------------------------------------------------------
 
 	@RequestMapping(value = "login.do", method = RequestMethod.GET)
 	public String login(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-
 		// System.out.println("======== Cookies Info =========");
 		// if(request.getCookies() != null){
 		// for(Cookie c : request.getCookies()){
@@ -191,29 +195,34 @@ public class MainController {
 		// System.out.println("==========================");
 
 		// Naver Login Api
-		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+		String naverAuthUrl = naverLoginServ.getAuthorizationUrl(session);
 		request.setAttribute("url", naverAuthUrl);
 
 		return "login";
 
 	}
 
-	@RequestMapping(value = "naverCallback.do", method = RequestMethod.GET)
-	public String naverLogin(Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
-			throws IOException {
-
-		OAuth2AccessToken oauthToken;
-		oauthToken = naverLoginBO.getAccessToken(session, code, state);
-		// 로그인 사용자 정보를 읽어온다.
-		apiResult = naverLoginBO.getUserProfile(oauthToken);
-		model.addAttribute("result", apiResult);
-
-		return "callback";
+	@RequestMapping(value = "naverApiLogin.do", method = RequestMethod.GET)
+	public String naverLogin(HttpServletRequest request, HttpServletResponse response, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException {
+		
+		
+		// 네이버 로그인 사용자 정보를 읽어온다.
+		OAuth2AccessToken oauthToken = naverLoginServ.getAccessToken(session, code, state);
+		String naverUniqId = loginServ.naverLoginLogic(naverLoginServ.getUserProfile(oauthToken));
+		
+		LoginVO loginVO = new LoginVO();
+		loginVO.setId(naverUniqId);
+		loginVO.setLoginApi("naver");
+		
+		String loginResult = loginServ.loginLogic(request, response, loginVO);
+		request.setAttribute("navigate", loginResult);
+		request.setAttribute("naverUniqId", naverUniqId);
+		
+		return "navigatePage";
 	}
 
 	@RequestMapping(value = "loginCheck.do", method = RequestMethod.POST)
-	public void loginCheck(HttpServletRequest request, HttpServletResponse response, HttpSession session,
-			LoginVO loginVO) {
+	public String loginCheck(Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session, LoginVO loginVO) {
 
 		// // 이미 로그인 값이 들어가있다면 해당 값은 삭제
 		response.setCharacterEncoding("UTF-8");
@@ -222,15 +231,33 @@ public class MainController {
 			session.removeAttribute("loginstatus");
 		}
 
-		// 사용자가 로그인한 값과 일치하는지 확인
-		MemberVO member = null;
-
+		// 없다면 로그인 로직 진행
+		String loginResult = "";
+		
 		try {
-			member = loginServ.loginLogic(member, request, response, loginVO);
-		} catch (Exception e) {
+			loginResult = loginServ.loginLogic(request, response, loginVO);
+			
+			if (loginResult.equals("loginSuccess")) {
+				request.setAttribute("navigate", "main.do");
+			} 
+//			else if(loginResult.equals("apiRegister")){
+//				System.out.println(loginVO.getLoginApi());
+//				request.setAttribute("navigate", "apiRegister.do");
+//			} 
+			else {
+				request.setAttribute("navigate", "login.do");
+			}
+			
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
+		return "navigatePage";
+	}
+	
+	@RequestMapping(value = "apiRegister.do", method = RequestMethod.GET)
+	public String apiRegister() {
+		return "apiRegit";
 	}
 
 	@RequestMapping(value = "logout.do", method = RequestMethod.GET)
@@ -247,7 +274,7 @@ public class MainController {
 			e.printStackTrace();
 		}
 	}
-
+	
 	@RequestMapping(value = "main.do", method = RequestMethod.GET)
 	public String main() {
 		return "main";
@@ -258,5 +285,10 @@ public class MainController {
 		loginServ.transactest();
 		return "main";
 	}
+	
+//	@RequestMapping(value = ".do", method = RequestMethod.GET)
+//	public String () {
+//		return "";
+//	}
 
 }

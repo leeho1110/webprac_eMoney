@@ -15,35 +15,7 @@ public class MemberVO {
 	private String ip;
 	private String browser;
 	private String os;
-
 	
-	public boolean getIs_mobile() {
-        // true : 1 / false : 0
-        return is_mobile == '1' ? true : false;
-	}
-	public void setIs_mobile(Boolean is_mobile) {
-        // true : 1 / false : 0
-        if(is_mobile){ this.is_mobile = '1'; } 
-        else { this.is_mobile = '0'; }
-	}
-	public String getIp() {
-		return ip;
-	}
-	public void setIp(String ip) {
-		this.ip = ip;
-	}
-	public String getBrowser() {
-		return browser;
-	}
-	public void setBrowser(String browser) {
-		this.browser = browser;
-	}
-	public String getOs() {
-		return os;
-	}
-	public void setOs(String os) {
-		this.os = os;
-	}
 	public int getAccnt_id() {
 		return accnt_id;
 	}
@@ -97,5 +69,50 @@ public class MemberVO {
 	}
 	public void setSalt(String salt) {
 		this.salt = salt;
+	}
+	public char getIs_mobile() {
+		return is_mobile;
+	}
+	public void setIs_mobile(char is_mobile) {
+		this.is_mobile = is_mobile;
+	}
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
+	public String getBrowser() {
+		return browser;
+	}
+	public void setBrowser(String browser) {
+		this.browser = browser;
+	}
+	public String getOs() {
+		return os;
+	}
+	public void setOs(String os) {
+		this.os = os;
+	}
+
+	
+//	public boolean getIs_mobile() {
+//        // true : 1 / false : 0
+//        return is_mobile == '1' ? true : false;
+//	}
+//	public void setIs_mobile(Boolean is_mobile) {
+//        // true : 1 / false : 0
+//        if(is_mobile){ this.is_mobile = '1'; } 
+//        else { this.is_mobile = '0'; }
+//	}
+	
+	
+	
+	@Override
+	public String toString() {
+		return "MemberVO [accnt_id=" + accnt_id + ", nickname=" + nickname + ", name=" + name + ", user_type="
+				+ user_type + ", phone=" + phone + ", id=" + id + ", s_passwd=" + s_passwd + ", last_loginDATE="
+				+ last_loginDATE + ", salt=" + salt + ", is_mobile=" + getIs_mobile() + ", ip=" + ip + ", browser=" + browser
+				+ ", os=" + os + "]";
 	}
 }

@@ -1,0 +1,87 @@
+#infobox {
+    width: 980px;
+    margin: 0px auto;
+    text-align: center;
+}
+
+
+/* table setting  */
+#infoTbl {
+    border-top: 2px solid black;
+    border-collapse: collapse;
+}
+
+
+input {
+    outline: none;
+    width: 210px;
+    height: 30px;
+    border: 1px solid #cdcdcd;
+    border-radius: 3px;
+}
+#infoTbl tr {
+    border-bottom: 1px solid #cdcdcd;
+}
+#infoTbl th {
+    width: 200px;
+    height: 40px;
+    vertical-align: middle;
+    background-color: #f5f4f3;
+    font-size: 14px;
+}
+em {
+    color: #dc0082;
+}
+
+#infoTbl tr td {
+    display: table-cell;
+    vertical-align: middle;
+    padding: 5px 0px 5px 15px;
+    text-align: left;
+    border-bottom: 1px solid #cdcdcd;
+}
+
+img {
+    cursor: pointer;
+}
+
+/* login box */
+#submitdiv {
+    margin: 20px auto;
+}
+
+.duplimentFormMent {
+    font-weight: bold;
+    color: #a3a0a8;
+    font-size: 12px;
+    padding: 10px 30px 0px 5px;
+}
+
+/* Nickname */
+#nicknamedupliok {
+    display: none;
+    color: green;
+}
+
+#nicknameduplicheck {
+    margin-top: 10px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.duplicateboxdiv {
+    display: flex;
+    width: 725px;
+}
+
+/* phone */
+.phoneinput {
+    border: 1px solid #cdcdcd;
+    outline: none;
+    width: 100px;
+    height: 25px;
+}
+
+
+
+

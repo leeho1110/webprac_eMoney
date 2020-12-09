@@ -15,6 +15,7 @@
 		<org.slf4j-version>1.7.25</org.slf4j-version>
 		<ch.qos.logback-version>1.2.3</ch.qos.logback-version>
 	</properties>
+	
 
 	<dependencies>
 		<dependency>
@@ -119,7 +120,7 @@
 		</dependency>
 		
 		<!-- Logging -->
-		<!--<dependency>
+		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>${org.slf4j-version}</version>
@@ -159,14 +160,7 @@
 				</exclusion>
 			</exclusions>
 			<scope>runtime</scope>
-		</dependency> -->
-
-		<!-- @Inject -->
-		<!-- <dependency>
-			<groupId>javax.inject</groupId>
-			<artifactId>javax.inject</artifactId>
-			<version>1</version>
-		</dependency> -->
+		</dependency>
 
 		<!-- Servlet -->
 		<dependency>

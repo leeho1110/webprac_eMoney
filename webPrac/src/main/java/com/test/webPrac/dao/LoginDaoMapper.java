@@ -20,4 +20,6 @@ public interface LoginDaoMapper {
 
 	void insert1(int i);
 
+	MemberVO setInfoOfMember(MemberVO member);
+
 }
