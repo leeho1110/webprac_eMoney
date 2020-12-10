@@ -1,0 +1,19 @@
+package com.test.webPrac.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+import com.test.webPrac.service.TransacTest;
+
+@Controller
+public class testController {
+
+	@Autowired
+	private TransacTest test;
+	
+	@RequestMapping(value = "/testTran.action", method = { RequestMethod.GET })
+	public String add(HttpServletRequest req, HttpServletResponse resp) {
+
+		return "add";
+	}
+}

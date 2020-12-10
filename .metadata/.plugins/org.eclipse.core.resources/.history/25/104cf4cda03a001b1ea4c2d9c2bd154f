@@ -1,0 +1,30 @@
+package com.test.webPrac.service;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.test.webPrac.dao.LoginDaoMapper;
+
+@Service
+public class TransacTest {
+
+	@Autowired
+	private  template;
+		
+	public static void main(String[] args) {
+		TransacTest t = new TransacTest();
+		t.insert(t);
+	}
+	
+	
+	
+	@Transactional
+	public void insert(TransacTest t){
+		template.insert("test.insert1",1);
+		template.insert("test.insert2",2);
+		throw new RuntimeException();
+	};
+	
+}

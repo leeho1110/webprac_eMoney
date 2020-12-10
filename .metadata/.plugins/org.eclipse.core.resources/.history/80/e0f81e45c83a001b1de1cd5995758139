@@ -1,0 +1,6 @@
+#cont_inner {
+}
+
+#writeBox {
+	margin: 0px auto;
+}

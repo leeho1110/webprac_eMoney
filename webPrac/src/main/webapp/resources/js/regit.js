@@ -202,7 +202,7 @@ $("input.phoneinput").keyup(function(){
     var phoneNum = $("#phoneinput1").val() + $("#phoneinput2").val() + $("#phoneinput3").val();
     if(phoneReg.test(phoneNum)){
         regitCategory["phoneForm"][0] = true;
-        $("#phoneHiddenInput").val(phoneNum);
+        $("#phoneHiddenInput").val(phoneNum.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/,"$1-$2-$3"));
     } else {
         regitCategory["phoneForm"][0] = false;
     }

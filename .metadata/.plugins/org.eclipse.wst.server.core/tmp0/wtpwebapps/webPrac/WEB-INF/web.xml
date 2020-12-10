@@ -42,6 +42,11 @@
         <error-code>403</error-code>
         <location>/WEB-INF/errorCustom/error_403.jsp</location>
     </error-page>
+    
+    <error-page>
+        <error-code>405</error-code>
+        <location>/WEB-INF/errorCustom/error_405.jsp</location>
+    </error-page>
   
   <!-- 인코딩 필터 (POST -> UTF-8) -->
   <filter>

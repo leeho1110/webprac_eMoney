@@ -1,23 +1,20 @@
 package com.test.webPrac.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.plaf.synth.SynthSpinnerUI;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.test.webPrac.service.LoginService;
@@ -29,6 +26,8 @@ import com.test.webPrac.vo.MemberVO;
 
 @Controller
 public class MainController {
+
+	static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
 	@Autowired
 	private RegisterService registerServ;
@@ -46,17 +45,21 @@ public class MainController {
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
 	public String home(HttpServletRequest req, HttpServletResponse resp) {
 
+		logger.info("Log Index.do");
+
 		SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분 ss초");
 		Date time = new Date();
 
 		req.setAttribute("time", format.format(time));
 
-		return "index";
+		return "common/index";
 	}
 
 	// 테이블에 있는 모든 데이터를 가져와서 노출 (account.이름약자) - http://ip/account.sj
 	@RequestMapping(value = "account.*.do", method = RequestMethod.GET)
 	public String getInfo(HttpServletRequest req, HttpServletResponse resp) {
+
+		logger.info("Log Index.do");
 
 		// account URL 파싱 처리
 		String url = req.getRequestURI();
@@ -65,7 +68,7 @@ public class MainController {
 
 		req.setAttribute("accntNickname", nickname);
 		req.setAttribute("accntInfo", registerServ.getAccountMemberInfo(nickname));
-		return "accountInfo";
+		return "common/accountInfo";
 	}
 
 	// Register
@@ -73,6 +76,8 @@ public class MainController {
 
 	@RequestMapping(value = "register.do", method = RequestMethod.GET)
 	public String register(HttpSession session, HttpServletRequest req, HttpServletResponse resp) {
+
+		logger.info("REGISTER");
 
 		// RSA 키 생성
 		// PrivateKey key = (PrivateKey) session.getAttribute("RSAprivateKey");
@@ -91,12 +96,14 @@ public class MainController {
 		// req.setAttribute("exponent", rsa.getExponent());
 		// session.setAttribute("RSAprivateKey", rsa.getPrivatekey());
 
-		return "regit";
+		return "regit/regit";
 	}
 
 	@RequestMapping(value = "register.idcheck.do", method = RequestMethod.POST)
 	public void register_idcheck(HttpServletRequest request, HttpServletResponse response, String dupliinput)
 			throws IOException {
+
+		logger.info("REGISTER ID DUPLICATE CHECK");
 
 		// 인코딩
 		response.setCharacterEncoding("UTF-8");
@@ -122,6 +129,8 @@ public class MainController {
 	@RequestMapping(value = "register.nicknamecheck.do", method = RequestMethod.POST)
 	public void register_nicknamecheck(HttpServletRequest request, HttpServletResponse response, String dupliinput) {
 
+		logger.info("REGISTER NICKNAME DUPLICATE CHECK");
+
 		// 인코딩
 		response.setCharacterEncoding("UTF-8");
 
@@ -143,7 +152,10 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "register.submit.do", method = RequestMethod.POST)
-	public void register_submit(HttpServletRequest req, HttpServletResponse resp, MemberVO member) {
+	public void register_submit(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			MemberVO member) {
+
+		logger.info("REGISTER SUBMIT");
 
 		// 전달된 아이디 비밀번호 decoding
 
@@ -166,17 +178,37 @@ public class MainController {
 		// 회원가입 시 로그인 성공
 		if (regitResult > 0) {
 			try {
-
-				resp.sendRedirect("main.do");
+				session.setAttribute("loginStatus", member);
+				response.sendRedirect("main.do");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
 	}
-	
+
 	@RequestMapping(value = "register.extraSubmit.do", method = RequestMethod.POST)
-	public void regit_extraSubmit(HttpServletRequest req, HttpServletResponse resp, String nickname, String phone) {
-		
+	public void register_Api_Submit(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			String nickname, String phone) {
+
+		logger.info("REGISTER API PART SUBMIT");
+
+		MemberVO member = new MemberVO();
+
+		member.setId((String) session.getAttribute("naverUniqId"));
+		member.setName((String) session.getAttribute("naverName"));
+		member.setNickname(nickname);
+		member.setPhone(phone);
+
+		int regitResult = registerServ.insertApiMember(member);
+
+		if (regitResult > 0) {
+			try {
+				session.setAttribute("loginStatus", member);
+				response.sendRedirect("main.do");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	// login Part
@@ -184,45 +216,47 @@ public class MainController {
 
 	@RequestMapping(value = "login.do", method = RequestMethod.GET)
 	public String login(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
-		// System.out.println("======== Cookies Info =========");
-		// if(request.getCookies() != null){
-		// for(Cookie c : request.getCookies()){
-		// System.out.println(c.getName());
-		// System.out.println(c.getValue());
-		// System.out.println(c.getMaxAge());
-		// }
-		// }
-		// System.out.println("==========================");
+
+		logger.info("LOGIN");
 
 		// Naver Login Api
 		String naverAuthUrl = naverLoginServ.getAuthorizationUrl(session);
 		request.setAttribute("url", naverAuthUrl);
 
-		return "login";
+		return "login/login";
 
 	}
 
 	@RequestMapping(value = "naverApiLogin.do", method = RequestMethod.GET)
-	public String naverLogin(HttpServletRequest request, HttpServletResponse response, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException {
-		
-		
+	public String naverLogin(HttpServletRequest request, HttpServletResponse response, String code, String state,
+			HttpSession session) throws IOException {
+
+		logger.info("NAVER LOGIN API ");
+
 		// 네이버 로그인 사용자 정보를 읽어온다.
 		OAuth2AccessToken oauthToken = naverLoginServ.getAccessToken(session, code, state);
-		String naverUniqId = loginServ.naverLoginLogic(naverLoginServ.getUserProfile(oauthToken));
-		
+		loginServ.naverLoginLogic(naverLoginServ.getUserProfile(oauthToken), session);
+
 		LoginVO loginVO = new LoginVO();
-		loginVO.setId(naverUniqId);
+		loginVO.setId((String) session.getAttribute("naverUniqId"));
 		loginVO.setLoginApi("naver");
-		
-		String loginResult = loginServ.loginLogic(request, response, loginVO);
+
+		String loginResult = "";
+		try {
+			loginResult = loginServ.loginLogic(request, response, session, loginVO);
+		} catch (Exception e) {
+			logger.info(e.getMessage());	
+		}
 		request.setAttribute("navigate", loginResult);
-		request.setAttribute("naverUniqId", naverUniqId);
-		
-		return "navigatePage";
+
+		return "common/navigatePage";
 	}
 
 	@RequestMapping(value = "loginCheck.do", method = RequestMethod.POST)
-	public String loginCheck(Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session, LoginVO loginVO) {
+	public String loginCheck(Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			LoginVO loginVO) {
+
+		logger.info("LOGIN INFO CHECK");
 
 		// // 이미 로그인 값이 들어가있다면 해당 값은 삭제
 		response.setCharacterEncoding("UTF-8");
@@ -233,35 +267,33 @@ public class MainController {
 
 		// 없다면 로그인 로직 진행
 		String loginResult = "";
-		
+
 		try {
-			loginResult = loginServ.loginLogic(request, response, loginVO);
-			
-			if (loginResult.equals("loginSuccess")) {
-				request.setAttribute("navigate", "main.do");
-			} 
-//			else if(loginResult.equals("apiRegister")){
-//				System.out.println(loginVO.getLoginApi());
-//				request.setAttribute("navigate", "apiRegister.do");
-//			} 
-			else {
-				request.setAttribute("navigate", "login.do");
+			loginResult = loginServ.loginLogic(request, response, session, loginVO);
+
+			if (loginResult.equals("main.do")) {
+				request.setAttribute("navigate", loginResult);
+			} else {
+				request.setAttribute("navigate", loginResult);
 			}
-			
-		} catch (IOException e) {
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		return "navigatePage";
+		return "common/navigatePage";
 	}
-	
-	@RequestMapping(value = "apiRegister.do", method = RequestMethod.GET)
+
+	@RequestMapping(value = "register.Api.do", method = RequestMethod.GET)
 	public String apiRegister() {
-		return "apiRegit";
+		return "regit.regitApi";
 	}
 
 	@RequestMapping(value = "logout.do", method = RequestMethod.GET)
 	public void logout(HttpServletRequest request, HttpServletResponse response) {
+
+		logger.info("LOGOUT");
 
 		// 세션에서 loginStatus 제거
 		HttpSession session = request.getSession();
@@ -274,21 +306,36 @@ public class MainController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@RequestMapping(value = "main.do", method = RequestMethod.GET)
 	public String main() {
-		return "main";
+		return "board/main";
 	}
 
 	@RequestMapping(value = "testTransac.do", method = RequestMethod.GET)
 	public String testTransac() {
 		loginServ.transactest();
-		return "main";
+		return "board/main";
 	}
-	
-//	@RequestMapping(value = ".do", method = RequestMethod.GET)
-//	public String () {
-//		return "";
-//	}
+
+	@RequestMapping(value = "navigate.do", method = RequestMethod.GET)
+	public String navigate(HttpServletRequest request) {
+		System.out.println(request.getAttribute("navigate"));
+		return "common/navigatePage";
+	}
+
+	 @RequestMapping(value = "se2.do", method = RequestMethod.GET)
+	 public String se2() {
+		 return "se2";
+	 }
+	 @RequestMapping(value = "board.write.do", method = RequestMethod.GET)
+		 public String write() {
+		 return "board/write";
+	 }
+
+	// @RequestMapping(value = ".do", method = RequestMethod.GET)
+	// public String () {
+	// return "";
+	// }
 
 }

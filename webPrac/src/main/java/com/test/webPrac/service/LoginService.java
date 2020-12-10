@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
 
@@ -12,12 +13,13 @@ import com.test.webPrac.vo.MemberVO;
 
 public interface LoginService {
 
-	String loginLogic(HttpServletRequest request, HttpServletResponse response, LoginVO loginVO) throws IOException;
+	String loginLogic(HttpServletRequest request, HttpServletResponse response, HttpSession session, LoginVO loginVO);
 
 	boolean checkLoginPw(LoginVO loginVO, MemberVO member);
 
 	void transactest();
 
-	String naverLoginLogic(String userProfile);
+	void naverLoginLogic(String userProfile, HttpSession session);
+	
 	
 }

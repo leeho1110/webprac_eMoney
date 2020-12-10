@@ -1,0 +1,71 @@
+package com.test.webPrac.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.test.webPrac.dao.LoginDaoMapper;
+import com.test.webPrac.dao.test;
+import com.test.webPrac.vo.LoginVO;
+import com.test.webPrac.vo.MemberVO;
+
+
+public class TransacTest {
+
+	@Autowired
+	private LoginDaoMapper dao;
+		
+	public static void main(String[] args) {
+		TransacTest t = new TransacTest();
+		t.insert(t);
+	}
+	
+	
+	
+	@Transactional
+	public void insert(TransacTest t){
+		t.dao.insert1(1);
+		t.dao.insert2(2);
+		throw new RuntimeException();
+	};
+	
+
+
+public class daoImpl implements LoginDaoMapper {
+
+	@Override
+	public MemberVO checkLoginInfo(LoginVO loginVO) {
+		return null;
+	}
+
+	@Override
+	public void updateLastlogin(int accnt_id) {
+		
+	}
+
+	@Override
+	public void insertLastloginhistory(MemberVO loginVO) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void insert1(int i) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void insert2(int i) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public MemberVO setInfoOfMember(MemberVO member) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	}
+}

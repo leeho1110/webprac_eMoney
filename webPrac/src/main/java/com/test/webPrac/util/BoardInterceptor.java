@@ -6,17 +6,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.logging.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-public class BoardInterceptor extends HandlerInterceptorAdapter {
+import com.test.webPrac.controller.MainController;
 
+public class BoardInterceptor extends HandlerInterceptorAdapter {
+	
+	static final Logger logger = LoggerFactory.getLogger(BoardInterceptor.class);
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler){
-
-		// 세션 가져오기 ( 세션이 이미 존재하면 기존 것을 반환, 없다면 새로운 세션 생성)
+		
+		logger.info("INTERCEPTING");
+		
 		HttpSession session = request.getSession();
-
+		
 		if (session.getAttribute("loginStatus") == null) {
 			try {
 				response.sendRedirect("login.do");

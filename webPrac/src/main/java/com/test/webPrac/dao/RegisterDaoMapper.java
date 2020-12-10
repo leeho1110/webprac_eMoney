@@ -19,9 +19,11 @@ public interface RegisterDaoMapper {
 
 	int insertAcctMember(MemberVO accnt);
 
-	void insertTest();
+	void insert1(int i);
 
-	void updateTest();
+	void insert2(int i);
+
+	int insertApiMember(MemberVO member);
 
 
 }

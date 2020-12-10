@@ -11,11 +11,9 @@ public interface RegisterService {
 
 	int getNicknameCheck(String nickname);
 
-	int insertAcctMember(MemberVO accnt);
+	int insertAcctMember(MemberVO member);
 
-	
-
-	
+	int insertApiMember(MemberVO member);
 
 
 }

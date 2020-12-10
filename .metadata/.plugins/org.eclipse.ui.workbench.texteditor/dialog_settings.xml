@@ -6,22 +6,24 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="to" key="selection"/>
+		<item value="LOGIN" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="to"/>
-			<item value="tooString"/>
-			<item value="dbcp"/>
+			<item value="login"/>
+			<item value="main"/>
+			<item value="navigatePage"/>
+			<item value="navigate"/>
+			<item value="navigate.do"/>
+			<item value="naviagte"/>
 			<item value="tx"/>
-			<item value="checkLoginInfo"/>
-			<item value="checkLoginPw"/>
-			<item value="getPwdandSalt"/>
-			<item value="loginLogic"/>
+			<item value="to"/>
 		</list>
 		<list key="replacehistory">
+			<item value="board."/>
+			<item value="common.navigatePage"/>
 			<item value="browserAndOs"/>
 		</list>
 	</section>

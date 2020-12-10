@@ -39,3 +39,31 @@
 1607500544808	Delete element
 1607500598332	Copy file
 1607502453791	Rename local variable 'oauthService1'
+1607555976728	Rename resource 'apiRegit.jsp'
+1607556000080	Rename resource 'registerApi.jsp'
+1607559373861	Rename local variable 'req'
+1607559383575	Rename local variable 'resp'
+1607559388650	Rename local variable 'req'
+1607559395290	Rename local variable 'resp'
+1607562179708	Delete element
+1607562184610	Delete element
+1607562311959	Move 'inc' to 'resources'
+1607562320552	Move 'inc' to 'WEB-INF'
+1607562376719	Move 'inc' to 'views'
+1607565741168	Rename resource 'log.xml'
+1607573362414	Move compilation unit
+1607573944943	Delete element
+1607573949577	Delete element
+1607577206000	Rename type 'TransacTest'
+1607577215816	Rename field 'test'
+1607580797890	Rename field 'Logger'
+1607586746895	Rename resource 'smarteditor.js'
+1607590530982	Move 'accountInfo.jsp' to 'common'
+1607590536023	Delete element
+1607590537588	Move 'index.jsp' to 'common'
+1607590539236	Move 'navigatePage.jsp' to 'common'
+1607590541473	Move 'regit.jsp' to 'regit'
+1607590543361	Move 'regitApi.jsp' to 'regit'
+1607590605141	Move 'login.jsp' to 'login'
+1607590630770	Move 'main.jsp' to 'board'
+1607591632924	Delete element

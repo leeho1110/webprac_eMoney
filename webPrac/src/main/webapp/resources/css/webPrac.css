@@ -24,6 +24,10 @@ body {
     font-family: 'Nanum Gothic';
 }
 
+#cont_inner {
+	margin-top: 50px;	
+}
+
 /* header */
 #topTab {background-color: #f5f8f9; border: 1px solid #dddddd}
 
@@ -40,6 +44,15 @@ body {
     cursor: pointer;
 }
 
+#topTabInner > a {
+    margin: 0px 10px;
+    cursor: pointer;
+    
+}
+
+#topTabInner > a:link { color: red; text-decoration: none;}
+#topTabInner > a:visited { color: black; text-decoration: none;}
+#topTabInner > a:hover {  text-decoration: underline;}
 
 #category {
     border-bottom: 1px solid #dddddd; 
