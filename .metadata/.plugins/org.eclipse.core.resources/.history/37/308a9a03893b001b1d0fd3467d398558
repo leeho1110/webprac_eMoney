@@ -1,0 +1,37 @@
+package com.test.webPrac.vo;
+
+public class BoardVO {
+	
+	private int post_num;
+	private String title;
+	private String content;
+	private int writer;
+	private String time;
+	
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public int getWriter() {
+		return writer;
+	}
+	public void setWriter(int writer) {
+		this.writer = writer;
+	}
+	
+	@Override
+	public String toString() {
+		return "BoardVO [title=" + title + ", content=" + content + ", writer=" + writer + ", writedDate=" + writedDate
+				+ "]";
+	}
+	
+	
+}

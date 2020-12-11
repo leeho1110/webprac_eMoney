@@ -67,3 +67,19 @@
 1607590605141	Move 'login.jsp' to 'login'
 1607590630770	Move 'main.jsp' to 'board'
 1607591632924	Delete element
+1607647084727	Delete element
+1607647530136	Rename type 'testDao'
+1607647555794	Delete element
+1607647558659	Delete element
+1607647585469	Rename type 'BoardInterceptor'
+1607647676596	Delete element
+1607647925624	Rename type 'LoginImpl'
+1607647931583	Rename type 'RegisterImpl'
+1607650140680	Delete element
+1607653420468	Delete element
+1607664131612	Delete element
+1607667514038	Rename local variable 'filename'
+1607667522571	Rename local variable 'filename_suffix'
+1607669948859	Rename field 'Logger'
+1607674525400	Encapsulate field 'post_num'
+1607674527963	Encapsulate field 'time'

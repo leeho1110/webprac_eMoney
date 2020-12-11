@@ -1,0 +1,12 @@
+#writeBox {
+	margin: 0px auto;
+}
+
+#writeBoxDiv {
+	width: 730px;
+	margin: 25px auto;
+}
+
+#writeBoxDiv > h2{
+	margin-top: 250px;
+}

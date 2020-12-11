@@ -1,0 +1,27 @@
+#writeBoxDiv {
+	width: 800px;
+	margin: 25px auto;
+}
+
+#writeBoxTbl td {
+	border-
+}
+
+#writeBox {
+	margin: 0px auto;
+}
+
+#titleMent {
+	font-size: 18px;
+}
+
+#titleDiv {
+	width: 725px;
+	margin: 15px auto;
+}
+
+
+
+#writeBoxDiv > h2 {
+	margin-bottom: 25px;
+}

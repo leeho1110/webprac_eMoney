@@ -1,0 +1,11 @@
+package com.test.webPrac.service;
+
+import com.test.webPrac.vo.BoardVO;
+
+public interface BoardService {
+
+	int insertBoard(BoardVO boardVO);
+
+	void fileUpload();
+	
+}

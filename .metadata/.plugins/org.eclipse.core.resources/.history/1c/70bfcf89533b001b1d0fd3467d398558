@@ -1,0 +1,48 @@
+package com.test.webPrac.util;
+
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.logging.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+import com.test.webPrac.controller.MainController;
+
+public class MainInterceptor extends HandlerInterceptorAdapter {
+	
+	static final Logger logger = LoggerFactory.getLogger(MainInterceptor.class);
+	
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler){
+		
+		logger.info("INTERCEPTING");
+		
+		HttpSession session = request.getSession();
+		
+		if (session.getAttribute("loginStatus") == null) {
+			try {
+				response.sendRedirect("login.do");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return false;
+		}
+
+		return true;
+
+	}
+
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+			ModelAndView modelAndView) throws Exception {
+		// TODO Auto-generated method stub
+		super.postHandle(request, response, handler, modelAndView);
+	}
+
+}

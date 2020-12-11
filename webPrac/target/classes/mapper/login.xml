@@ -8,11 +8,12 @@
 	</select>
 	
 	<update id="updateLastlogin" parameterType="_int">
-		UPDATE ACCOUNT SET LAST_LOGINDATE = sysdate WHERE ACCNT_ID = #{1}
+		UPDATE ACCOUNT SET LAST_LOGINDATE = sysdate+9/24 WHERE ACCNT_ID = #{1}
 	</update>
 	
 	<insert id="insertLastloginhistory" parameterType="MemberVO">
-		INSERT INTO login_history VALUES (seq_loginHistory.nextval, #{accnt_id}, sysdate, #{is_mobile}, #{ip}, #{browser}, #{os})
+		INSERT INTO login_history VALUES (seq_loginHistory.nextval, #{accnt_id}, sysdate+9/24, #{is_mobile}, #{ip}, #{browser}, #{os})
+		<!-- INSERT INTO login_history VALUES (seq_loginHistory.nextval, #{accnt_id}, sysdate+9/24, #{is_mobile}, #{ip}, #{browser}, #{os}); -->
 	</insert>
 	
 	<select id="setInfoOfMember" parameterType="MemberVO" resultType="MemberVO">

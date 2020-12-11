@@ -10,18 +10,28 @@
 </head>
 <body>
 	<script>
-		var loginResult = "${navigate}";
+		var navigateVal = "${navigate}";
+		console.log(navigateVal);
 		
-		if (loginResult == "login.do") {
+		if (navigateVal == "login.do") {
 			alert("아이디와 비밀번호를 다시 확인해주세요")
 			location.href = "${navigate}";
-		} else if (loginResult == "register.Api.do") {
+		} else if (navigateVal == "register.Api.do") {
 			alert("추가 정보기입 창으로 이동합니다")
 			location.href = "${navigate}";
-		} else if (loginResult == "main.do") {
+		} else if (navigateVal == "main.do") {
 			location.href = "${navigate}";
-		} else {
-			alert("이호에게 문의하세요");
+		} else if (navigateVal == "board.write.do"){
+			alert("작성에 실패하였습니다")
+			location.href = "${navigate}";
+		} 
+		
+		
+		
+		
+		
+		else {
+			alert(navigateVal);
 			location.href = "login.do";
 		}
 	</script>

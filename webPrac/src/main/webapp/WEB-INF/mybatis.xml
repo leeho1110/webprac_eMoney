@@ -6,5 +6,6 @@
 	<typeAliases>
 		<typeAlias type="com.test.webPrac.vo.MemberVO" alias="MemberVO"/>
 		<typeAlias type="com.test.webPrac.vo.LoginVO" alias="LoginVO"/>
+		<typeAlias type="com.test.webPrac.vo.BoardVO" alias="BoardVO"/>
 	</typeAliases>
 </configuration>

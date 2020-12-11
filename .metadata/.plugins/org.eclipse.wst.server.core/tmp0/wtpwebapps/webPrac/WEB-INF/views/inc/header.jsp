@@ -14,6 +14,6 @@
 			</div>
 			<!-- header menu -->
 			<div id="category">
-				<img id="emoneyLogo" src="https://pds.saramin.co.kr/company/logo/201902/26/pnj7pp_2uf9-0_logo.jpg" alt="">
+				<img id="emoneyLogo" src="https://pds.saramin.co.kr/company/logo/201902/26/pnj7pp_2uf9-0_logo.jpg" alt="emoney 로고" onclick="location.href='main.do';">
 			</div>
 		</div>

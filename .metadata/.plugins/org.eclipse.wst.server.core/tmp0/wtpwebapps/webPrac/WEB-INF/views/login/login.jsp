@@ -1,8 +1,9 @@
 <%@ page import="java.net.URLEncoder"%>
 <%@ page import="java.security.SecureRandom"%>
 <%@ page import="java.math.BigInteger"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 
@@ -29,37 +30,52 @@
 				<div id="infobox">
 					<form id="loginForm" action="loginCheck.do" method="POST">
 						<h3>로그인</h3>
-						<div class="info_area">
-							<input type="text" id="idBox" name="id" placeholder="아이디를 입력해주세요">
-						</div>
-						<div class="info_area">
-							<input type="password" id="pwBox" name="pw" placeholder="비밀번호를 입력해주세요">
+						<div style="margin-top: 30px;">
+							<div class="info_area">
+								<input type="text" id="idBox" name="id"
+									placeholder="아이디를 입력해주세요">
+							</div>
+							<div class="info_area">
+								<input type="password" id="pwBox" name="pw"
+									placeholder="비밀번호를 입력해주세요">
+							</div>
 						</div>
 					</form>
 
 					<!-- submit btn -->
 					<div>
-						<input type="button" id="loginbox" value="로그인" onclick="loginInputCheck();")>
+						<input type="button" id="loginbox" value="로그인"
+							onclick="loginInputCheck();")>
 
 					</div>
-					<div  style="text-align:center"><a href="${url}"><img width="215" height="45" style="margin-top: 15px;"src="https://lh3.googleusercontent.com/proxy/_JN8maZyAYB0PGFelR_HLxyRAZoPzioWxMaGVxf44zegdCcOdTbHFht7AdedeNzbaV6Ikd8xpikfsb11j5j6aH8xKdZPz18fVMCM9ZvQrzUhzWM"/></a></div>
+					<div style="text-align: center">
+						<a href="${url}"><img width="120" height="45"
+							style="margin-top: 15px;"
+							src="http://static.nid.naver.com/oauth/small_g_in.PNG" /></a>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 	<script>
-	 	
-		function loginInputCheck() {
-			if ($("#idBox").val() == "") {
-				alert("아이디 입력을 확인해주세요");
-			} else if ($("#pwBox").val() == "") {
-				alert("비밀번호 입력을 확인해주세요");
-			} else {
-				$("#loginForm").submit();
-			}
-		}
-	</script>
+	// 페이지 로딩 시 로그인 포커스
+	$(document).ready(function(){
+		$("#idBox").focus();
+	})
+	
+	function loginInputCheck() {
+	    if ($("#idBox").val() == "") {
+			alert("아이디 입력을 확인해주세요");
+			$("#idBox").focus();
+	    } else if ($("#pwBox").val() == "") {
+			alert("비밀번호 입력을 확인해주세요");
+			$("#pwBox").focus();
+	    } else {
+		$("#loginForm").submit();
+	    }
+	}
+    </script>
 </body>
 
 </html>

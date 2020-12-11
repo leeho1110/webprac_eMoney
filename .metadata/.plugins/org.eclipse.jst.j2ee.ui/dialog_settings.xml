@@ -6,10 +6,10 @@
 		<item value="Apache Tomcat v8.5"/>
 	</list>
 	<list key="J2EE_EXPORT_JST_WEB">
+		<item value="C:\Users\SAMSUNG\Desktop\이호\WAR\webPrac.war"/>
+		<item value="C:\Users\SAMSUNG\Desktop\이호\WAR\webPrac1211.war"/>
 		<item value="C:\Users\SAMSUNG\Desktop\이호\WAR\webPrac1210.war"/>
 		<item value="C:\Users\SAMSUNG\Desktop\이호\WAR\webPrac1208.war"/>
 		<item value="C:\Users\SAMSUNG\Desktop\이호\WAR\webPrac1208_mod.war"/>
-		<item value="C:\Users\SAMSUNG\Desktop\이호\WAR\webPrac.war"/>
-		<item value="C:\Users\SAMSUNG\Desktop\이호\WAR\web2st.war"/>
 	</list>
 </section>

@@ -2,8 +2,10 @@ package com.test.webPrac.controller;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -17,17 +19,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.test.webPrac.service.BoardService;
 import com.test.webPrac.service.LoginService;
 import com.test.webPrac.service.NaverLoginService;
 import com.test.webPrac.service.RegisterService;
 import com.test.webPrac.util.SHA256Util;
+import com.test.webPrac.vo.BoardVO;
 import com.test.webPrac.vo.LoginVO;
 import com.test.webPrac.vo.MemberVO;
+import com.test.webPrac.vo.PagingVO;
 
 @Controller
 public class MainController {
 
-	static final Logger logger = LoggerFactory.getLogger(MainController.class);
+	static final Logger logger = LoggerFactory.getLogger("emoney Web Practice");
 
 	@Autowired
 	private RegisterService registerServ;
@@ -37,6 +42,9 @@ public class MainController {
 
 	@Autowired
 	private NaverLoginService naverLoginServ;
+
+	@Autowired
+	private BoardService boardServ;
 
 	// Basic Part
 	// -----------------------------------------------------------------
@@ -219,6 +227,13 @@ public class MainController {
 
 		logger.info("LOGIN");
 
+		if (session.getAttribute("loginStatus") != null) {
+			try {
+				response.sendRedirect("main.do");
+			} catch (Exception e) {
+			}
+		}
+
 		// Naver Login Api
 		String naverAuthUrl = naverLoginServ.getAuthorizationUrl(session);
 		request.setAttribute("url", naverAuthUrl);
@@ -244,8 +259,10 @@ public class MainController {
 		String loginResult = "";
 		try {
 			loginResult = loginServ.loginLogic(request, response, session, loginVO);
+
 		} catch (Exception e) {
-			logger.info(e.getMessage());	
+			request.setAttribute("navigate", e.getClass());
+			e.printStackTrace();
 		}
 		request.setAttribute("navigate", loginResult);
 
@@ -270,7 +287,8 @@ public class MainController {
 
 		try {
 			loginResult = loginServ.loginLogic(request, response, session, loginVO);
-
+			Cookie c = new Cookie("login", "test");
+			response.addCookie(c);
 			if (loginResult.equals("main.do")) {
 				request.setAttribute("navigate", loginResult);
 			} else {
@@ -278,7 +296,7 @@ public class MainController {
 			}
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			request.setAttribute("navigate", e.getClass());
 			e.printStackTrace();
 		}
 
@@ -287,7 +305,10 @@ public class MainController {
 
 	@RequestMapping(value = "register.Api.do", method = RequestMethod.GET)
 	public String apiRegister() {
-		return "regit.regitApi";
+
+		logger.info("NAVER LOGIN EXTRA REGISTER");
+
+		return "regit/regitApi";
 	}
 
 	@RequestMapping(value = "logout.do", method = RequestMethod.GET)
@@ -308,30 +329,56 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "main.do", method = RequestMethod.GET)
-	public String main() {
-		return "board/main";
-	}
+	public String main(HttpServletRequest request, HttpServletResponse response, PagingVO pagingVO ) {
 
-	@RequestMapping(value = "testTransac.do", method = RequestMethod.GET)
-	public String testTransac() {
-		loginServ.transactest();
+		logger.info("MAIN");
+		// 여기서 nowPage와 cntPerPage를 받아온다.
+		ArrayList<BoardVO> boardList = boardServ.getBoardList(pagingVO);
+
 		return "board/main";
 	}
 
 	@RequestMapping(value = "navigate.do", method = RequestMethod.GET)
 	public String navigate(HttpServletRequest request) {
-		System.out.println(request.getAttribute("navigate"));
+
+		logger.info("NAVIGATING...");
+
 		return "common/navigatePage";
 	}
 
-	 @RequestMapping(value = "se2.do", method = RequestMethod.GET)
-	 public String se2() {
-		 return "se2";
-	 }
-	 @RequestMapping(value = "board.write.do", method = RequestMethod.GET)
-		 public String write() {
-		 return "board/write";
-	 }
+	// BOARD -----------------------------
+
+	@RequestMapping(value = "board.write.do", method = RequestMethod.GET)
+	public String write() {
+
+		logger.info("DO WRITE");
+
+		return "board/write";
+	}
+
+	@RequestMapping(value = "board.write.uploadFile.do", method = RequestMethod.POST)
+	public void write_multiImg(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+		logger.info("UPLOAD FILE");
+		String fileInfo = boardServ.fileUpload(request);
+
+		response.getOutputStream().print(fileInfo);
+	}
+
+	@RequestMapping(value = "board.write.submit.do", method = RequestMethod.POST)
+	public String write_submit(HttpServletRequest request, HttpServletResponse response, HttpSession session, BoardVO boardVO) {
+		
+		logger.info("WRITING SUBMIT");
+		int result = boardServ.insertPost(boardVO, session);
+		System.out.println(result);
+		if(result > 0){
+			request.setAttribute("navigate", "main.do");
+			return "common/navigatePage";
+		} else {
+			request.setAttribute("navigate", "board.write.do");
+			return "common/navigatePage";
+		}
+	}
 
 	// @RequestMapping(value = ".do", method = RequestMethod.GET)
 	// public String () {

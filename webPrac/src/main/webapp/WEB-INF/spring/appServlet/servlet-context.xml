@@ -22,7 +22,7 @@
 	<resources mapping="/resources/**" location="/resources/" />
 
 	<!-- Interceptor -->
-	<beans:bean id="BoardInterceptor" class="com.test.webPrac.util.BoardInterceptor">
+	<beans:bean id="MainInterceptor" class="com.test.webPrac.util.MainInterceptor">
 	</beans:bean>
 	<interceptors>
 		<interceptor>
@@ -38,7 +38,7 @@
 			<exclude-mapping path="/navigate*.do" />
 			<!-- se2 -->
 			<exclude-mapping path="/se2.do" />
-			<beans:ref bean="BoardInterceptor" />
+			<beans:ref bean="MainInterceptor" />
 		</interceptor>
 	</interceptors>
 

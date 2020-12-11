@@ -17,9 +17,7 @@ public interface LoginService {
 
 	boolean checkLoginPw(LoginVO loginVO, MemberVO member);
 
-	void transactest();
-
 	void naverLoginLogic(String userProfile, HttpSession session);
 	
-	
+	void updateLoginInfoLogic(HttpServletRequest request, MemberVO member, HttpSession session);
 }

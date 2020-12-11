@@ -1,0 +1,8 @@
+package com.test.webPrac.dao;
+
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface BoardDaoMapper {
+	
+}

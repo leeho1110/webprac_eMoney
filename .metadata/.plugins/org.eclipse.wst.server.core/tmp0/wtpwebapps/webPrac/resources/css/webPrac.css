@@ -61,6 +61,7 @@ body {
 #category > img {
     width: 150px;
     margin: 40px;
+    cursor: pointer;
 }
 
 /* container */

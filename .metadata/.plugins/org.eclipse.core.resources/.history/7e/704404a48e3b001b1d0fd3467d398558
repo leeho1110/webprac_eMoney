@@ -1,0 +1,9 @@
+package com.test.webPrac.vo;
+
+public class PagingVO {
+	//			현재페이지  시작페이지		끝페이지	총 게시물 수	페이지 당 게시물 수  마지막 페이지 시작 끝
+	private int nowPage, startPage, endPage, totalCnt, cntPerPage, lastPage, start, end;
+	private int cntPage = 5;
+	
+	
+}

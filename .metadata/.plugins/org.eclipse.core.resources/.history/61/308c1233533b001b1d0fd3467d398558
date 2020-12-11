@@ -1,0 +1,9 @@
+package com.test.webPrac.vo;
+
+import org.springframework.web.multipart.MultipartFile;
+
+public class MultiImageVO {
+
+	private MultipartFile filedata;
+	
+}
