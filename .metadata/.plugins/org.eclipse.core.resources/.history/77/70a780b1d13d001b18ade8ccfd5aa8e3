@@ -1,0 +1,186 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+	<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+	<html lang="en">
+	
+	<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>eMoney Web 실습</title>
+	<link rel="stylesheet" href="resources/css/webPrac.css">
+	<link rel="stylesheet" href="resources/css/regit.css">
+	
+	<!-- RSA 암호화 JavaScript -->
+	<script src="resources/js/jquery-1.12.4.js"></script>
+	
+	<script src="resources/js/rsa/jsbn.js"></script>
+	<script src="resources/js/rsa/prng4.js"></script>
+	<script src="resources/js/rsa/rng.js"></script>
+	<script src="resources/js/rsa/rsa.js"></script>
+	</head>
+	
+	<body>
+		<!-- wrapper -->
+		<div id="wrap">
+			<!-- header -->
+			<jsp:include page="/WEB-INF/views/inc/header.jsp"></jsp:include>
+			<!-- 여기부터 본문 복사 -->
+			<div id="container">
+				<div id="cont_inner">
+					<h2>회원가입</h2>
+					<div id="agreeAllMent">
+						<strong>“아래의 '서비스 약관, 개인정보 보호정책 및 수집 이용 안내'에 모두 동의합니다.”</strong>
+						<div id="agreeAlldiv">
+							<input type="checkbox" id="agreeAll" class="agreeEachCbox" onclick="agreementAllClick();">
+							<label id="agreeAllLabel" for="agreeAll">모든 약관에 동의합니다.</label>
+						</div>
+					</div>
+					<div id="termsAndConditions">
+						<div class=TACdiv>
+						<h2>Terms & Conditions 1.</h2>
+						<div class="TACcontent">
+							<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Similique totam, aspernatur ipsam, soluta vitae inventore odit, sint nemo praesentium minus eaque veniam temporibus consequatur minima veritatis. Nostrum eligendi architecto enim?
+								Ab ut perferendis officia, cum ullam quisquam at illum eum, aspernatur perspiciatis doloremque vero dolores voluptate voluptatibus cumque quia, pariatur fugiat recusandae numquam est facilis exercitationem nam. Quos, eaque ratione?
+								Assumenda magnam sed laborum veniam doloribus, harum modi quasi sapiente tempora earum debitis dolores dicta eos consectetur perspiciatis repellat omnis porro! Fugiat, voluptate dignissimos quia vero alias est omnis maxime.
+								Quos quam aut provident? Explicabo labore, ad earum veritatis nisi doloremque corporis pariatur ab vero, quod cumque deleniti iure illum tempore, dolore possimus molestiae dolorem modi. Deleniti non neque magnam.
+								Non commodi dicta cum incidunt iste repellat molestias officia nisi placeat amet repellendus sit iusto, magnam animi! Modi beatae temporibus ipsa nisi quia nostrum, aspernatur rerum, recusandae, debitis facilis autem?
+								Minima ullam modi voluptatibus reprehenderit dolor, est, dolore et ratione odit aliquid consequuntur? Assumenda, molestiae nobis! Dicta modi nam iure et numquam, provident earum sunt eveniet voluptates repudiandae ullam delectus?
+								Iste fuga, ducimus maiores deleniti iure quos quia ab asperiores. Voluptate tempora obcaecati inventore nesciunt, veniam molestiae maiores vitae ad quisquam fugit, dolor enim deleniti, incidunt laborum numquam temporibus exercitationem.
+								Unde reiciendis non tempora, quam aliquid aperiam rem alias officia veniam? Mollitia ipsum, reiciendis, quas qui non eos sapiente expedita nesciunt harum, ipsam esse praesentium enim ut vero recusandae error!
+								Ea autem tenetur totam cumque fugit voluptatibus, explicabo sunt deleniti! Laudantium dolor officiis incidunt voluptatem, eum obcaecati fuga ex. Nihil architecto, exercitationem veritatis dolor voluptatem delectus necessitatibus eveniet fuga consequuntur!
+								Cupiditate odio fuga, quaerat illum dolor sit unde fugiat numquam aliquam ipsum quo optio officia obcaecati? Earum, eligendi! Corrupti laudantium minus, odit sed temporibus sit id explicabo sapiente aspernatur quaerat.
+								Explicabo voluptas incidunt ex dolor consequuntur, eum fugit molestias rerum nulla laborum! Tempore necessitatibus doloremque tempora aut provident porro velit inventore, possimus earum officia sequi ex? Maiores tenetur deleniti blanditiis.
+								Cum, labore doloremque vitae voluptate eaque, explicabo provident necessitatibus est dolore veritatis molestias. Ab est illum officia fugit eaque omnis, velit natus commodi aut enim nobis, perspiciatis laudantium sed aspernatur.
+								Soluta placeat, sit fugiat sequi cum accusamus in eos nulla amet facere, voluptas aliquam, vero molestias beatae pariatur neque tenetur! Nobis ab, odit praesentium quidem culpa neque repellat similique molestiae.
+								Et a mollitia possimus facilis recusandae quasi aut assumenda qui, autem nisi impedit unde sunt dolore animi esse fuga iusto nobis quod, nostrum ducimus ullam? Ullam eligendi nisi obcaecati quod?
+								Est beatae, impedit unde accusantium eaque aliquam similique voluptas officia iure doloremque odit vitae quasi corrupti dolor debitis culpa laborum molestias, illo animi ducimus ea repellendus nam distinctio tenetur? Impedit.
+								Molestias, debitis? Mollitia fugit nobis tempora modi laboriosam facilis veniam delectus! Quod quis hic qui expedita esse, minima ullam, assumenda laboriosam distinctio facilis amet eius corrupti aut, modi atque odit?
+								Tempore alias maiores accusamus asperiores distinctio rerum ratione explicabo. Fuga, repellat eius officiis veritatis recusandae odit ad eum nam veniam ea, dolorum dolores culpa, ullam ipsum facere. Aspernatur, cum officiis!
+								Deserunt, maxime quas? Ex, ullam itaque minus pariatur eligendi officiis. Provident laborum dolor sed sunt quasi porro assumenda animi explicabo tenetur minima saepe fugiat error, nihil qui cupiditate unde delectus.
+								Dolorum ipsum odio quo, ducimus nostrum excepturi. Suscipit at, voluptatem nisi tempore voluptas magni, nemo saepe debitis, eligendi soluta omnis accusamus rerum officia iure fugit aperiam. Quidem magni odit laudantium!
+								Quo asperiores doloremque fuga deserunt iste repellat at culpa, optio excepturi id? Recusandae rerum nesciunt, accusantium porro fuga minima repellat ipsam autem libero similique totam odio vero omnis delectus dolores.
+							</p>
+						</div>
+						<div class="agreeEachdiv">
+							<input type="checkbox" id="agreeEach1" class="agreeEachCbox" onchange="agreementEachClick(this);">
+							<label id="each1Label" for="agreeEach1">약관에 동의합니다.</label>
+				   
+						</div>
+					</div>
+					<div class=TACdiv>
+						<h2>Terms & Conditions 2.</h2>
+						<div class="TACcontent">
+							<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet, adipisci, quaerat molestias, laborum dolores sed eum tenetur non ex mollitia facilis assumenda. Tempore ipsam ipsa officiis explicabo laborum neque quia.
+								Porro exercitationem, in eligendi dolores repellendus magnam sed, enim alias dicta libero earum voluptates consequatur amet neque inventore quo. Maiores quos provident possimus sapiente similique aperiam expedita? Voluptas, nobis. Eos!
+							Voluptas deserunt, quibusdam iste a odit est in et molestiae quisquam? Nihil et quia minima id inventore soluta totam, incidunt, beatae, molestias aliquid saepe illo sequi. Vel necessitatibus adipisci assumenda.
+							Illum vel inventore vero sapiente officiis doloribus odit architecto, commodi, beatae voluptatibus blanditiis culpa ab earum neque. Delectus esse, repellat, cupiditate reiciendis aut ad a pariatur, illo cumque porro fugit?
+							Quae quisquam animi repellendus cumque delectus sint doloremque assumenda. Ducimus debitis mollitia perspiciatis nobis fugit unde asperiores sapiente odio culpa impedit? Natus, minus? Quas voluptatibus reiciendis itaque aut iste tenetur!
+							Eos ut voluptas commodi neque quas, doloremque voluptatem omnis quaerat necessitatibus nam dolorem, nulla possimus. Inventore ut pariatur fugiat exercitationem, rem doloribus consequuntur non molestiae! Doloribus dicta quo quibusdam voluptatum.
+							Cumque rerum voluptates quam inventore quae cupiditate ex veniam quaerat tenetur consequatur earum delectus quasi, rem atque eveniet debitis voluptas aspernatur dolore nobis reprehenderit molestias. Sapiente dolor deserunt asperiores ea!
+							Laudantium dolore iure, architecto fugiat, dolorum quia earum nostrum molestiae ea amet perspiciatis fuga ducimus magnam ratione alias dicta, eligendi voluptatum dolor id? Nulla dicta inventore voluptatum, ullam aspernatur unde?
+							Quis fuga quidem et ab ad sapiente porro omnis quaerat, sequi officiis voluptate cumque vitae obcaecati assumenda laborum ut magnam iste totam amet? Ipsa nulla, minus sint tenetur voluptas quibusdam!
+							Nulla beatae quidem impedit odit itaque, dolorum, consequuntur tempora temporibus necessitatibus eum architecto neque voluptas aut vero odio doloremque recusandae. Esse voluptatum dolore dolores aperiam eum est placeat vitae nostrum.
+							Molestias, fugit vel repellat eveniet facere aperiam corrupti excepturi, nostrum blanditiis quo accusantium ea similique hic quaerat pariatur qui incidunt vitae, sequi inventore. Et, repudiandae! Laboriosam libero et a nulla.
+							Iste non veniam cum, consectetur voluptas unde voluptatum veritatis omnis suscipit repellat corrupti totam facere? Illo deserunt quod nulla dicta inventore eius placeat praesentium cupiditate minus neque, dolor omnis quo!
+							Ex, cum? Voluptate alias, nemo magni architecto harum ab placeat in at eum ipsa commodi hic, omnis voluptatem corporis deserunt. Voluptates, corporis magnam in sint fugiat soluta asperiores accusamus iure?
+							Nihil harum magni quis corporis esse, mollitia aperiam vero in, sunt iusto vitae ex porro incidunt amet rem earum, vel asperiores? Vel temporibus, impedit sunt assumenda commodi voluptate reiciendis dolor!
+							Eos, doloribus nisi sit, adipisci obcaecati temporibus vitae id, quaerat repudiandae numquam expedita? Saepe expedita explicabo eaque reprehenderit cupiditate quae blanditiis assumenda maiores laudantium, eos ratione voluptate autem enim eum.
+							Quaerat possimus, iure quas deserunt odio asperiores nesciunt accusantium natus placeat quo excepturi hic corrupti eveniet aperiam debitis adipisci, ullam consectetur a harum laudantium necessitatibus. Veritatis optio exercitationem accusantium eius!
+							Recusandae dolore labore quaerat eveniet quidem similique placeat illo pariatur veniam reprehenderit qui ipsam, eum itaque animi delectus dolorum ex libero quisquam. Laudantium asperiores porro doloribus autem ratione esse ut?
+							Quas cupiditate obcaecati sequi iusto nesciunt recusandae totam commodi repellat quisquam, tempore doloremque facere pariatur voluptates ut consequatur suscipit porro. Animi veniam saepe necessitatibus molestiae explicabo. Illo molestiae esse ex.
+							Iste consectetur doloribus sint repellat non veritatis dolorum quod hic voluptatibus cupiditate, praesentium, dolores suscipit numquam saepe reiciendis, optio maxime sequi laborum error nam ut porro! Magnam quo nobis pariatur.
+							Explicabo sint illo, magni dolorum aut corrupti corporis sunt dignissimos, nam nostrum architecto alias ex neque, et veritatis? Dicta, error non? Aspernatur perspiciatis, modi culpa consequuntur beatae suscipit eum dolor?
+							</p>
+						</div>
+						<div class="agreeEachdiv">
+							<input type="checkbox" id="agreeEach2" class="agreeEachCbox" onchange="agreementEachClick(this);">
+							<label id="each2Label" for="agreeEach2">약관에 동의합니다.</label>
+						</div>
+					</div>
+					</div>
+					<div id="infobox">
+						<form id="accntRegit" action="/register.submit.do" method="POST">
+							<table id="infoTbl">
+								<tbody>
+									<tr>
+										<th>아이디 <em>*</em></th>
+										<td>
+											<div class="duplicateboxdiv">
+												<input type="text" id="idinput" onkeyup="idFormCheck();"> 
+												<input type="hidden" id="idhiddeninput" name="id"> 
+												<img src="//img.x1.co.kr/x1/images/btn/btn_duplication.gif" id="idduplicheck" onclick="duplicheckAjax(this);"> 
+												<span class="duplimentFormMent" id="idduplino">4자이상 12자이하 영문,숫자(띄어쓰기, 특수문자 불가)<span style="color: red;"> 중복확인을 해주세요</span></span> 
+												<span class="duplimentFormMent" id="iddupliok">사용가능합니다.</span>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<th>비밀번호 <em>*</em></th>
+										<td><input type="password" id="pwinput" onkeyup="pwFormCheck();">
+											<input type="hidden" id="pwhiddeninput" name="s_passwd">
+											<span class="pwdment" id="pwduplino">영어 대/소문자, 숫자, 특수문자 중 2가지 이상 조합 6자~12자(띄어쓰기 불가)</span> 
+											<span class="pwdment" id="pwdupliok">사용가능합니다.</span></td>
+										</tr>
+										<tr>
+											<th>비밀번호 확인 <em>*</em></th>
+											<td><input type="password" id="pwreinput" onkeyup="pwCorrectcheck();"></td>
+										</tr>
+										<tr>
+											<th>성명 <em>*</em></th>
+											<td><input type="text" id="nameinput" name="name" onkeyup="nameFormCheck();"></td>
+										</tr>
+										<tr>
+										<th>닉네임(필명) <em>*</em></th>
+										<td>
+											<div class="duplicateboxdiv">
+												<input type="text" id="nicknameinput" name="nickname" onkeyup="nicknameFormCheck();">
+												<img src="//img.x1.co.kr/x1/images/btn/btn_duplication.gif" id="nicknameduplicheck" onclick="duplicheckAjax(this);"> 
+												<span class="duplimentFormMent" id="nicknameduplino">영문 4자~12자,한글 2자~6자(띄어쓰기, 특수문자 불가)<span style="color: red;"> 중복확인을 해주세요</span></span> 
+												<span class="duplimentFormMent" id="nicknamedupliok">사용가능합니다.</span></td>
+											</div>
+										</td>
+										
+									</td>
+                                    
+                                    <tr>
+                                    <th>휴대폰 번호 <em>*</em></th>
+                                    <td>
+                                        <select id="phoneinput1" class="phoneinput">
+                                            <option>010</option>
+                                            <option>011</option>
+                                            <option>016</option>
+                                            <option>017</option>
+                                            <option>018</option>
+                                            <option>018</option>
+                                            <option>070</option>
+                                        </select> -
+                                            <input type="text" id="phoneinput2" class="phoneinput" maxlength="4"> -
+                                            <input type="text" id="phoneinput3" class="phoneinput" maxlength="4">
+                                            <input type="hidden" id="phoneHiddenInput" name="phone">
+                                    </td>
+                                    </tr>
+									</tr>
+								</tbody>
+							</table>
+						</form>
+						<!-- submit btn -->
+						<div id="submitdiv">
+							<img id="cancelbtn"
+								src="//img.x1.co.kr/x1/images/btn/btn_cancel.gif"> 
+								<img
+								id="submitbtn" src="//img.x1.co.kr/x1/images/btn/btn_confirm.gif" onclick="regitCtgSubmit();">
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		
+		<!-- 공개키 설정에 필요한 값 -->
+		<input type="hidden" id="modulusVal" value="${modulus }">
+		<input type="hidden" id="exponentVal" value="${exponent }">
+		
+		<!-- JS load -->
+		<script src="resources/js/regit.js"></script>
+	</body>
+	
+	</html>

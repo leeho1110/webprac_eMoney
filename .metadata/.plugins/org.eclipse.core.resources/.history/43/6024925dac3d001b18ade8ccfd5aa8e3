@@ -1,0 +1,24 @@
+#postTbl {
+    width: 600px;
+    margin: 0px auto;
+}
+
+#postTbl th {
+	width: 100px;
+    text-align: center;
+	vertical-align: middle;
+	background-color: #eeeeee;
+}
+
+#postTbl td {
+	text-align: left;
+}
+
+#postTbl tr:NTH-CHILD(3){
+	height: 400px;
+	overflow-y: scroll;
+}
+
+#postTbl th:NTH-CHILD(3) {
+}
+

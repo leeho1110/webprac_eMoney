@@ -21,7 +21,7 @@ public class RSAUtil {
 	public RSAUtil() {
 		try {
 			generator = KeyPairGenerator.getInstance("RSA");
-			generator.initialize(4096);
+			generator.initialize(1024);
 			keyFactory = KeyFactory.getInstance("RSA");
 			cipher = Cipher.getInstance("RSA");
 		} catch (Exception e) {
@@ -40,12 +40,9 @@ public class RSAUtil {
 			PublicKey publickey = keyPair.getPublic();
 			PrivateKey privatekey = keyPair.getPrivate();
 
-			RSAPublicKeySpec publicSpec = keyFactory.getKeySpec(publickey, RSAPublicKeySpec.class);
+			RSAPublicKeySpec publicSpec =  (RSAPublicKeySpec) keyFactory.getKeySpec(publickey, RSAPublicKeySpec.class);
 			String modulus = publicSpec.getModulus().toString(16);
 			String exponent = publicSpec.getPublicExponent().toString(16);
-			
-//			System.out.println(modulus);
-//			System.out.println(exponent);
 			
 			rsa = new RSA(privatekey, modulus, exponent);
 			

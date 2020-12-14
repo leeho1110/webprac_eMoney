@@ -4,10 +4,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 
-import javax.xml.crypto.dsig.keyinfo.RetrievalMethod;
-
-import oracle.jdbc.driver.Message;
-
 public class SHA256Util {
 
 	public String getEncrypt(String source, String salt){

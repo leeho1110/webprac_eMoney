@@ -5,11 +5,11 @@ import com.test.webPrac.vo.MemberVO;
 
 public interface RegisterService {
 	
-	MemberVO getAccountMemberInfo(String nickname);
+	MemberVO selectAccountMemberInfo(String nickname);
 
-	int getIdCheck(String idinput);
+	int selectIdCheck(String idinput);
 
-	int getNicknameCheck(String nickname);
+	int selectNicknameCheck(String nickname);
 
 	int insertAcctMember(MemberVO member);
 

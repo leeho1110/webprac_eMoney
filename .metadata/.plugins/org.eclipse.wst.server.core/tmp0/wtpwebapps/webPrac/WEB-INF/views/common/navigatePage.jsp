@@ -21,14 +21,22 @@
 			location.href = "${navigate}";
 		} else if (navigateVal == "main.do") {
 			location.href = "${navigate}";
-		} else if (navigateVal == "board.write.do"){
+		} else if (navigateVal == "writeError"){
 			alert("작성에 실패하였습니다")
-			location.href = "${navigate}";
-		} 
-		
-		
-		
-		
+			location.href = "main.do";
+		} else if (navigateVal == "deleteError"){
+			alert("삭제에 실패하였습니다")
+			location.href = "main.do";
+		} else if (navigateVal == "updateError"){
+			alert("수정에 실패하였습니다")
+			location.href = "main.do";
+		} else if (navigateVal == "registerError"){
+		    alert("회원가입에 실패하였습니다")
+			location.href = "register.do";
+		} else if (navigateVal == "rsaError"){
+		    alert("비정상적인 접근입니다")
+			location.href = "register.do";
+		}
 		
 		else {
 			alert(navigateVal);

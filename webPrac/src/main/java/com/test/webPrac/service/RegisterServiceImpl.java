@@ -13,18 +13,18 @@ public class RegisterServiceImpl implements RegisterService {
 	private RegisterDaoMapper registerDaoMapper;
 
 	@Override
-	public MemberVO getAccountMemberInfo(String nickname) {
-		return registerDaoMapper.getAccountMemberInfo(nickname);
+	public MemberVO selectAccountMemberInfo(String nickname) {
+		return registerDaoMapper.selectAccountMemberInfo(nickname);
 	}
 
 	@Override
-	public int getIdCheck(String idinput) {
-		return registerDaoMapper.getIdCheck(idinput);
+	public int selectIdCheck(String idinput) {
+		return registerDaoMapper.selectIdCheck(idinput);
 	}
 
 	@Override
-	public int getNicknameCheck(String nicknameinput) {
-		return registerDaoMapper.getNicknameCheck(nicknameinput);
+	public int selectNicknameCheck(String nicknameinput) {
+		return registerDaoMapper.selectNicknameCheck(nicknameinput);
 	}
 
 	@Override

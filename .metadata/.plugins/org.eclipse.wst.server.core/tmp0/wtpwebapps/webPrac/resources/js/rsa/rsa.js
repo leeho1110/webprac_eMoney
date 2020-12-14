@@ -26,8 +26,6 @@ function byte2Hex(b) {
 
 // PKCS#1 (type 2, random) pad input string s to n bytes, and return a bigint
 function pkcs1pad2(s,n) {
-  console.log("n(modulus bit):" + n);
-  console.log(s.length + 11);
   if(n < s.length + 11) { // TODO: fix for utf-8
     alert("Message too long for RSA");
     return null;
@@ -91,6 +89,7 @@ function RSADoPublic(x) {
 
 // Return the PKCS#1 RSA encryption of "text" as an even-length hex string
 function RSAEncrypt(text) {
+  console.log(this.n.bitLength());
   var m = pkcs1pad2(text,(this.n.bitLength()+7)>>3);
   if(m == null) return null;
   var c = this.doPublic(m);

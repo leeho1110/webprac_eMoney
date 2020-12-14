@@ -3,7 +3,7 @@
 
 <mapper namespace="com.test.webPrac.dao.LoginDaoMapper">
 	
-	<select id="checkLoginInfo" parameterType="LoginVO" resultType="MemberVO">
+	<select id="selectLoginInfo" parameterType="LoginVO" resultType="MemberVO">
 		SELECT * FROM ACCOUNT WHERE id = #{id}
 	</select>
 	
@@ -13,19 +13,10 @@
 	
 	<insert id="insertLastloginhistory" parameterType="MemberVO">
 		INSERT INTO login_history VALUES (seq_loginHistory.nextval, #{accnt_id}, sysdate+9/24, #{is_mobile}, #{ip}, #{browser}, #{os})
-		<!-- INSERT INTO login_history VALUES (seq_loginHistory.nextval, #{accnt_id}, sysdate+9/24, #{is_mobile}, #{ip}, #{browser}, #{os}); -->
 	</insert>
 	
-	<select id="setInfoOfMember" parameterType="MemberVO" resultType="MemberVO">
+	<select id="selectInfoOfMember" parameterType="MemberVO" resultType="MemberVO">
 		select * from account where accnt_id = #{accnt_id}
 	</select>
-	
-	<insert id="insert1" parameterType="_int">
-		insert into test values (#{1}, #{1})
-	</insert>
-	
-	<insert id="insert2" parameterType="_int">
-		insert into test values (#{1}, #{1})
-	</insert>
 	
 </mapper>

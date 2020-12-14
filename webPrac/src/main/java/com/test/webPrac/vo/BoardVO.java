@@ -6,6 +6,7 @@ public class BoardVO {
 	private String title;
 	private String content;
 	private int writer;
+	private String writer_name;
 	private String time;
 	
 	public String getTitle() {
@@ -38,5 +39,18 @@ public class BoardVO {
 	public void setTime(String time) {
 		this.time = time;
 	}
+	public String getWriter_name() {
+		return writer_name;
+	}
+	public void setWriter_name(String writer_name) {
+		this.writer_name = writer_name;
+	}
+	
+	@Override
+	public String toString() {
+		return "BoardVO [post_num=" + post_num + ", title=" + title + ", content=" + content + ", writer=" + writer
+				+ ", writer_name=" + writer_name + ", time=" + time + "]";
+	}
+	
 	
 }

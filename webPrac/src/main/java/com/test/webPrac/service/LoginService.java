@@ -1,12 +1,8 @@
 package com.test.webPrac.service;
 
-import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.springframework.ui.Model;
 
 import com.test.webPrac.vo.LoginVO;
 import com.test.webPrac.vo.MemberVO;

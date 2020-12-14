@@ -1,6 +1,6 @@
 
-#boardList th:nth-child(1) {  width: 100px; }
-#boardList th:nth-child(2) { width: auto; }
+#boardList th:nth-child(1) { width: 200px; }
+#boardList th:nth-child(2) { width: auto; overflow-y: hidden;}
 #boardList th:nth-child(3) { width: 200px; }
 #boardList th:nth-child(4) { width: 200px; }
 
@@ -8,7 +8,12 @@
 
 #boardList th {
 	text-align: center;
-	font-size: 16px;	
+	font-size: 17px;
+	background-color: #eeeeee;
+}
+
+#boardList td {
+	pointer: cursor;
 }
 
 #pagingPart {
@@ -17,5 +22,6 @@
 
 #btnBox {
 	margin-top: 15px;
-	text-align:right;
+	margin-bottom: 50px;
+	 text-align: right;
 }

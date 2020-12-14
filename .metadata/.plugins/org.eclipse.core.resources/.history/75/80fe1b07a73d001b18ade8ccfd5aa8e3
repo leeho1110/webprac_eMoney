@@ -1,0 +1,4 @@
+function cntPerPageChange() {
+	location.href="main.do?nowPage=${paging.nowPage}&cntPerPage="+$("#cntPerPage").val();
+}
+

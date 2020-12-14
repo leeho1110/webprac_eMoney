@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.test.webPrac.dao.BoardDaoMapper">
+
+	<insert id="insertPost" parameterType="BoardVO">
+		INSERT INTO board VALUES (seq_board.nextVal, #{title}, #{content}, #{writer}, sysdate+9/24)
+	</insert> 
+	
+	<select id="selectTotalBoardCnt" resultType="_int">
+		select count(*) as cnt from board
+	</select>
+	
+	<select id="selectTotalBoardList" parameterType="PagingVO" resultType="BoardVO">
+		SELECT post_num, title, content, (SELECT id FROM account WHERE ACCNT_ID = writer) as writer_name, to_char(time,'YYYY-MM-DD') as time  FROM (
+				SELECT ROWNUM RN, A.* 
+					FROM (
+							SELECT * 
+							FROM BOARD 
+							ORDER BY POST_NUM DESC 
+							) A
+					)
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="selectViewOfPost" parameterType="_int" resultType="BoardVO">
+		select post_num, writer, title, content, (SELECT id FROM account WHERE ACCNT_ID = writer) as writer_name, to_char(time,'YYYY-MM-DD') as time from board where post_num = #{1}
+	</select>
+	
+	<delete id="deletePost" parameterType="_int">
+		
+	</delete>
+</mapper>

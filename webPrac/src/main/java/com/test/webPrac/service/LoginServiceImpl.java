@@ -38,22 +38,19 @@ public class LoginServiceImpl implements LoginService {
 		logger.info("lOGIN LOGIC START");
 		
 		// 로그인 시 입력한 id로 존재 여부 확인
-		MemberVO member = loginDaoMapper.checkLoginInfo(loginVO);
+		MemberVO member = loginDaoMapper.selectLoginInfo(loginVO);
 		String loginApi = loginVO.getLoginApi();
 		
 		// 일반 로그인 경우
 		logger.info("ID PASS");
 		if (member != null && loginApi == null) {
-
 			// PW 확인
 			if (checkLoginPw(loginVO, member)) {
 				logger.info("PW PASS");
 				
 				// 데이터베이스 정보를 객체에 넣어주는 과정 및 웹 정보 추출
 				updateLoginInfoLogic(request, member, session);
-				
 				return "main.do";
-
 			} else {
 				System.out.println("loginFail");
 				return "login.do";
@@ -61,18 +58,14 @@ public class LoginServiceImpl implements LoginService {
 		}
 		// 로그인 API 연동 시 (네이버) 바로 로그인 창으로 이동
 		else if (member != null && loginApi != null) {
-
 			// 데이터베이스 정보를 객체에 넣어주는 과정 및 웹 정보 추출
 			updateLoginInfoLogic(request, member, session);
 			return "main.do";
 		}
-
 		// 로그인 API 연동 시 추가 회원가입 절차
 		else if (member == null && loginApi != null) {
-			
 			return "register.Api.do";
 		}
-
 		// 회원가입 X
 		else {
 			System.out.println("loginFail");
@@ -113,7 +106,7 @@ public class LoginServiceImpl implements LoginService {
 	public void updateLoginInfoLogic(HttpServletRequest request, MemberVO member, HttpSession session) {
 		
 		// DB 정보 세팅
-		member = loginDaoMapper.setInfoOfMember(member);
+		member = loginDaoMapper.selectInfoOfMember(member);
 		// browser, moblie, os 정보 세팅
 		member = Util.getInfoFromRequest(request, member);
 
@@ -124,10 +117,8 @@ public class LoginServiceImpl implements LoginService {
 		logger.info("UPDATE AND INSERT LAST LOGIN HISTORY");
 
 		// Session Cookie를 사용한 로그인 처리
-		
 		session.setAttribute("loginStatus", member);
 		logger.info("LOGIN COMPLETE");
-		
 	}
 
 }

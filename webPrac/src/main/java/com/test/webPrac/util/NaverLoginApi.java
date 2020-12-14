@@ -1,7 +1,5 @@
 package com.test.webPrac.util;
 
-import javax.servlet.http.HttpSession;
-
 import com.github.scribejava.core.builder.api.DefaultApi20;
 
 public class NaverLoginApi extends DefaultApi20{
@@ -27,9 +25,4 @@ public class NaverLoginApi extends DefaultApi20{
         return "https://nid.naver.com/oauth2.0/authorize";
     }
 
-	public static void getAuthURL(HttpSession session) {
-		// TODO Auto-generated method stub
-		
-	}   
- 
 }

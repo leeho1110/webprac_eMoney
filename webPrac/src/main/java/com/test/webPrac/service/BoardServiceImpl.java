@@ -5,11 +5,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -35,17 +34,13 @@ public class BoardServiceImpl implements BoardService {
 		
 		String fileInfo = "";
 		String fileName = request.getHeader("file-name");
-		String fileName_suffix = fileName.substring(fileName.indexOf(".") + 1).toLowerCase();
 
 		logger.info("SET PATH OF INPUTSTREAM");
-		// C:\workspace\git\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\webPrac\img\SE\
 		String defaultPath = request.getSession().getServletContext().getRealPath("/");
 		String filePath = defaultPath + "img" + File.separator + "SE" + File.separator;
 
 		File file = new File(filePath);
-
 		// 위에서 지정한 폴더 생성
-		// C:\workspace\git\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\webPrac\img\SE\
 		if (!file.exists()) {
 			file.mkdirs();
 		}
@@ -89,19 +84,37 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int insertPost(BoardVO boardVO, HttpSession session) {
 		logger.info("INSERT NEW POST");
+		
 		int writer = ((MemberVO)session.getAttribute("loginStatus")).getAccnt_id();
 		boardVO.setWriter(writer);
+		
 		return boardDaoMapper.insertPost(boardVO);
 	}
 
 	@Override
-	public ArrayList<BoardVO> getBoardList(PagingVO pagingVO) {
-		// 그 뒤부터 받아온 걸 가지고 메소드 활용해서 작성하는게 중요할듯?
-		logger.info("GET BOARD LIST");
-		
-		int total = boardDaoMapper.getTotalBoardCnt();
-		
-		return null;
+	public int selectTotalBoardCnt() {
+		logger.info("GET TOTAL COUNT OF BOARD");
+		return boardDaoMapper.selectTotalBoardCnt();
+	}
+
+	@Override
+	public List<BoardVO> selectBoardList(PagingVO pagingVO) {
+		return boardDaoMapper.selectTotalBoardList(pagingVO);
+	}
+
+	@Override
+	public BoardVO selectPost(int post_num) {
+		return boardDaoMapper.selectViewOfPost(post_num);
+	}
+
+	@Override
+	public int deletePost(int post_num) {
+		return boardDaoMapper.deletePost(post_num);
+	}
+
+	@Override
+	public int updatePost(BoardVO boardVO) {
+		return boardDaoMapper.updatePost(boardVO);
 	}
 
 }

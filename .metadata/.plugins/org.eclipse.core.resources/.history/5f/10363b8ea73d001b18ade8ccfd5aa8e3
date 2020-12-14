@@ -1,0 +1,7 @@
+function cntPerPageChange() {
+	location.href="main.do?nowPage=${paging.nowPage}&cntPerPage="+$("#cntPerPage").val();
+}
+
+$("#boardList tr").click(function(){
+    console.log(this.find());
+})

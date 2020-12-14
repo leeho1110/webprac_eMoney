@@ -11,13 +11,25 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>eMoney Web 실습</title>
-<!-- 네이버 로그인 연동 -->
-<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js" charset="utf-8"></script>
 
-<!-- jQuery & RSA -->
+<!-- 네이버 로그인 연동 -->
+<script type="text/javascript"
+	src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js"
+	charset="utf-8"></script>
+
+<!-- jQuery & bootstrap -->
 <jsp:include page="/WEB-INF/views/inc/asset.jsp"></jsp:include>
-<script src="resources/js/jquery-1.12.4.js"></script>
+
+
+<!-- RSA -->
+<script src="resources/js/rsa/jsbn.js"></script>
+<script src="resources/js/rsa/prng4.js"></script>
+<script src="resources/js/rsa/rng.js"></script>
+<script src="resources/js/rsa/rsa.js"></script>
+
+<!-- CSS -->
 <link rel="stylesheet" href="resources/css/login.css">
+
 </head>
 <body>
 	<!-- wrapper -->
@@ -32,12 +44,12 @@
 						<h3>로그인</h3>
 						<div style="margin-top: 30px;">
 							<div class="info_area">
-								<input type="text" id="idBox" name="id"
-									placeholder="아이디를 입력해주세요">
+								<input type="text" id="idBox" placeholder="아이디를 입력해주세요">
+								<input type="hidden" id="idHiddenBox" name="id">
 							</div>
 							<div class="info_area">
-								<input type="password" id="pwBox" name="pw"
-									placeholder="비밀번호를 입력해주세요">
+								<input type="password" id="pwBox" placeholder="비밀번호를 입력해주세요">
+								<input type="hidden" id="pwHiddenBox" name="pw">
 							</div>
 						</div>
 					</form>
@@ -58,20 +70,42 @@
 		</div>
 	</div>
 
-	<script>
+	<!-- 공개키 설정에 필요한 값 -->
+	<input type="hidden" id="modulusVal" value="${modulus }">
+	<input type="hidden" id="exponentVal" value="${exponent }">
+
+	<script type="text/javascript">
 	// 페이지 로딩 시 로그인 포커스
-	$(document).ready(function(){
-		$("#idBox").focus();
+	$(document).ready(function() {
+	    $("#idBox").focus();
 	})
-	
+
+	var rsa = new RSAKey();
+	var modulus = $("#modulusVal").val();
+	var exponent = $("#exponentVal").val();
+	rsa.setPublic(modulus, exponent);
+
 	function loginInputCheck() {
 	    if ($("#idBox").val() == "") {
-			alert("아이디 입력을 확인해주세요");
-			$("#idBox").focus();
+		alert("아이디 입력을 확인해주세요");
+		$("#idBox").focus();
 	    } else if ($("#pwBox").val() == "") {
-			alert("비밀번호 입력을 확인해주세요");
-			$("#pwBox").focus();
+		alert("비밀번호 입력을 확인해주세요");
+		$("#pwBox").focus();
 	    } else {
+		// 암호화 후 전송
+		alert($("#idBox").val());
+		alert($("#pwBox").val());
+
+		var encrypedId = rsa.encrypt($("#idBox").val());
+		var encrypedPw = rsa.encrypt($("#pwBox").val());
+
+		alert(encrypedId);
+		alert(encrypedPw);
+
+		$("#idHiddenBox").val(encrypedId);
+		$("#pwHiddenBox").val(encrypedPw);
+
 		$("#loginForm").submit();
 	    }
 	}

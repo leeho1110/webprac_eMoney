@@ -6,16 +6,19 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>eMoney Web 실습</title>
-	<link rel="stylesheet" href="resources/css/webPrac.css">
-	<link rel="stylesheet" href="resources/css/regit.css">
 	
-	<!-- RSA 암호화 JavaScript -->
-	<script src="resources/js/jquery-1.12.4.js"></script>
+	<!-- jQuery & bootstrap -->	
+	<jsp:include page="/WEB-INF/views/inc/asset.jsp"></jsp:include>
 	
+	<!-- RSA -->
 	<script src="resources/js/rsa/jsbn.js"></script>
 	<script src="resources/js/rsa/prng4.js"></script>
 	<script src="resources/js/rsa/rng.js"></script>
 	<script src="resources/js/rsa/rsa.js"></script>
+
+	<!-- CSS -->	
+	<link rel="stylesheet" href="resources/css/regit.css">
+	
 	</head>
 	
 	<body>
@@ -169,12 +172,15 @@
 								<img
 								id="submitbtn" src="//img.x1.co.kr/x1/images/btn/btn_confirm.gif" onclick="regitCtgSubmit();">
 						</div>
-	
 					</div>
 				</div>
 			</div>
-	
+			
 		</div>
+		
+		<!-- 공개키 설정에 필요한 값 -->
+		<input type="hidden" id="modulusVal" value="${modulus }">
+		<input type="hidden" id="exponentVal" value="${exponent }">
 		
 		<!-- JS load -->
 		<script src="resources/js/regit.js"></script>

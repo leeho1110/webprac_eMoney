@@ -1,0 +1,8 @@
+#postTbl {
+    width: 600px;
+    margin: 0px auto;
+}
+
+/* #tblDiv {
+    width: 600px;
+} */

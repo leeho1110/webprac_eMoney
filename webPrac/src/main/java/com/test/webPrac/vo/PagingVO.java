@@ -3,15 +3,13 @@ package com.test.webPrac.vo;
 public class PagingVO {
 	// 현재페이지 시작페이지 끝페이지 총 게시물 수 페이지 당 게시물 수 마지막 페이지 시작 끝
 	private int nowPage, startPage, endPage, Total, cntPerPage, lastPage, start, end;
-	private int cntPage = 5;
 
 	public PagingVO() {
 
 	}
 
-	public PagingVO(int total, int nowPage, int cntPerPage) {
+	public void setPagingInfo(int total) {
 		setNowPage(nowPage);
-		setCntPage(cntPerPage);
 		setTotal(total);
 		calcLastPage(total, cntPerPage);
 		calcStartEnd(nowPage, cntPerPage);
@@ -22,6 +20,7 @@ public class PagingVO {
 	public void calcLastPage(int total, int cntPerPage) {
 		setLastPage((int) Math.ceil((double) total / (double) cntPerPage)); 
 	}
+
 
 	// 시작, 끝 페이지 계산
 	public void calcStartEndPage(int nowPage, int cntPage) {
@@ -105,12 +104,10 @@ public class PagingVO {
 		this.end = end;
 	}
 
-	public int getCntPage() {
-		return cntPage;
+	@Override
+	public String toString() {
+		return "PagingVO [nowPage=" + nowPage + ", startPage=" + startPage + ", endPage=" + endPage + ", Total=" + Total
+				+ ", cntPerPage=" + cntPerPage + ", lastPage=" + lastPage + ", start=" + start + ", end=" + end + "]";
 	}
-
-	public void setCntPage(int cntPage) {
-		this.cntPage = cntPage;
-	};
 
 }

@@ -1,9 +1,10 @@
 package com.test.webPrac.controller;
 
 import java.io.IOException;
+import java.security.PrivateKey;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +24,8 @@ import com.test.webPrac.service.BoardService;
 import com.test.webPrac.service.LoginService;
 import com.test.webPrac.service.NaverLoginService;
 import com.test.webPrac.service.RegisterService;
+import com.test.webPrac.util.RSA;
+import com.test.webPrac.util.RSAUtil;
 import com.test.webPrac.util.SHA256Util;
 import com.test.webPrac.vo.BoardVO;
 import com.test.webPrac.vo.LoginVO;
@@ -46,63 +49,63 @@ public class MainController {
 	@Autowired
 	private BoardService boardServ;
 
-	// Basic Part
-	// -----------------------------------------------------------------
-
+	// BASIC
 	// 한글 이름, 영문 이름, 생일, 현재 날짜 및 시간 출력 (index.jsp)
 	@RequestMapping(value = "index.do", method = RequestMethod.GET)
-	public String home(HttpServletRequest req, HttpServletResponse resp) {
+	public String home(HttpServletRequest request, HttpServletResponse response) {
 
 		logger.info("Log Index.do");
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분 ss초");
 		Date time = new Date();
 
-		req.setAttribute("time", format.format(time));
+		request.setAttribute("time", format.format(time));
 
 		return "common/index";
 	}
 
 	// 테이블에 있는 모든 데이터를 가져와서 노출 (account.이름약자) - http://ip/account.sj
 	@RequestMapping(value = "account.*.do", method = RequestMethod.GET)
-	public String getInfo(HttpServletRequest req, HttpServletResponse resp) {
+	public String getInfo(HttpServletRequest request, HttpServletResponse response) {
 
 		logger.info("Log Index.do");
 
 		// account URL 파싱 처리
-		String url = req.getRequestURI();
+		String url = request.getRequestURI();
 		String parsedUrl = url.substring(url.indexOf("/account"), url.length());
 		String nickname = parsedUrl.replace("/account.", "").replace(".do", "");
 
-		req.setAttribute("accntNickname", nickname);
-		req.setAttribute("accntInfo", registerServ.getAccountMemberInfo(nickname));
+		request.setAttribute("accntNickname", nickname);
+		request.setAttribute("accntInfo", registerServ.selectIdCheck(nickname));
 		return "common/accountInfo";
 	}
 
-	// Register
-	// -------------------------------------------------------------------
-
+	// REGISTER
 	@RequestMapping(value = "register.do", method = RequestMethod.GET)
-	public String register(HttpSession session, HttpServletRequest req, HttpServletResponse resp) {
+	public String register(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 
 		logger.info("REGISTER");
 
-		// RSA 키 생성
-		// PrivateKey key = (PrivateKey) session.getAttribute("RSAprivateKey");
-		// if(key != null){
-		// session.removeAttribute("RSAprivateKey");
-		// }
+		if (session.getAttribute("loginStatus") != null) {
+			try {
+				response.sendRedirect("main.do");
+			} catch (Exception e) {
+			}
+		}
 
-		// rsa도 새로운 키가 계속 생성되고있음
-		// RSAUtil rsaUtil = new RSAUtil();
-		// RSA rsa = rsaUtil.creatRSA();
+		// RSA 개인키 생성
+		PrivateKey key = (PrivateKey) session.getAttribute("RSAprivateKey");
+		if (key != null) {
+			session.removeAttribute("RSAprivateKey");
+		}
 
-		// System.out.println("Modulas:" + rsa.getModulas());
-		// System.out.println("Exponent:" +rsa.getExponent());
+		// RSA 개인키 세션 저장 후 공개키 클라이언트에 전달
+		RSAUtil rsaUtil = new RSAUtil();
+		RSA rsa = rsaUtil.creatRSA();
+		session.setAttribute("RSAprivateKey", rsa.getPrivatekey());
 
-		// req.setAttribute("modulus", rsa.getModulas());
-		// req.setAttribute("exponent", rsa.getExponent());
-		// session.setAttribute("RSAprivateKey", rsa.getPrivatekey());
+		request.setAttribute("modulus", rsa.getModulas());
+		request.setAttribute("exponent", rsa.getExponent());
 
 		return "regit/regit";
 	}
@@ -116,11 +119,9 @@ public class MainController {
 		// 인코딩
 		response.setCharacterEncoding("UTF-8");
 
-		// 값 반환
-		String result = "";
-
 		// 일치하는 아이디가 1개라도 존재하면 중복
-		if (registerServ.getIdCheck(dupliinput) > 0) {
+		String result = "";
+		if (registerServ.selectIdCheck(dupliinput) > 0) {
 			result = "duplicated";
 		} else {
 			result = "ok";
@@ -142,11 +143,9 @@ public class MainController {
 		// 인코딩
 		response.setCharacterEncoding("UTF-8");
 
-		// 값 반환
-		String result = "";
-
 		// 일치하는 닉네임이 1개라도 존재하면 중복
-		if (registerServ.getNicknameCheck(dupliinput) > 0) {
+		String result = "";
+		if (registerServ.selectNicknameCheck(dupliinput) > 0) {
 			result = "duplicated";
 		} else {
 			result = "ok";
@@ -160,37 +159,57 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "register.submit.do", method = RequestMethod.POST)
-	public void register_submit(HttpServletRequest request, HttpServletResponse response, HttpSession session,
-			MemberVO member) {
+	public String register_submit(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			MemberVO memberVO) {
 
 		logger.info("REGISTER SUBMIT");
 
-		// 전달된 아이디 비밀번호 decoding
+		// 세션에서 RSA 개인키 가져옴
+		PrivateKey key = (PrivateKey) session.getAttribute("RSAprivateKey");
 
-		// -----------------------
+		// 비정상적인 접근 처리
+		if (key == null) {
+			request.setAttribute("navigate", "rsaError");
+			return "common/navigatePage";
+		}
 
-		// SHA-256 비밀번호 암호화
-		SHA256Util sha256 = new SHA256Util();
+		// 세션에서 개인키 제거
+		session.removeAttribute("RSAprivateKey");
+
+		RSAUtil rsaUtil = new RSAUtil();
+		String decrypedid = "";
+		String decrypedPw = "";
+
+		try {
+			decrypedid = rsaUtil.getDecryptText(key, memberVO.getId());
+			decrypedPw = rsaUtil.getDecryptText(key, memberVO.getS_passwd());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 
 		// 암호화에 필요한 salt값 및 암호화
+		SHA256Util sha256 = new SHA256Util();
 		String salt = sha256.generateSalt();
-		String newPwd = sha256.getEncrypt(member.getS_passwd(), salt);
+		String newPwd = sha256.getEncrypt(decrypedPw, salt);
 
 		// 값 입력
-		member.setSalt(salt);
-		member.setS_passwd(newPwd);
+		memberVO.setId(decrypedid);
+		memberVO.setSalt(salt);
+		memberVO.setS_passwd(newPwd);
 
-		// insert 작업
-		int regitResult = registerServ.insertAcctMember(member);
+		// insert
+		int regitResult = registerServ.insertAcctMember(memberVO);
 
-		// 회원가입 시 로그인 성공
+		// 회원가입  성공
 		if (regitResult > 0) {
-			try {
-				session.setAttribute("loginStatus", member);
-				response.sendRedirect("main.do");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			session.setAttribute("loginStatus", memberVO);
+			request.setAttribute("navigate", "main.do");
+			return "common/navigatePage";
+		} else {
+			request.setAttribute("navigate", "registerError");
+			return "common/navigatePage";
 		}
 	}
 
@@ -202,13 +221,16 @@ public class MainController {
 
 		MemberVO member = new MemberVO();
 
+		// 세션에 저장된 네이버 교유 ID번호 및 이름 가져옴
 		member.setId((String) session.getAttribute("naverUniqId"));
 		member.setName((String) session.getAttribute("naverName"));
 		member.setNickname(nickname);
 		member.setPhone(phone);
 
+		// insert
 		int regitResult = registerServ.insertApiMember(member);
 
+		// 추가 회원가입 성공
 		if (regitResult > 0) {
 			try {
 				session.setAttribute("loginStatus", member);
@@ -219,9 +241,7 @@ public class MainController {
 		}
 	}
 
-	// login Part
-	// -------------------------------------------------------------------
-
+	// LOGIN
 	@RequestMapping(value = "login.do", method = RequestMethod.GET)
 	public String login(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 
@@ -233,6 +253,22 @@ public class MainController {
 			} catch (Exception e) {
 			}
 		}
+
+		// 세션에서 RSA 개인키 가져옴
+		PrivateKey key = (PrivateKey) session.getAttribute("RSAprivateKey");
+		
+		// 비정상적인 접근 처리
+		if (key != null) {
+			session.removeAttribute("RSAprivateKey");
+		}
+
+		// RSA 개인키 세션 저장 후 공개키 클라이언트에 전달 
+		RSAUtil rsaUtil = new RSAUtil();
+		RSA rsa = rsaUtil.creatRSA();
+		session.setAttribute("RSAprivateKey", rsa.getPrivatekey());
+
+		request.setAttribute("modulus", rsa.getModulas());
+		request.setAttribute("exponent", rsa.getExponent());
 
 		// Naver Login Api
 		String naverAuthUrl = naverLoginServ.getAuthorizationUrl(session);
@@ -248,7 +284,7 @@ public class MainController {
 
 		logger.info("NAVER LOGIN API ");
 
-		// 네이버 로그인 사용자 정보를 읽어온다.
+		// 네이버 로그인 사용자 정보를 읽어온다
 		OAuth2AccessToken oauthToken = naverLoginServ.getAccessToken(session, code, state);
 		loginServ.naverLoginLogic(naverLoginServ.getUserProfile(oauthToken), session);
 
@@ -270,8 +306,7 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "loginCheck.do", method = RequestMethod.POST)
-	public String loginCheck(Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session,
-			LoginVO loginVO) {
+	public String loginCheck(Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session, LoginVO loginVO) {
 
 		logger.info("LOGIN INFO CHECK");
 
@@ -281,10 +316,39 @@ public class MainController {
 		if (session.getAttribute("loginStatus") != null) {
 			session.removeAttribute("loginstatus");
 		}
+		
+		// 전달된 아이디 비밀번호 decoding
+		PrivateKey key = (PrivateKey) session.getAttribute("RSAprivateKey");
+
+		// 비정상적인 접근 처리
+		if (key == null) {
+			request.setAttribute("navigate", "rsaError");
+			return "common/navigatePage";
+		}
+
+		// 개인키 제거
+		session.removeAttribute("RSAprivateKey");
+
+		// 복호화
+		RSAUtil rsaUtil = new RSAUtil();
+		String decrypedid = "";
+		String decrypedPw = "";
+
+		try {
+			decrypedid = rsaUtil.getDecryptText(key, loginVO.getId());
+			decrypedPw = rsaUtil.getDecryptText(key, loginVO.getPw());
+			
+			loginVO.setId(decrypedid);
+			loginVO.setPw(decrypedPw);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 
 		// 없다면 로그인 로직 진행
 		String loginResult = "";
-
+		
 		try {
 			loginResult = loginServ.loginLogic(request, response, session, loginVO);
 			Cookie c = new Cookie("login", "test");
@@ -329,11 +393,25 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "main.do", method = RequestMethod.GET)
-	public String main(HttpServletRequest request, HttpServletResponse response, PagingVO pagingVO ) {
+	public String main(HttpServletRequest request, HttpServletResponse response, PagingVO pagingVO) {
 
-		logger.info("MAIN");
-		// 여기서 nowPage와 cntPerPage를 받아온다.
-		ArrayList<BoardVO> boardList = boardServ.getBoardList(pagingVO);
+		logger.info("MAIN LOADING");
+
+		// 처음 메인 접속 시 nowPage, CntPerPage 없는 경우 처리
+		if (pagingVO.getNowPage() == 0 && pagingVO.getCntPerPage() == 0) {
+			pagingVO.setNowPage(1);
+			pagingVO.setCntPerPage(5);
+		} else if (pagingVO.getNowPage() == 0) {
+			pagingVO.setNowPage(1);
+		} else if (pagingVO.getCntPerPage() == 0) {
+			pagingVO.setCntPerPage(5);
+		}
+
+		pagingVO.setPagingInfo(boardServ.selectTotalBoardCnt());
+		List<BoardVO> boardList = boardServ.selectBoardList(pagingVO);
+
+		request.setAttribute("paging", pagingVO);
+		request.setAttribute("boardList", boardList);
 
 		return "board/main";
 	}
@@ -346,8 +424,7 @@ public class MainController {
 		return "common/navigatePage";
 	}
 
-	// BOARD -----------------------------
-
+	// BOARD
 	@RequestMapping(value = "board.write.do", method = RequestMethod.GET)
 	public String write() {
 
@@ -366,18 +443,69 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "board.write.submit.do", method = RequestMethod.POST)
-	public String write_submit(HttpServletRequest request, HttpServletResponse response, HttpSession session, BoardVO boardVO) {
-		
+	public String write_submit(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			BoardVO boardVO) {
+
 		logger.info("WRITING SUBMIT");
 		int result = boardServ.insertPost(boardVO, session);
-		System.out.println(result);
-		if(result > 0){
+
+		if (result > 0) {
 			request.setAttribute("navigate", "main.do");
 			return "common/navigatePage";
 		} else {
-			request.setAttribute("navigate", "board.write.do");
+			request.setAttribute("navigate", "writeError");
 			return "common/navigatePage";
 		}
+	}
+
+	@RequestMapping(value = "board.view.do", method = RequestMethod.GET)
+	public String view(HttpServletRequest request, HttpServletResponse response, int post_num) {
+
+		logger.info("GET VIEW PAGE");
+
+		request.setAttribute("post", boardServ.selectPost(post_num));
+		return "board/view";
+	}
+
+	@RequestMapping(value = "board.modify.do", method = RequestMethod.GET)
+	public String modify(HttpServletRequest request, HttpServletResponse response, int post_num) {
+
+		logger.info("MODIFY POST");
+
+		request.setAttribute("post", boardServ.selectPost(post_num));
+		return "board/modify";
+	}
+
+	@RequestMapping(value = " board.modify.submit.do", method = RequestMethod.POST)
+	public String modify(HttpServletRequest request, HttpServletResponse response, BoardVO boardVO) {
+
+		logger.info("MODIFY POST SUBMIT");
+
+		int result = boardServ.updatePost(boardVO);
+
+		if (result > 0) {
+			request.setAttribute("navigate", "main.do");
+		} else {
+			request.setAttribute("navigate", "updateError");
+		}
+
+		return "common/navigatePage";
+	}
+
+	@RequestMapping(value = "board.delete.do", method = RequestMethod.GET)
+	public String delete(HttpServletRequest request, HttpServletResponse response, int post_num) {
+
+		logger.info("DELETE POST");
+
+		int result = boardServ.deletePost(post_num);
+
+		if (result > 0) {
+			request.setAttribute("navigate", "main.do");
+		} else {
+			request.setAttribute("navigate", "deleteError");
+		}
+
+		return "common/navigatePage";
 	}
 
 	// @RequestMapping(value = ".do", method = RequestMethod.GET)

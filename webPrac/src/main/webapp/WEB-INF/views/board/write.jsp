@@ -42,7 +42,7 @@
 								<td>
 									<div style="text-align: center; margin-top: 20px;">
 										<input type="button" class="btn" id="submitBtn" value="작성완료" onclick="submitWriteBox();">
-										<input type="button" class="btn" id="goBack" value="뒤로가기" onclick="">
+										<input type="button" class="btn" id="goBack" value="뒤로가기" onclick="location.href='main.do';">
 									</div>
 								</td>
 							</tr>
@@ -61,12 +61,6 @@
 			sSkinURI: "/SE/SmartEditor2Skin.html",
 			fCreator: "createSEditor2"
 		});
-
-		$("#goBack").click(function () {
-			oEditors.getById["writeBox"].exec("UPDATE_CONTENTS_FIELD", []);
-		    alert($("#writeBox").val());
-		});
-		
 
 		function submitWriteBox() {
 			// load the value of SE		    
