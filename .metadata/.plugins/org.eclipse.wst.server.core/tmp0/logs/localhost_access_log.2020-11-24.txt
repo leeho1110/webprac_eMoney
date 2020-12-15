@@ -1,5 +1,0 @@
-127.0.0.1 - - [24/Nov/2020:09:33:11 +0900] "GET / HTTP/1.1" 404 807
-127.0.0.1 - - [24/Nov/2020:15:56:50 +0900] "GET / HTTP/1.1" 404 807
-0:0:0:0:0:0:0:1 - - [24/Nov/2020:15:56:51 +0900] "GET /mavenTest/WEB-INF/classes/com/test/mavenTest/SingletonPrac.java HTTP/1.1" 404 721
-0:0:0:0:0:0:0:1 - - [24/Nov/2020:15:57:00 +0900] "GET /mavenTest/WEB-INF/classes/com/test/mavenTest/SingletonPrac.java HTTP/1.1" 404 721
-0:0:0:0:0:0:0:1 - - [24/Nov/2020:15:57:22 +0900] "GET /mavenTest/WEB-INF/classes/com/test/mavenTest/SingletonPrac.java HTTP/1.1" 404 721

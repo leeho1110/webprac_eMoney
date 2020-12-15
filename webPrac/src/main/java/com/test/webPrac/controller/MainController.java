@@ -508,9 +508,15 @@ public class MainController {
 		return "common/navigatePage";
 	}
 
-	// @RequestMapping(value = ".do", method = RequestMethod.GET)
-	// public String () {
-	// return "";
-	// }
+	 @RequestMapping(value = "testXss.do", method = RequestMethod.GET)
+	 public String xssTest() {
+	 return "common/xssTest";
+	 }
+	 @RequestMapping(value = "testXssS.do", method = RequestMethod.GET)
+	 public String xssTestsubmit(HttpServletRequest request, HttpServletResponse response, String test) {
+		 System.out.println(test);
+		 request.setAttribute("test", test);
+		 return "common/xssTest";
+	 }
 
 }

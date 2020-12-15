@@ -1,9 +1,0 @@
-#postTbl {
-    width: 600px;
-    margin: 0px auto;
-}
-
-#postTbl th {
-	width: 100px;
-}
-

@@ -1,9 +1,0 @@
-
-function loginInputCheck() {
-    
-	if()
-
-    if(tempFlag){
-        $("#loginForm").submit();
-    }
-}

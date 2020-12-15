@@ -1,0 +1,61 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> -->
+<title>eMoney Web 실습</title>
+
+<link rel="stylesheet" href="resources/css/view.css">
+
+</head>
+<jsp:include page="/WEB-INF/views/inc/asset.jsp"></jsp:include>
+
+<body>
+	<!-- header -->
+	<div id="wrap">
+		<jsp:include page="/WEB-INF/views/inc/header.jsp"></jsp:include>
+		<div id="container">
+			<div id="cont_inner">
+			<h2>본문</h2>
+				<div id="allowUserBtn">
+					<!-- 자신이 작성한 글의 경우 수정과 삭제가 가능하고 이외에는 운영자만 기능 부여 (계정 권한별 기능 구분)-->
+					<c:if test="${sessionScope.loginStatus.accnt_id eq post.writer || sessionScope.loginStatus.user_type eq '운영자'}">
+							<input type="button" id="modBtn" class="btn" value="수정"
+								onclick="location.href='board.modify.do?post_num=${post.post_num}';">
+							<input type="button" id="delBtn" class="btn" value="삭제"
+								onclick="location.href='board.delete.do?post_num=${post.post_num}';">
+					</c:if>
+				</div>
+				<table id="postTbl" class="table table-bordered">
+					<tbody>
+						<tr>
+							<th>제목</th>
+							<td><div id="titleDiv">${post.title}</div></td>
+						</tr>
+						<tr>
+							<th>작성자</th>
+							<td><div id=" timeDiv">${post.writer_name}</div></td>
+						</tr>
+						<tr>
+							<th>작성일</th>
+							<td><div id=" timeDiv">${post.time}</div></td>
+						</tr>
+						<tr>
+							<td colspan="2"><div id="contentDiv">${post.content}</div></td>
+						</tr>
+					</tbody>
+				</table>
+				<div id="btnDiv">
+					<input type="button" id="backBtn" class="btn" value="뒤로가기"
+						onclick="location.href='main.do';">
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

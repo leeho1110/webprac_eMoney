@@ -4,10 +4,6 @@
 		<item value="0" key="scope"/>
 	</section>
 	<section name="">
-		<item value="1000" key="org.eclipse.jdt.search.resultpage.limit"/>
-		<item value="TRUE" key="org.eclipse.jdt.search.resultpage.limit_enabled"/>
-	</section>
-	<section name="">
 		<item value="1000" key="org.eclipse.search.resultpage.limit"/>
 		<item value="1000" key="org.eclipse.jdt.search.resultpage.limit"/>
 		<item value="TRUE" key="org.eclipse.jdt.search.resultpage.limit_enabled"/>
@@ -59,7 +55,7 @@
 		</list>
 	</section>
 	<section name="SearchDialog">
-		<item value="org.eclipse.search.internal.ui.text.TextSearchPage" key="PREVIOUS_PAGE"/>
+		<item value="org.eclipse.wst.jsdt.ui.JavaSearchPage" key="PREVIOUS_PAGE"/>
 	</section>
 	<section name="org.eclipse.jdt.ui.JavaSearchResultPage">
 		<item value="4" key="org.eclipse.jdt.search.resultpage.grouping"/>
