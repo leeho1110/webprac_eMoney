@@ -145,6 +145,13 @@
 		    <scope>runtime</scope>
 		</dependency>
 		
+		<!-- XSS Filter - naver lucy-xss-servlet-filter -->
+		<dependency>
+		    <groupId>com.navercorp.lucy</groupId>
+		    <artifactId>lucy-xss-servlet</artifactId>
+		    <version>2.0.0</version>
+		</dependency>
+		
 
 
 		<!-- Servlet -->

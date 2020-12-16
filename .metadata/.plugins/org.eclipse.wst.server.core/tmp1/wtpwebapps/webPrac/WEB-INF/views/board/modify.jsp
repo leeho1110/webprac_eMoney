@@ -27,22 +27,22 @@
 					<tbody>
 						<tr>
 							<th>제목</th>
-							<td><div id="titleDiv">${post.title}</div></td>
+							<td><div id="titleDiv"><c:out value="${post.title}"></c:out></div></td>
 						</tr>
 						<tr>
 							<th>작성자</th>
-							<td><div id=" timeDiv">${post.writer_name}</div></td>
+							<td><div id=" timeDiv"><c:out value="${post.writer_name}"></c:out></div></td>
 						</tr>
 						<tr>
 							<th>작성일</th>
-							<td><div id=" timeDiv">${post.time}</div></td>
+							<td><div id=" timeDiv"><c:out value="${post.time}"></c:out></div></td>
 						</tr>
 						<tr>
 							<td colspan="2">
 								<div id="contentDiv">
 								<form id="naverSEwriteBox" action="board.modify.submit.do" method="POST"> 
-									<textarea name="content" id="modifyBox" rows="10" cols="100">${post.content}</textarea>
-									<input type="hidden" value="${post.post_num }" name="post_num">
+									<textarea name="content" id="modifyBox" rows="10" cols="100"><c:out value="${post.content }"></c:out></textarea>
+									<input type="hidden" value='<c:out value="${post.post_num }"></c:out>' name="post_num">
 								</form>
 								</div>
 							</td>

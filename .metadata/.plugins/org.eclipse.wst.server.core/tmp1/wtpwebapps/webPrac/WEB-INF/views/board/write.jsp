@@ -29,7 +29,7 @@
 						<tbody>
 							<tr>
 								<td style="text-align: center;">
-									<input type="text" name="title" id="titleBox" placeholder="제목을 입력해주세요" maxlength="45">
+									<input type="text" name="title" id="titleBox" placeholder="제목을 입력해주세요" maxlength="25">
 								</td>
 							</tr>
 							<tr>
@@ -60,7 +60,7 @@
 			sSkinURI: "/SE/SmartEditor2Skin.html",
 			fCreator: "createSEditor2"
 		});
-
+		
 		function submitWriteBox() {
 			// load the value of SE		    
 		    oEditors.getById["writeBox"].exec("UPDATE_CONTENTS_FIELD", []);
@@ -68,7 +68,7 @@
 		    var titleLenth = $("#titleBox").val().length;
 		    var contentLength = $("#writeBox").val().length;
 		    
-		    if(titleLenth > 0 && contentLength > 0){
+		    if(titleLenth > 0 && contentLength > 0 ){
 				$("#naverSEwriteBox").submit();
 			} else {
 				alert("제목과 내용을 다시 확인해주세요");

@@ -24,27 +24,27 @@
 					<!-- 자신이 작성한 글의 경우 수정과 삭제가 가능하고 이외에는 운영자만 기능 부여 (계정 권한별 기능 구분)-->
 					<c:if test="${sessionScope.loginStatus.accnt_id eq post.writer || sessionScope.loginStatus.user_type eq '운영자'}">
 							<input type="button" id="modBtn" class="btn" value="수정"
-								onclick="location.href='board.modify.do?post_num=${post.post_num}';">
+								onclick="location.href='board.modify.do?post_num=<c:out value="${post.post_num}"></c:out>';">
 							<input type="button" id="delBtn" class="btn" value="삭제"
-								onclick="location.href='board.delete.do?post_num=${post.post_num}';">
+								onclick="location.href='board.delete.do?post_num=<c:out value="${post.post_num}"></c:out>';">
 					</c:if>
 				</div>
 				<table id="postTbl" class="table table-bordered">
 					<tbody>
 						<tr>
 							<th>제목</th>
-							<td><div id="titleDiv">${post.title}</div></td>
+							<td><div id="titleDiv"><c:out value="${post.title}"></c:out></div></td>
 						</tr>
 						<tr>
 							<th>작성자</th>
-							<td><div id=" timeDiv">${post.writer_name}</div></td>
+							<td><div id=" timeDiv"><c:out value="${post.writer_name}"></c:out></div></td>
 						</tr>
 						<tr>
 							<th>작성일</th>
-							<td><div id=" timeDiv">${post.time}</div></td>
+							<td><div id=" timeDiv"><c:out value="${post.time}"></c:out></div></td>
 						</tr>
 						<tr>
-							<td colspan="2"><div id="contentDiv">${post.content}</div></td>
+							<td colspan="2"><div id="contentDiv"><c:out value="${post.content }"></c:out></div></td>
 						</tr>
 					</tbody>
 				</table>

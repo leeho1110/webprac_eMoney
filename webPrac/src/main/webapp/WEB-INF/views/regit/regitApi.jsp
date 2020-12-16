@@ -26,17 +26,17 @@
 						<form id="accntRegit" action="/register.extraSubmit.do" method="POST">
 							<table id="infoTbl">
 								<tbody>
+									<tr>
 										<th>닉네임(필명) <em>*</em></th>
 										<td>
 											<div class="duplicateboxdiv">
 												<input type="text" id="nicknameinput" name="nickname" onkeyup="nicknameFormCheck();">
 												<img src="//img.x1.co.kr/x1/images/btn/btn_duplication.gif" id="nicknameduplicheck" onclick="duplicheckAjax(this);"> 
 												<span class="duplimentFormMent" id="nicknameduplino">영문 4자~12자,한글 2자~6자(띄어쓰기, 특수문자 불가)<span style="color: red;"> 중복확인을 해주세요</span></span> 
-												<span class="duplimentFormMent" id="nicknamedupliok">사용가능합니다.</span></td>
+												<span class="duplimentFormMent" id="nicknamedupliok">사용가능합니다.</span>
 											</div>
 										</td>
-										
-									</td>
+									<tr>
                                     
                                     <tr>
                                     <th>휴대폰 번호 <em>*</em></th>
@@ -55,15 +55,13 @@
                                             <input type="hidden" id="phoneHiddenInput" name="phone">
                                     </td>
                                     </tr>
-									</tr>
-									
 								</tbody>
 							</table>
 						</form>
 						<!-- submit btn -->
 						<div id="submitdiv">
 							<img id="cancelbtn"
-								src="//img.x1.co.kr/x1/images/btn/btn_cancel.gif"> 
+								src="//img.x1.co.kr/x1/images/btn/btn_cancel.gif" onclick="location.href='login.do';"> 
 								<img
 								id="submitbtn" src="//img.x1.co.kr/x1/images/btn/btn_confirm.gif" onclick="regitCtgSubmit();">
 						</div>

@@ -1,0 +1,27 @@
+
+#boardList th:nth-child(1) { width: 200px; }
+#boardList th:nth-child(2) { width: auto; overflow-x: hidden;}
+#boardList th:nth-child(3) { width: 200px; }
+#boardList th:nth-child(4) { width: 200px; }
+
+#boardMain { margin-top: 30px; }
+
+#boardList th {
+	text-align: center;
+	font-size: 17px;
+	background-color: #eeeeee;
+}
+
+#boardList td {
+	overflow-x: hidden;
+}
+
+#pagingPart {
+	border: 1px solid black;
+}
+
+#btnBox {
+	margin-top: 15px;
+	margin-bottom: 50px;
+	 text-align: right;
+}

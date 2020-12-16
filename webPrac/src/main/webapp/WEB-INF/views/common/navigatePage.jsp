@@ -11,7 +11,6 @@
 <body>
 	<script>
 		var navigateVal = "${navigate}";
-		console.log(navigateVal);
 		
 		if (navigateVal == "login.do") {
 			alert("아이디와 비밀번호를 다시 확인해주세요")
@@ -33,13 +32,13 @@
 		} else if (navigateVal == "registerError"){
 		    alert("회원가입에 실패하였습니다")
 			location.href = "register.do";
+		} else if (navigateVal == "registerApiError") {
+		    alert("추가 회원가입에 실패하였습니다")
+			location.href = "register.Api.do";
 		} else if (navigateVal == "rsaError"){
-		    alert(navigateVal);
 		    alert("비정상적인 접근입니다")
 			location.href = "register.do";
-		}
-		
-		else {
+		} else {
 			alert(navigateVal);
 			location.href = "login.do";
 		}

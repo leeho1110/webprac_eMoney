@@ -10,6 +10,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -77,6 +78,7 @@ public class MainController {
 
 		request.setAttribute("accntNickname", nickname);
 		request.setAttribute("accntInfo", registerServ.selectIdCheck(nickname));
+
 		return "common/accountInfo";
 	}
 
@@ -93,7 +95,7 @@ public class MainController {
 			}
 		}
 
-		// RSA 개인키 생성
+		// 기존 키 제거
 		PrivateKey key = (PrivateKey) session.getAttribute("RSAprivateKey");
 		if (key != null) {
 			session.removeAttribute("RSAprivateKey");
@@ -111,28 +113,25 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "register.idcheck.do", method = RequestMethod.POST)
-	public void register_idcheck(HttpServletRequest request, HttpServletResponse response, String dupliinput)
-			throws IOException {
+	public void register_idcheck(HttpServletRequest request, HttpServletResponse response, String dupliinput) {
 
 		logger.info("REGISTER ID DUPLICATE CHECK");
 
-		// 인코딩
 		response.setCharacterEncoding("UTF-8");
 
-		// 일치하는 아이디가 1개라도 존재하면 중복
 		String result = "";
 		if (registerServ.selectIdCheck(dupliinput) > 0) {
 			result = "duplicated";
 		} else {
-			result = "ok";
+			result = "pass";
 		}
 
+		// Result
 		try {
 			response.getOutputStream().print(result);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@RequestMapping(value = "register.nicknamecheck.do", method = RequestMethod.POST)
@@ -143,14 +142,14 @@ public class MainController {
 		// 인코딩
 		response.setCharacterEncoding("UTF-8");
 
-		// 일치하는 닉네임이 1개라도 존재하면 중복
 		String result = "";
 		if (registerServ.selectNicknameCheck(dupliinput) > 0) {
 			result = "duplicated";
 		} else {
-			result = "ok";
+			result = "pass";
 		}
 
+		// Result
 		try {
 			response.getOutputStream().print(result);
 		} catch (IOException e) {
@@ -164,16 +163,14 @@ public class MainController {
 
 		logger.info("REGISTER SUBMIT");
 
-		// 세션에서 RSA 개인키 가져옴
 		PrivateKey key = (PrivateKey) session.getAttribute("RSAprivateKey");
 
-		// 비정상적인 접근 처리
+		// 비정상적 접근 처리
 		if (key == null) {
 			request.setAttribute("navigate", "rsaError");
 			return "common/navigatePage";
 		}
 
-		// 세션에서 개인키 제거
 		session.removeAttribute("RSAprivateKey");
 
 		RSAUtil rsaUtil = new RSAUtil();
@@ -188,13 +185,11 @@ public class MainController {
 			e.printStackTrace();
 		}
 
-
 		// 암호화에 필요한 salt값 및 암호화
 		SHA256Util sha256 = new SHA256Util();
 		String salt = sha256.generateSalt();
 		String newPwd = sha256.getEncrypt(decrypedPw, salt);
 
-		// 값 입력
 		memberVO.setId(decrypedid);
 		memberVO.setSalt(salt);
 		memberVO.setS_passwd(newPwd);
@@ -202,7 +197,7 @@ public class MainController {
 		// insert
 		int regitResult = registerServ.insertAcctMember(memberVO);
 
-		// 회원가입  성공
+		// 회원가입 성공
 		if (regitResult > 0) {
 			session.setAttribute("loginStatus", memberVO);
 			request.setAttribute("navigate", "main.do");
@@ -214,7 +209,7 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "register.extraSubmit.do", method = RequestMethod.POST)
-	public void register_Api_Submit(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+	public String register_Api_Submit(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			String nickname, String phone) {
 
 		logger.info("REGISTER API PART SUBMIT");
@@ -232,12 +227,12 @@ public class MainController {
 
 		// 추가 회원가입 성공
 		if (regitResult > 0) {
-			try {
-				session.setAttribute("loginStatus", member);
-				response.sendRedirect("main.do");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			session.setAttribute("loginStatus", member);
+			request.setAttribute("navigate", "main.do");
+			return "common/navigatePage";
+		} else {
+			request.setAttribute("navigate", "registerApiError");
+			return "common/navigatePage";
 		}
 	}
 
@@ -256,13 +251,13 @@ public class MainController {
 
 		// 세션에서 RSA 개인키 가져옴
 		PrivateKey key = (PrivateKey) session.getAttribute("RSAprivateKey");
-		
+
 		// 비정상적인 접근 처리
 		if (key != null) {
 			session.removeAttribute("RSAprivateKey");
 		}
 
-		// RSA 개인키 세션 저장 후 공개키 클라이언트에 전달 
+		// RSA 개인키 세션 저장 후 공개키 클라이언트에 전달
 		RSAUtil rsaUtil = new RSAUtil();
 		RSA rsa = rsaUtil.creatRSA();
 		session.setAttribute("RSAprivateKey", rsa.getPrivatekey());
@@ -279,36 +274,47 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "naverApiLogin.do", method = RequestMethod.GET)
-	public String naverLogin(HttpServletRequest request, HttpServletResponse response, String code, String state,
-			HttpSession session) throws IOException {
+	public String naverLogin(HttpServletRequest request, HttpServletResponse response, HttpSession session, String code, String state, String error) {
 
 		logger.info("NAVER LOGIN API ");
 
-		// 네이버 로그인 사용자 정보를 읽어온다
-		OAuth2AccessToken oauthToken = naverLoginServ.getAccessToken(session, code, state);
-		loginServ.naverLoginLogic(naverLoginServ.getUserProfile(oauthToken), session);
+		if (error == null) {
+			// 네이버 로그인 사용자 정보를 읽어온다
+			OAuth2AccessToken oauthToken;
+			try {
+				oauthToken = naverLoginServ.getAccessToken(session, code, state);
+				loginServ.naverLoginLogic(naverLoginServ.getUserProfile(oauthToken), session);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
 
-		LoginVO loginVO = new LoginVO();
-		loginVO.setId((String) session.getAttribute("naverUniqId"));
-		loginVO.setLoginApi("naver");
+			LoginVO loginVO = new LoginVO();
+			loginVO.setId((String) session.getAttribute("naverUniqId"));
+			loginVO.setLoginApi("naver");
 
-		String loginResult = "";
-		try {
-			loginResult = loginServ.loginLogic(request, response, session, loginVO);
+			String loginResult = "";
+			try {
+				loginResult = loginServ.loginLogic(request, response, session, loginVO);
 
-		} catch (Exception e) {
-			request.setAttribute("navigate", e.getClass());
-			e.printStackTrace();
+			} catch (Exception e) {
+				request.setAttribute("navigate", e.getClass());
+				e.printStackTrace();
+			}
+			request.setAttribute("navigate", loginResult);
+
+			return "common/navigatePage";
+		} else {
+			request.setAttribute("navigate", "naverLoginCancel");
+			return "common/navigatePage";
 		}
-		request.setAttribute("navigate", loginResult);
-
-		return "common/navigatePage";
 	}
 
-	@RequestMapping(value = "loginCheck.do", method = RequestMethod.POST)
-	public String loginCheck(Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session, LoginVO loginVO) {
+	@RequestMapping(value = "login.submit.do", method = RequestMethod.POST)
+	public String loginCheck(Model model, HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			LoginVO loginVO) {
 
 		logger.info("LOGIN INFO CHECK");
+		logger.info(loginVO.toString());
 
 		// // 이미 로그인 값이 들어가있다면 해당 값은 삭제
 		response.setCharacterEncoding("UTF-8");
@@ -316,7 +322,7 @@ public class MainController {
 		if (session.getAttribute("loginStatus") != null) {
 			session.removeAttribute("loginstatus");
 		}
-		
+
 		// 전달된 아이디 비밀번호 decoding
 		PrivateKey key = (PrivateKey) session.getAttribute("RSAprivateKey");
 
@@ -337,18 +343,17 @@ public class MainController {
 		try {
 			decrypedid = rsaUtil.getDecryptText(key, loginVO.getId());
 			decrypedPw = rsaUtil.getDecryptText(key, loginVO.getPw());
-			
+
 			loginVO.setId(decrypedid);
 			loginVO.setPw(decrypedPw);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 
 		// 없다면 로그인 로직 진행
 		String loginResult = "";
-		
+
 		try {
 			loginResult = loginServ.loginLogic(request, response, session, loginVO);
 			Cookie c = new Cookie("login", "test");
@@ -392,12 +397,13 @@ public class MainController {
 		}
 	}
 
+	// MAIN
 	@RequestMapping(value = "main.do", method = RequestMethod.GET)
 	public String main(HttpServletRequest request, HttpServletResponse response, PagingVO pagingVO) {
 
 		logger.info("MAIN LOADING");
 
-		// 처음 메인 접속 시 nowPage, CntPerPage 없는 경우 처리
+		// 페이징 최초 접속 처리
 		if (pagingVO.getNowPage() == 0 && pagingVO.getCntPerPage() == 0) {
 			pagingVO.setNowPage(1);
 			pagingVO.setCntPerPage(5);
@@ -437,6 +443,7 @@ public class MainController {
 	public void write_multiImg(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
 		logger.info("UPLOAD FILE");
+
 		String fileInfo = boardServ.fileUpload(request);
 
 		response.getOutputStream().print(fileInfo);
@@ -447,6 +454,7 @@ public class MainController {
 			BoardVO boardVO) {
 
 		logger.info("WRITING SUBMIT");
+		System.out.println(boardVO.toString());
 		int result = boardServ.insertPost(boardVO, session);
 
 		if (result > 0) {
@@ -508,15 +516,16 @@ public class MainController {
 		return "common/navigatePage";
 	}
 
-	 @RequestMapping(value = "testXss.do", method = RequestMethod.GET)
-	 public String xssTest() {
-	 return "common/xssTest";
-	 }
-	 @RequestMapping(value = "testXssS.do", method = RequestMethod.GET)
-	 public String xssTestsubmit(HttpServletRequest request, HttpServletResponse response, String test) {
-		 System.out.println(test);
-		 request.setAttribute("test", test);
-		 return "common/xssTest";
-	 }
+	@RequestMapping(value = "testXss.do", method = RequestMethod.GET)
+	public String xssTest() {
+		return "common/xssTest";
+	}
+
+	@RequestMapping(value = "testXssS.do", method = RequestMethod.GET)
+	public String xssTestsubmit(HttpServletRequest request, HttpServletResponse response, String test) {
+		System.out.println(test);
+		request.setAttribute("test", test);
+		return "common/xssTest";
+	}
 
 }

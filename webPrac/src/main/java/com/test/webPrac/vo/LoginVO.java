@@ -32,5 +32,8 @@ public class LoginVO {
 		this.loginApi = loginApi;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "LoginVO [id=" + id + ", pw=" + pw + ", accnt_id=" + accnt_id + ", loginApi=" + loginApi + "]";
+	}
 }

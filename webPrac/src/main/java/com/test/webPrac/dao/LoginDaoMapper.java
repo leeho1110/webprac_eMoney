@@ -14,10 +14,6 @@ public interface LoginDaoMapper {
 
 	void insertLastloginhistory(MemberVO loginVO);
 
-	void insert1(int i);
-
-	void insert2(int i);
-
 	MemberVO selectInfoOfMember(MemberVO member);
 
 }

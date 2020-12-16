@@ -12,7 +12,7 @@
 	</select>
 	
 	<select id="selectTotalBoardList" parameterType="PagingVO" resultType="BoardVO">
-		SELECT post_num, title, content, (SELECT id FROM account WHERE ACCNT_ID = writer) as writer_name, to_char(time,'YYYY-MM-DD') as time  FROM (
+		SELECT post_num, title, content, (SELECT nickname FROM account WHERE ACCNT_ID = writer) as writer_name, to_char(time,'YYYY-MM-DD') as time  FROM (
 				SELECT ROWNUM RN, A.* 
 					FROM (
 							SELECT * 
@@ -24,7 +24,7 @@
 	</select>
 	
 	<select id="selectViewOfPost" parameterType="_int" resultType="BoardVO">
-		select post_num, writer, title, content, (SELECT id FROM account WHERE ACCNT_ID = writer) as writer_name, to_char(time,'YYYY-MM-DD') as time from board where post_num = #{1}
+		select post_num, writer, title, content, (SELECT nickname FROM account WHERE ACCNT_ID = writer) as writer_name, to_char(time,'YYYY-MM-DD') as time from board where post_num = #{1}
 	</select>
 	
 	<update id="updatePost" parameterType="BoardVO">

@@ -22,6 +22,13 @@
 </head>
 <jsp:include page="/WEB-INF/views/inc/asset.jsp"></jsp:include>
 
+<!-- 뒤로가기 처리  -->
+<% response.setHeader("Pragma", "no-cache"); 
+	response.setHeader("Cache-Control", "no-cache"); 
+	response.setHeader("Cache-Control", "no-store"); 
+	response.setDateHeader("Expires", 0L); 
+%>
+
 <body>
 	<!-- header -->
 	<div id="wrap">
@@ -49,12 +56,18 @@
 							</tr>
 							<!-- 글 목록 당 하나씩 추가 -->
 							<c:forEach items="${boardList}" var="post">
-								<tr>
-									<input type="hidden" class="postNumBox" value="${post.post_num}" name="post_num">
-									<td>${post.title }</td>
-									<td>${post.content }</td>
-									<td>${post.writer_name}</td>
-									<td>${post.time}</td>
+								<tr class="boardContentTr" >
+									<td><c:out value="${post.title }"></c:out><input type="hidden" class="postNumBox" value='<c:out value="${post.post_num}"></c:out>' name="post_num"></td>
+									<td><c:out value="${post.content }"></c:out></td>
+									<td>
+										<c:if test="${empty post.writer_name }">
+											탈퇴 회원
+										</c:if>
+										<c:if test="${not empty post.writer_name}">
+											<c:out value="${post.writer_name }"></c:out>
+										</c:if>
+									</td>
+									<td><c:out value="${post.time}"></c:out></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -86,14 +99,16 @@
 	</div>
 	
 	<script type="text/javascript">
+	
 	function cntPerPageChange() {
 		location.href="main.do?nowPage=${paging.nowPage}&cntPerPage="+$("#cntPerPage").val();
 	}
 
-	$("#boardList tr").click(function(){
+	$(".boardContentTr").click(function(){
 	    var post_num = $(this).find(".postNumBox").val();
 	    location.href="/board.view.do?post_num="+ post_num;
-	})
+	}).css("cursor","pointer");
+	
 	</script>
 	
 </body>
