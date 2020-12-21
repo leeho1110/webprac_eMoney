@@ -415,7 +415,7 @@ public class MainController {
 
 		pagingVO.setPagingInfo(boardServ.selectTotalBoardCnt());
 		List<BoardVO> boardList = boardServ.selectBoardList(pagingVO);
-
+		
 		request.setAttribute("paging", pagingVO);
 		request.setAttribute("boardList", boardList);
 
@@ -454,7 +454,6 @@ public class MainController {
 			BoardVO boardVO) {
 
 		logger.info("WRITING SUBMIT");
-		System.out.println(boardVO.toString());
 		int result = boardServ.insertPost(boardVO, session);
 
 		if (result > 0) {
@@ -470,7 +469,6 @@ public class MainController {
 	public String view(HttpServletRequest request, HttpServletResponse response, int post_num) {
 
 		logger.info("GET VIEW PAGE");
-
 		request.setAttribute("post", boardServ.selectPost(post_num));
 		return "board/view";
 	}

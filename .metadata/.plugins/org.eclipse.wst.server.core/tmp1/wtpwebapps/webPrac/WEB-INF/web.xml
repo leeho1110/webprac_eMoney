@@ -75,7 +75,7 @@
 	
    <!-- HTTPS Redirect 처리 부분-->
    <!-- 현재 HTTP 포트는 8080으로 되어있고, 해당 포트로 접속 시 자동으로 443 포트로 연결해준다. -->
-   <security-constraint>
+  <!--  <security-constraint>
         <web-resource-collection>
             <web-resource-name>HTTP</web-resource-name>
             <url-pattern>/*</url-pattern>
@@ -83,7 +83,7 @@
         <user-data-constraint>
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
-    </security-constraint>
+    </security-constraint> -->
     
     
 

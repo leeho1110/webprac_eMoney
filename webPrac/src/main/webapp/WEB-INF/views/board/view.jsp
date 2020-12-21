@@ -33,7 +33,7 @@
 					<tbody>
 						<tr>
 							<th>제목</th>
-							<td><div id="titleDiv"><c:out value="${post.title}"></c:out></div></td>
+							<td><c:out value="${post.title}"></c:out></td>
 						</tr>
 						<tr>
 							<th>작성자</th>
@@ -44,7 +44,7 @@
 							<td><div id=" timeDiv"><c:out value="${post.time}"></c:out></div></td>
 						</tr>
 						<tr>
-							<td colspan="2"><div id="contentDiv"><c:out value="${post.content }"></c:out></div></td>
+							<td colspan="2"><div id="contentDiv"><c:out value="${post.content}" escapeXml="false"></c:out></div></td>
 						</tr>
 					</tbody>
 				</table>
@@ -55,6 +55,13 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		$(document).ready(function(){
+		    var justText = $("#contentDiv").text();
+		    $("#contentDiv").text("");
+		    $("#contentDiv").append(justText);
+		})
+	</script>
 </body>
 
 </html>

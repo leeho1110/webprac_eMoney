@@ -1,7 +1,0 @@
-#cont_inner {
-	width: 700px;
-}
-
-#writeBox {
-	margin: 0px auto;
-}

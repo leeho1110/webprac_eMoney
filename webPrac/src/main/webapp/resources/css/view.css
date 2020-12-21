@@ -1,6 +1,7 @@
 #postTbl {
     width: 743px;
     margin: 0px auto;
+	table-layout: fixed;
 }
 
 #postTbl th {
@@ -15,8 +16,8 @@
 	text-align: left;
 }
 
-#postTbl tr:NTH-CHILD(4){
-	overflow-y: scroll;
+#postTbl tr:NTH-CHILD(4) td {
+	padding: 0px;
 }
 
 #btnDiv {
@@ -31,4 +32,10 @@
 
 #cont_inner > h2 {
 	margin-bottom: 40px;
+}
+
+#contentDiv {
+	width:741px;
+	overflow-y: scroll;
+	height: 295px;
 }

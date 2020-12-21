@@ -1,8 +1,0 @@
-function cntPerPageChange() {
-	location.href="main.do?nowPage=${paging.nowPage}&cntPerPage="+$("#cntPerPage").val();
-}
-
-$("#boardList tr").click(function(){
-    var post_num = $(this).find(".postNumBox").val();
-    location.href="/board.view.do?post_num="+ post_num;
-})

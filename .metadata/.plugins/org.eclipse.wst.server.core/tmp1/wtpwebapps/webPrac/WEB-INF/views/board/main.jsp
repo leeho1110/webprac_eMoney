@@ -49,16 +49,16 @@
 					<table id="boardList" class="table table-bordered">
 						<tbody>
 							<tr>
+								<th>번호</th>
 								<th>제목</th>
-								<th>내용</th>
 								<th>작성자</th>
-								<th>작성시간</th>
+								<th>작성일</th>
 							</tr>
 							<!-- 글 목록 당 하나씩 추가 -->
 							<c:forEach items="${boardList}" var="post">
 								<tr class="boardContentTr" >
-									<td><c:out value="${post.title }"></c:out><input type="hidden" class="postNumBox" value='<c:out value="${post.post_num}"></c:out>' name="post_num"></td>
-									<td><c:out value="${post.content }"></c:out></td>
+									<td class="postNumBox"><c:out value="${post.post_num}"></c:out></td>
+									<td><c:out value="${post.title }"></c:out></td>
 									<td>
 										<c:if test="${empty post.writer_name }">
 											탈퇴 회원
@@ -105,7 +105,7 @@
 	}
 
 	$(".boardContentTr").click(function(){
-	    var post_num = $(this).find(".postNumBox").val();
+	    var post_num = $(this).find(".postNumBox").text();
 	    location.href="/board.view.do?post_num="+ post_num;
 	}).css("cursor","pointer");
 	

@@ -1,7 +1,0 @@
-package com.test.webPrac.vo;
-
-public class BoardVO {
-	
-	private String title;
-	private String content
-}

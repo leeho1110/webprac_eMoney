@@ -11,7 +11,7 @@
 <script type="text/javascript" src="/SE/js/HuskyEZCreator.js"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 
-<link rel="stylesheet" href="resources/css/view.css">
+<link rel="stylesheet" href="resources/css/modify.css">
 
 </head>
 <jsp:include page="/WEB-INF/views/inc/asset.jsp"></jsp:include>
@@ -41,7 +41,7 @@
 							<td colspan="2">
 								<div id="contentDiv">
 								<form id="naverSEwriteBox" action="board.modify.submit.do" method="POST"> 
-									<textarea name="content" id="modifyBox" rows="10" cols="100"><c:out value="${post.content }"></c:out></textarea>
+									<textarea name="content" id="modifyBox" rows="10" cols="100">${post.content}</textarea>
 									<input type="hidden" value='<c:out value="${post.post_num }"></c:out>' name="post_num">
 								</form>
 								</div>
@@ -51,7 +51,7 @@
 				</table>
 				<div id="btnDiv">
 					<input type="button" id="submitBtn" class="btn" value="수정완료" onclick="submitModfiyBox();">
-					<input type="button" id="goBack" class="btn" value="뒤로가기" onclick="location.href='main.do';">
+					<input type="button" id="goBack" class="btn" value="뒤로가기" onclick="history.back();">
 				</div>
 			</div>
 		</div>

@@ -10,16 +10,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>eMoney Web 실습</title>
 
-<!-- 로그인 성공 이후 다시 되돌아갈 수 없도록 처리 -->
-<script type="text/javascript">
-	window.history.forward();
-	function noBack() {
-		window.history.forward();
-	}
-</script>
-
-
-
 <!-- 네이버 로그인 연동 -->
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js" charset="utf-8"></script>
 
