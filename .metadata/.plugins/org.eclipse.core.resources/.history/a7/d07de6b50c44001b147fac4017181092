@@ -1,0 +1,21 @@
+package com.test.webPrac.service;
+
+import com.test.webPrac.vo.MemberVO;
+
+
+public interface RegisterService {
+	
+	MemberVO selectAccountMemberInfo(String nickname);
+
+	int selectIdCheck(String idinput);
+
+	int selectNicknameCheck(String nickname);
+
+	int insertAcctMember(MemberVO member);
+
+	int insertApiMember(MemberVO member);
+
+	int selectLastestAcctNum();
+
+
+}

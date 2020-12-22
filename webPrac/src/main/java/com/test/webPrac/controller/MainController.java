@@ -10,7 +10,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -158,8 +157,7 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "register.submit.do", method = RequestMethod.POST)
-	public String register_submit(HttpServletRequest request, HttpServletResponse response, HttpSession session,
-			MemberVO memberVO) {
+	public String register_submit(HttpServletRequest request, HttpServletResponse response, HttpSession session, MemberVO memberVO) {
 
 		logger.info("REGISTER SUBMIT");
 
@@ -199,6 +197,11 @@ public class MainController {
 
 		// 회원가입 성공
 		if (regitResult > 0) {
+
+			int regitMemberAccntNum = registerServ.selectAcctNum(memberVO.getNickname());
+			memberVO.setAccnt_id(regitMemberAccntNum);
+			loginServ.updateLoginInfoLogic(request, memberVO, session);
+			
 			session.setAttribute("loginStatus", memberVO);
 			request.setAttribute("navigate", "main.do");
 			return "common/navigatePage";
@@ -214,20 +217,25 @@ public class MainController {
 
 		logger.info("REGISTER API PART SUBMIT");
 
-		MemberVO member = new MemberVO();
+		MemberVO memberVO = new MemberVO();
 
 		// 세션에 저장된 네이버 교유 ID번호 및 이름 가져옴
-		member.setId((String) session.getAttribute("naverUniqId"));
-		member.setName((String) session.getAttribute("naverName"));
-		member.setNickname(nickname);
-		member.setPhone(phone);
+		memberVO.setId((String) session.getAttribute("naverUniqId"));
+		memberVO.setName((String) session.getAttribute("naverName"));
+		memberVO.setNickname(nickname);
+		memberVO.setPhone(phone);
 
 		// insert
-		int regitResult = registerServ.insertApiMember(member);
+		int regitResult = registerServ.insertApiMember(memberVO);
 
 		// 추가 회원가입 성공
 		if (regitResult > 0) {
-			session.setAttribute("loginStatus", member);
+			int regitMemberAccntNum = registerServ.selectAcctNum(nickname);
+			memberVO.setAccnt_id(regitMemberAccntNum);
+			loginServ.updateLoginInfoLogic(request, memberVO, session);
+			
+			session.setAttribute("loginStatus", memberVO);
+			session.setAttribute("loginStatus", memberVO);
 			request.setAttribute("navigate", "main.do");
 			return "common/navigatePage";
 		} else {
@@ -241,7 +249,7 @@ public class MainController {
 	public String login(HttpServletRequest request, HttpServletResponse response, HttpSession session) {
 
 		logger.info("LOGIN");
-
+		
 		if (session.getAttribute("loginStatus") != null) {
 			try {
 				response.sendRedirect("main.do");
@@ -251,12 +259,12 @@ public class MainController {
 
 		// 세션에서 RSA 개인키 가져옴
 		PrivateKey key = (PrivateKey) session.getAttribute("RSAprivateKey");
-
+		
 		// 비정상적인 접근 처리
 		if (key != null) {
 			session.removeAttribute("RSAprivateKey");
 		}
-
+		
 		// RSA 개인키 세션 저장 후 공개키 클라이언트에 전달
 		RSAUtil rsaUtil = new RSAUtil();
 		RSA rsa = rsaUtil.creatRSA();
@@ -314,7 +322,6 @@ public class MainController {
 			LoginVO loginVO) {
 
 		logger.info("LOGIN INFO CHECK");
-		logger.info(loginVO.toString());
 
 		// // 이미 로그인 값이 들어가있다면 해당 값은 삭제
 		response.setCharacterEncoding("UTF-8");
@@ -450,12 +457,13 @@ public class MainController {
 	}
 
 	@RequestMapping(value = "board.write.submit.do", method = RequestMethod.POST)
-	public String write_submit(HttpServletRequest request, HttpServletResponse response, HttpSession session,
-			BoardVO boardVO) {
+	public String write_submit(HttpServletRequest request, HttpServletResponse response, HttpSession session, BoardVO boardVO) {
 
 		logger.info("WRITING SUBMIT");
+		
 		int result = boardServ.insertPost(boardVO, session);
-
+		logger.info("Content of post: " + boardVO.getContent());
+		
 		if (result > 0) {
 			request.setAttribute("navigate", "main.do");
 			return "common/navigatePage";
@@ -488,9 +496,8 @@ public class MainController {
 		logger.info("MODIFY POST SUBMIT");
 
 		int result = boardServ.updatePost(boardVO);
-
 		if (result > 0) {
-			request.setAttribute("navigate", "main.do");
+			request.setAttribute("navigate", "board.view.do?post_num=" + boardVO.getPost_num());
 		} else {
 			request.setAttribute("navigate", "updateError");
 		}
@@ -512,18 +519,6 @@ public class MainController {
 		}
 
 		return "common/navigatePage";
-	}
-
-	@RequestMapping(value = "testXss.do", method = RequestMethod.GET)
-	public String xssTest() {
-		return "common/xssTest";
-	}
-
-	@RequestMapping(value = "testXssS.do", method = RequestMethod.GET)
-	public String xssTestsubmit(HttpServletRequest request, HttpServletResponse response, String test) {
-		System.out.println(test);
-		request.setAttribute("test", test);
-		return "common/xssTest";
 	}
 
 }

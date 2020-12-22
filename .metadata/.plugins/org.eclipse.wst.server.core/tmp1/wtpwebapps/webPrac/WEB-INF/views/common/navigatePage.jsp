@@ -37,7 +37,9 @@
 			location.href = "register.Api.do";
 		} else if (navigateVal == "rsaError"){
 		    alert("비정상적인 접근입니다")
-			location.href = "register.do";
+			location.href = "login.do";
+		} else if (navigateVal.search("view.do") > 0) {
+		    location.href = navigateVal;
 		} else {
 			alert(navigateVal);
 			location.href = "login.do";

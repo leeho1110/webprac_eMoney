@@ -1,6 +1,8 @@
 package com.test.webPrac.vo;
 
-public class MemberVO {
+import java.io.Serializable;
+
+public class MemberVO implements Serializable{
 
 	private int accnt_id;
 	private String nickname;
@@ -94,19 +96,6 @@ public class MemberVO {
 	public void setOs(String os) {
 		this.os = os;
 	}
-
-	
-//	public boolean getIs_mobile() {
-//        // true : 1 / false : 0
-//        return is_mobile == '1' ? true : false;
-//	}
-//	public void setIs_mobile(Boolean is_mobile) {
-//        // true : 1 / false : 0
-//        if(is_mobile){ this.is_mobile = '1'; } 
-//        else { this.is_mobile = '0'; }
-//	}
-	
-	
 	
 	@Override
 	public String toString() {

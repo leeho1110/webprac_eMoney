@@ -29,4 +29,8 @@
 		</choose>
 	</insert>
 	
+	<select id="selectAcctNum" parameterType="String" resultType="_int">
+		select accnt_id from account where nickname = #{1}
+	</select>
+	
 </mapper>

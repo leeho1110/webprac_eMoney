@@ -167,8 +167,7 @@
 						</form>
 						<!-- submit btn -->
 						<div id="submitdiv">
-							<img id="cancelbtn"
-								src="//img.x1.co.kr/x1/images/btn/btn_cancel.gif"> 
+							<img id="cancelbtn" src="//img.x1.co.kr/x1/images/btn/btn_cancel.gif" onclick="history.back();"> 
 								<img
 								id="submitbtn" src="//img.x1.co.kr/x1/images/btn/btn_confirm.gif" onclick="regitCtgSubmit();">
 						</div>
