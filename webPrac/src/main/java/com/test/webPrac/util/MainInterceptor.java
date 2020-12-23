@@ -13,7 +13,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class MainInterceptor extends HandlerInterceptorAdapter {
 	
-	static final Logger logger = LoggerFactory.getLogger(MainInterceptor.class);
+	static final Logger logger = LoggerFactory.getLogger("emoney Web Practice");
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler){

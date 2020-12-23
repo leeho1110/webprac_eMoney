@@ -41,7 +41,7 @@
 							<td colspan="2">
 								<div id="contentDiv">
 								<form id="naverSEwriteBox" action="board.modify.submit.do" method="POST"> 
-									<textarea name="content" id="modifyBox" rows="10" cols="100">${post.content}</textarea>
+									<textarea name="content" id="modifyBox" rows="10" cols="100">${post.content }</textarea>
 									<input type="hidden" value='<c:out value="${post.post_num }"></c:out>' name="post_num">
 								</form>
 								</div>
@@ -58,6 +58,7 @@
 	</div>
 	
 	<script type="text/javascript">
+		
 		var oEditors = [];
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef: oEditors,
@@ -67,12 +68,16 @@
 		});
 		
 		function submitModfiyBox() {
-			// load the value of SE		    
+			// load the value of SE	
+			
 		    oEditors.getById["modifyBox"].exec("UPDATE_CONTENTS_FIELD", []);
 		    
+			var content =  $("#modifyBox").val();
 		    var contentLength = $("#modifyBox").val().length;
 		    
-		    if(contentLength > 0){
+		    alert($("#modifyBox").val());
+		    
+		    if(contentLength > 0 && content != "<p>&nbsp;</p>"){
 				$("#naverSEwriteBox").submit();
 			} else {
 				alert("내용을 다시 확인해주세요");

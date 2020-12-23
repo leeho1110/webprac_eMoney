@@ -32,12 +32,7 @@
 			<exclude-mapping path="/register*.do" />
 			<!-- 네이버 아이디 로그인 -->
 			<exclude-mapping path="/naver*.do" />
-			<!-- 테스트 URL -->
-			<exclude-mapping path="/test*.do" />
-			<!-- navigate -->
-			<exclude-mapping path="/navigate*.do" />
-			<!-- se2 -->
-			<exclude-mapping path="/se2.do" />
+			
 			<beans:ref bean="MainInterceptor" />
 		</interceptor>
 	</interceptors>

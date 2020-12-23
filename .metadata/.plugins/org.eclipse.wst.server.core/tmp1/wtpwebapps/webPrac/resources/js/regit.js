@@ -97,11 +97,10 @@ function duplicheckAjax(category) {
 		    regitCategory[ctg + "Dupli"][0] = false;
 		    $("#" + ctg + "dupliok").hide();
 		    $("#" + ctg + "duplino").show();
-		}
-		;
+		};
 	    },
 	    error : function(a, b, c) {
-		console.log(a, b, c);
+			console.log(a, b, c);
 	    }
 
 	});
@@ -123,24 +122,23 @@ function pwFormCheck() {
 
     // 패스워드 값
     var pwInput = $("#pwinput").val();
-
+    console.log(pwReg_eng_num.test(pwInput) || pwReg_eng_spe.test(pwInput) || pwReg_sep_num.test(pwInput));
     // 영어 대/소문자, 숫자, 특수문자 중 2가지 이상 조합 6자~12자
-    if (pwReg_eng_num.test(pwInput) || pwReg_eng_spe.test(pwInput)
-	    || pwReg_sep_num.test(pwInput)) {
+    if (pwReg_eng_num.test(pwInput) || pwReg_eng_spe.test(pwInput) || pwReg_sep_num.test(pwInput)) {
 	// 해당 조건 만족 시에 공백 검사
 	if (pwInput.search(/\s/) == -1) {
 	    $("#pwduplino").hide();
 	    $("#pwdupliok").show();
-	    regitCategory['pwForm'] = true;
+	    regitCategory['pwForm'][0] = true;
 	} else {
 	    $("#pwdupliok").hide();
 	    $("#pwduplino").show();
-	    regitCategory['pwForm'] = false;
+	    regitCategory['pwForm'][0] = false;
 	}
     } else {
 	$("#pwdupliok").hide();
 	$("#pwduplino").show();
-	regitCategory['pwForm'] = false;
+	regitCategory['pwForm'][0] = false;
     }
 };
 
@@ -202,16 +200,15 @@ $("#phoneinput2").keyup(function() {
 var phoneReg = /^[0-9]{11}$/;
 $("input.phoneinput").keyup(
 	function() {
-	    var phoneNum = $("#phoneinput1").val() + $("#phoneinput2").val()
-		    + $("#phoneinput3").val();
+	    var phoneNum = $("#phoneinput1").val() + $("#phoneinput2").val() + $("#phoneinput3").val();
 	    if (phoneReg.test(phoneNum)) {
-		regitCategory["phoneForm"][0] = true;
+			regitCategory["phoneForm"][0] = true;
 		$("#phoneHiddenInput").val(
 			phoneNum.replace(
 				/(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/,
 				"$1-$2-$3"));
 	    } else {
-		regitCategory["phoneForm"][0] = false;
+			regitCategory["phoneForm"][0] = false;
 	    }
 	});
 
@@ -227,26 +224,24 @@ rsa.setPublic(modulus, exponent);
 // 전송 시 항목별 체크
 function regitCtgSubmit() {
     var tempFlag = true;
+    console.log(regitCategory);
     for ( var key in regitCategory) {
-	if (regitCategory[key][0] == false) {
-	    alert(regitCategory[key][1]);
-	    tempFlag = false;
-	    break;
-	}
+		if (regitCategory[key][0] == false) {
+			alert(regitCategory[key][1]);
+			tempFlag = false;
+			break;
+		}
     }
     // 모든 조건에 만족한 경우 RSA 암호화를 진행					
     if (tempFlag) {
-	
-	var encrytedId = rsa.encrypt($("#idinput").val());
-	var encrytedPw = rsa.encrypt($("#pwinput").val());
+		var encrytedId = rsa.encrypt($("#idinput").val());
+		var encrytedPw = rsa.encrypt($("#pwinput").val());
 
-	// hidden 태그에 값을 주입
-	$("#idhiddeninput").val(encrytedId);
-	$("#pwhiddeninput").val(encrytedPw);
+		// hidden 태그에 값을 주입
+		$("#idhiddeninput").val(encrytedId);
+		$("#pwhiddeninput").val(encrytedPw);
 
-	// 전송
-	$("#accntRegit").submit();
-
-    }
-    ;
+		// 전송
+		$("#accntRegit").submit();
+	};
 };

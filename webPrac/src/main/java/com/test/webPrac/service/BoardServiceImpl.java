@@ -35,7 +35,6 @@ public class BoardServiceImpl implements BoardService {
 		String fileInfo = "";
 		String fileName = request.getHeader("file-name");
 
-		logger.info("SET PATH OF INPUTSTREAM");
 		String defaultPath = request.getSession().getServletContext().getRealPath("/");
 		String filePath = defaultPath + "img" + File.separator + "SE" + File.separator;
 
@@ -54,7 +53,7 @@ public class BoardServiceImpl implements BoardService {
 
 			// 위에서 생성한 폴더에 rFilename 파일을 생성
 			OutputStream os = new FileOutputStream(rFileName);
-
+			
 			// os가 생성한 빈 폴더에 file을 바이트로 읽어 작성함
 			int num;
 			byte b[] = new byte[Integer.parseInt(request.getHeader("file-size"))];
@@ -67,7 +66,6 @@ public class BoardServiceImpl implements BoardService {
 
 			os.flush();
 			os.close();
-			logger.info("FILE CREATING SUCCESS");
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -84,7 +82,6 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int insertPost(BoardVO boardVO, HttpSession session) {
 		logger.info("INSERT NEW POST");
-		
 		int writer = ((MemberVO)session.getAttribute("loginStatus")).getAccnt_id();
 		boardVO.setWriter(writer);
 		

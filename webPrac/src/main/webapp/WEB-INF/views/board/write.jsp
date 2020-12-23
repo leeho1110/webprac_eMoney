@@ -53,6 +53,8 @@
 	</div>
 
 	<script type="text/javascript">
+		
+	
 		var oEditors = [];
 		nhn.husky.EZCreator.createInIFrame({
 			oAppRef: oEditors,
@@ -62,13 +64,15 @@
 		});
 		
 		function submitWriteBox() {
+		    
 			// load the value of SE		    
 		    oEditors.getById["writeBox"].exec("UPDATE_CONTENTS_FIELD", []);
 		    
+			var title = $("#writeBox").val();
 		    var titleLenth = $("#titleBox").val().length;
 		    var contentLength = $("#writeBox").val().length;
 		    
-		    if(titleLenth > 0 && contentLength > 0 ){
+		    if(titleLenth > 0 && contentLength > 0 && title != "<p>&nbsp;</p>"){
 				$("#naverSEwriteBox").submit();
 			} else {
 				alert("제목과 내용을 다시 확인해주세요");

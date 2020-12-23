@@ -44,10 +44,10 @@ public class MainController {
 	private LoginService loginServ;
 
 	@Autowired
-	private NaverLoginService naverLoginServ;
-
-	@Autowired
 	private BoardService boardServ;
+	
+	@Autowired
+	private NaverLoginService naverLoginServ;
 
 	// BASIC
 	// 한글 이름, 영문 이름, 생일, 현재 날짜 및 시간 출력 (index.jsp)
@@ -427,14 +427,6 @@ public class MainController {
 		request.setAttribute("boardList", boardList);
 
 		return "board/main";
-	}
-
-	@RequestMapping(value = "navigate.do", method = RequestMethod.GET)
-	public String navigate(HttpServletRequest request) {
-
-		logger.info("NAVIGATING...");
-
-		return "common/navigatePage";
 	}
 
 	// BOARD

@@ -40,7 +40,7 @@ public class Util {
 		
 		if (browserAndOs != null) {
 			if (browserAndOs.indexOf("Trident") > -1) {
-				browser = "MSIE";
+				browser = "IE";
 			} else if (browserAndOs.indexOf("Edg") > -1) {
 				browser = "Edge";
 			} else if (browserAndOs.indexOf("Chrome") > -1) {
@@ -49,6 +49,9 @@ public class Util {
 				browser = "Opera";
 			} else if (browserAndOs.indexOf("iPhone") > -1 && browserAndOs.indexOf("Mobile") > -1) {
 				browser = "iPhone";
+				member.setIs_mobile('1');
+			} else if (browserAndOs.indexOf("Ipad") > -1) {
+				browser = "iPad";
 				member.setIs_mobile('1');
 			} else if (browserAndOs.indexOf("Android") > -1 && browserAndOs.indexOf("Mobile") > -1) {
 				browser = "Android";
@@ -74,6 +77,7 @@ public class Util {
 		else if(browserAndOs.indexOf("Windows") != -1) os = "Windows";
 		else if(browserAndOs.indexOf("Linux") != -1) os = "Linux";
 		else if(browserAndOs.indexOf("Macintosh") != -1) os = "Macintosh";
+		else if(browserAndOs.indexOf("Mac OS") != -1) os = "Mac OS";
 		else os = ""; 
 		
 		// set OS

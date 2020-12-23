@@ -5470,7 +5470,7 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 		var sContent, 
 			oNavigator = this.oApp.oNavigator, 
 			bUnderIE11 = oNavigator.ie && document.documentMode < 11, // IE11미만
-			sCursorHolder = bUnderIE11 ? "" : "<br>";
+			sCursorHolder = bUnderIE11 ? "" : "";
 
 		if(this.oApp.applyConverter){
 			sContent = this.oApp.applyConverter("IR_TO_"+this.sMode, sIR, this.oApp.getWYSIWYGDocument());
@@ -5489,8 +5489,9 @@ nhn.husky.SE_EditingArea_WYSIWYG = jindo.$Class({
 			if(this.oApp.sLineBreaker !== "BR"){
 				sCursorHolder = "<p>" + sCursorHolder + "</p>";
 			}
-			sContent = sCursorHolder;
-		}
+			sContent = sCursorHolder; }
+		
+			
 		this.iframe.contentWindow.document.body.innerHTML = sContent;
 
 		// [COM-1142] IE의 경우 <p>&nbsp;</p> 를 <p></p> 로 변환
