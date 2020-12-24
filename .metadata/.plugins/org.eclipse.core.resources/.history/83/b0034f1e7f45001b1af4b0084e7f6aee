@@ -1,0 +1,36 @@
+#boardList {width: 1100px; table-layout: fixed;}
+
+#boardList th:nth-child(1) { width: 15%; }
+#boardList th:nth-child(2) { width: 55%; }
+#boardList th:nth-child(3) { width: 15%; }
+#boardList th:nth-child(4) { width: 15%; }
+
+#boardMain { margin-top: 30px; }
+
+#boardList th {
+	text-align: center;
+	font-size: 17px;
+	background-color: #eeeeee;
+}
+
+#pagingPart {
+	border: 1px solid black;
+}
+
+#btnBox {
+	margin-top: 15px;
+	margin-bottom: 50px;
+	 text-align: right;
+}
+
+#cntPerPage {
+		width: 120px;
+		height: 27px;
+		margin-bottom: 30px;
+		text-align: center;
+		float: right;
+	}
+	
+#pagingBtnBox > a:link { color: black; text-decoration: none;}
+#pagingBtnBox > a:visited { color: black; text-decoration: none;}
+#pagingBtnBox > a:hover {  text-decoration: underline;}

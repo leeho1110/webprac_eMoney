@@ -75,8 +75,6 @@
 			var content =  $("#modifyBox").val();
 		    var contentLength = $("#modifyBox").val().length;
 		    
-		    alert($("#modifyBox").val());
-		    
 		    if(contentLength > 0 && content != "<p>&nbsp;</p>"){
 				$("#naverSEwriteBox").submit();
 			} else {

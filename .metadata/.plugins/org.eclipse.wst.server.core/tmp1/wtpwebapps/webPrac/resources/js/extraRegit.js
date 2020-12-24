@@ -92,14 +92,7 @@ $("input.phoneinput").keyup(function(){
     }
 });
 
-//  -----------------------------------------------------
-
- // Server로부터 받은 공개키 입력 (보류)
-// var rsa = new RSAKey();
-// rsa.setPublic("${modulus}", "${exponent}");
-// rsa.encrypt(encodeURI("test"));
- 
-  // 전송 시 항목별 체크
+// 전송 시 항목별 체크
 function regitCtgSubmit(){
      var tempFlag = true;
      for(var key in regitCategory){
@@ -110,19 +103,7 @@ function regitCtgSubmit(){
          }
      }
      // 모든 조건에 만족한 경우 RSA 암호화를 진행					
-     if (tempFlag) {
-         
-        // var encrytedId = rsa.encrypt($("#idinput").val());
-        // var encrytedPw = rsa.encrypt($("#pwinput").val());
-         
-         // hidden 태그에 값을 주입
-//         $("#idhiddeninput").val(encrytedId);
-//         $("#pwhiddeninput").val(encrytedPw);
-        $("#idhiddeninput").val($("#idinput").val());
-        $("#pwhiddeninput").val($("#pwinput").val());
-         
-         // 전송
-         $("#accntRegit").submit();
-         
+     if (tempFlag) { 
+	 $("#accntRegit").submit();
      };
  };

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -35,6 +36,7 @@
 							<tr>
 								<td >
 									<textarea name="content" id="writeBox" rows="10" cols="100"></textarea>
+									<input type="hidden" name="writer" value='<c:out value="${writer}"></c:out>'>
 								</td>
 							</tr>
 							<tr>
@@ -68,11 +70,11 @@
 			// load the value of SE		    
 		    oEditors.getById["writeBox"].exec("UPDATE_CONTENTS_FIELD", []);
 		    
-			var title = $("#writeBox").val();
 		    var titleLenth = $("#titleBox").val().length;
 		    var contentLength = $("#writeBox").val().length;
+			var content = $("#writeBox").val();
 		    
-		    if(titleLenth > 0 && contentLength > 0 && title != "<p>&nbsp;</p>"){
+		    if(titleLenth > 0 && contentLength > 0 && content != "<p>&nbsp;</p>"){
 				$("#naverSEwriteBox").submit();
 			} else {
 				alert("제목과 내용을 다시 확인해주세요");

@@ -41,7 +41,6 @@
 		} else if (navigateVal.search("view.do") > 0) {
 		    location.href = navigateVal;
 		} else {
-			alert(navigateVal);
 			location.href = "login.do";
 		}
 	</script>

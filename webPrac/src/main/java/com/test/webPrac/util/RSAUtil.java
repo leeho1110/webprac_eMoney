@@ -27,7 +27,6 @@ public class RSAUtil implements Serializable{
 			cipher = Cipher.getInstance("RSA");
 		} catch (Exception e) {
 			System.out.println(("RSAUtil 생성 실패."));
-
 		}
 
 	}

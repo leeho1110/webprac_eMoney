@@ -37,7 +37,16 @@
 						</tr>
 						<tr>
 							<th>작성자</th>
-							<td><div id=" timeDiv"><c:out value="${post.writer_name}"></c:out></div></td>
+							<td>
+								<div id=" timeDiv">
+									<c:if test="${empty post.writer_name }">
+										탈퇴 회원
+									</c:if>
+									<c:if test="${not empty post.writer_name}">
+										<c:out value="${post.writer_name }"></c:out>
+									</c:if>
+								</div>
+							</td>
 						</tr>
 						<tr>
 							<th>작성일</th>

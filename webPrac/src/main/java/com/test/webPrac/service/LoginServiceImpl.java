@@ -42,11 +42,9 @@ public class LoginServiceImpl implements LoginService {
 		String loginApi = loginVO.getLoginApi();
 		
 		// 일반 로그인 경우
-		logger.info("ID PASS");
 		if (member != null && loginApi == null) {
 			// PW 확인
 			if (checkLoginPw(loginVO, member)) {
-				logger.info("PW PASS");
 				
 				// 데이터베이스 정보를 객체에 넣어주는 과정 및 웹 정보 추출
 				updateLoginInfoLogic(request, member, session);
@@ -88,7 +86,7 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public void naverLoginLogic(String userProfile, HttpSession session) {
 
-		// 넘어온 값들 JSON 형변환
+		// JSON 형변환
 		JSONObject naverInfo = JSONObject.fromObject(JSONSerializer.toJSON(userProfile)).getJSONObject("response");
 
 		// Naver 고유 ID 추출
@@ -102,12 +100,8 @@ public class LoginServiceImpl implements LoginService {
 	@Override
 	public void updateLoginInfoLogic(HttpServletRequest request, MemberVO memberVO, HttpSession session) {
 		
-		// DB 정보 세팅
-		memberVO = loginDaoMapper.selectInfoOfMember(memberVO);
-		// browser, moblie, os 정보 세팅
-		memberVO = Util.getInfoFromRequest(request, memberVO);
-		
-		logger.info("Member Browser: "+ memberVO.getBrowser() + " | OS: " + memberVO.getOs() + " | IP: " + memberVO.getIp() + " | isMobile: " + (memberVO.getIs_mobile() == 0 ? "true" : "false"));
+		// DB 정보, browser, moblie, os 정보 세팅
+		memberVO = Util.getInfoFromRequest(request, loginDaoMapper.selectInfoOfMember(memberVO));
 		
 		// 로그인 시간 갱신 및 로그인 히스토리 삽입 (트랜잭션 매니저 적용)
 		loginDaoMapper.updateLastlogin(memberVO.getAccnt_id());
@@ -117,7 +111,6 @@ public class LoginServiceImpl implements LoginService {
 
 		// Session Cookie를 사용한 로그인 처리
 		session.setAttribute("loginStatus", memberVO);
-		logger.info("LOGIN COMPLETE");
 	}
 
 }

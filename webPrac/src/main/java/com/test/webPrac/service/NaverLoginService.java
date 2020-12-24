@@ -20,20 +20,20 @@ import com.test.webPrac.util.NaverLoginApi;
 public class NaverLoginService {
  
     /* 인증 요청문을 구성하는 파라미터 */
-    //client_id: 애플리케이션 등록 후 발급받은 클라이언트 아이디
-    //response_type: 인증 과정에 대한 구분값. code로 값이 고정돼 있습니다.
-    //redirect_uri: 네이버 로그인 인증의 결과를 전달받을 콜백 URL(URL 인코딩). 애플리케이션을 등록할 때 Callback URL에 설정한 정보입니다.
-    //state: 애플리케이션이 생성한 상태 토큰
+    // client_id: 애플리케이션 등록 후 발급받은 클라이언트 아이디
+    // response_type: 인증 과정에 대한 구분값. code로 값이 고정돼 있습니다.
+    // redirect_uri: 네이버 로그인 인증의 결과를 전달받을 콜백 URL(URL 인코딩). 애플리케이션을 등록할 때 Callback URL에 설정한 정보입니다.
+    // state: 애플리케이션이 생성한 상태 토큰
 	
 	// AWS
-    private final static String CLIENT_ID = "jlAqIF6hXon86Hxyhv1Y";
-    private final static String CLIENT_SECRET = "ZahAEKpAmX";
-    private final static String REDIRECT_URI = "https://awslh.x1.co.kr/naverApiLogin.do";
+	// private final static String CLIENT_ID = "jlAqIF6hXon86Hxyhv1Y";
+	// private final static String CLIENT_SECRET = "ZahAEKpAmX";
+	// private final static String REDIRECT_URI = "https://awslh.x1.co.kr/naverApiLogin.do";
 	
     // Local
-//    private final static String CLIENT_ID = "1TTLFSfy6PU_7P_ixQHP";
-//    private final static String CLIENT_SECRET = "sSwrM1KXot";
-//    private final static String REDIRECT_URI = "https://lh.x1.co.kr/naverApiLogin.do";
+    private final static String CLIENT_ID = "1TTLFSfy6PU_7P_ixQHP";
+    private final static String CLIENT_SECRET = "sSwrM1KXot";
+    private final static String REDIRECT_URI = "https://lh.x1.co.kr/naverApiLogin.do";
     
     private final static String SESSION_STATE = "oauth_state";
     

@@ -18,7 +18,6 @@
 	
 
 	<dependencies>
-		
 		<!-- jsoup -->
 		<dependency>
 			<groupId>org.jsoup</groupId>

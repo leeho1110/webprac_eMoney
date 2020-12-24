@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +17,6 @@ import org.springframework.stereotype.Service;
 
 import com.test.webPrac.dao.BoardDaoMapper;
 import com.test.webPrac.vo.BoardVO;
-import com.test.webPrac.vo.MemberVO;
 import com.test.webPrac.vo.PagingVO;
 
 @Service
@@ -80,17 +78,13 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int insertPost(BoardVO boardVO, HttpSession session) {
+	public int insertPost(BoardVO boardVO) {
 		logger.info("INSERT NEW POST");
-		int writer = ((MemberVO)session.getAttribute("loginStatus")).getAccnt_id();
-		boardVO.setWriter(writer);
-		
 		return boardDaoMapper.insertPost(boardVO);
 	}
 
 	@Override
 	public int selectTotalBoardCnt() {
-		logger.info("GET TOTAL COUNT OF BOARD");
 		return boardDaoMapper.selectTotalBoardCnt();
 	}
 
@@ -101,16 +95,19 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public BoardVO selectPost(int post_num) {
+		logger.info("SELECT POST");
 		return boardDaoMapper.selectViewOfPost(post_num);
 	}
 
 	@Override
 	public int deletePost(int post_num) {
+		logger.info("DELETE POST");
 		return boardDaoMapper.deletePost(post_num);
 	}
 
 	@Override
 	public int updatePost(BoardVO boardVO) {
+		logger.info("UPDATE POST");
 		return boardDaoMapper.updatePost(boardVO);
 	}
 

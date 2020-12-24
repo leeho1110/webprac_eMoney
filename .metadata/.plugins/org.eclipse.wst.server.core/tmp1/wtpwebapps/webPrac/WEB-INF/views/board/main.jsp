@@ -5,12 +5,13 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>eMoney Web 실습</title>
+	<title>eMoney Web 실습</title>
 	
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 	<link rel="stylesheet" href="resources/css/main.css">
 	
 	<style type="text/css">
+	
 	#cntPerPage {
 		width: 120px;
 		height: 27px;
@@ -18,6 +19,10 @@
 		text-align: center;
 		float: right;
 	}
+	
+	#pagingBtnBox > a:link { color: black; text-decoration: none;}
+	#pagingBtnBox > a:visited { color: black; text-decoration: none;}
+	#pagingBtnBox > a:hover {  text-decoration: underline;}
 	</style>
 </head>
 <jsp:include page="/WEB-INF/views/inc/asset.jsp"></jsp:include>
