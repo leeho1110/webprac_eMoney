@@ -6,7 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -123,7 +122,6 @@ public class MainController {
 		}
 
 		try {
-			response.setCharacterEncoding("UTF-8");
 			response.getOutputStream().print(result);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -144,7 +142,6 @@ public class MainController {
 
 		// Result
 		try {
-			response.setCharacterEncoding("UTF-8");
 			response.getOutputStream().print(result);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -297,6 +294,7 @@ public class MainController {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			
 			request.setAttribute("navigate", loginResult);
 			
 			return "common/navigatePage";
@@ -312,8 +310,6 @@ public class MainController {
 
 		logger.info("LOGIN INFO CHECK");
 		
-		response.setCharacterEncoding("UTF-8");
-
 		if (session.getAttribute("loginStatus") != null) {
 			session.removeAttribute("loginstatus");
 		}

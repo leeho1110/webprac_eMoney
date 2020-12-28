@@ -1,0 +1,62 @@
+#postTbl {
+    width: 743px;
+    margin: 0px auto;
+	table-layout: fixed;
+}
+
+#postTbl th {
+	width: 100px;
+    text-align: center;
+	vertical-align: middle;
+	background-color: #eeeeee;
+	height: 40px;
+}
+
+#postTbl td {
+	text-align: left;
+}
+
+#postTbl tr:NTH-CHILD(4) td {
+	padding: 0px;
+}
+
+#btnDiv {
+	margin-top: 20px;
+	display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+
+}
+
+#allowUserBtn {
+	width: 743px;
+	margin: 10px auto;
+	text-align: right;
+}
+
+#cont_inner > h2 {
+	margin-bottom: 40px;
+}
+
+#contentDiv {
+	width:741px;
+	overflow-y: scroll;
+	height: 295px;
+	padding: 10px 10px;
+}

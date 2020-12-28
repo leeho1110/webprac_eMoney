@@ -58,8 +58,7 @@
 					</tbody>
 				</table>
 				<div id="btnDiv">
-					<input type="button" id="backBtn" class="btn" value="뒤로가기"
-						onclick="location.href='main.do';">
+					<a id="backBtn" href="${header.referer}">뒤로가기</a>
 				</div>
 			</div>
 		</div>

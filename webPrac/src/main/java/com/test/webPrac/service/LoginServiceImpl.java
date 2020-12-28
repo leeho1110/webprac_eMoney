@@ -98,6 +98,7 @@ public class LoginServiceImpl implements LoginService {
 	}
 
 	@Override
+	@Transactional
 	public void updateLoginInfoLogic(HttpServletRequest request, MemberVO memberVO, HttpSession session) {
 		
 		// DB 정보, browser, moblie, os 정보 세팅

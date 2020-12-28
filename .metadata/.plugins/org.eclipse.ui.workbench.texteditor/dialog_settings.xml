@@ -6,20 +6,20 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="sCursorHolder " key="selection"/>
+		<item value="login.do" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="sCursorHolder "/>
-			<item value="Enter"/>
-			<item value="smarteditor2.js"/>
-			<item value="INTERCEP"/>
-			<item value="INTER"/>
-			<item value="loginLogic"/>
-			<item value="loginLogi"/>
-			<item value="board.write."/>
+			<item value="login.do"/>
+			<item value="backBtn"/>
+			<item value="response.set"/>
+			<item value="setChar"/>
+			<item value="setChrac"/>
+			<item value="board.write.do"/>
+			<item value="register.do"/>
+			<item value="lucy"/>
 		</list>
 		<list key="replacehistory">
 			<item value="navigateVal"/>

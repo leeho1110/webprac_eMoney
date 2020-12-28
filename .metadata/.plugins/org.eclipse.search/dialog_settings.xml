@@ -5,11 +5,10 @@
 	</section>
 	<section name="">
 		<item value="1000" key="org.eclipse.search.resultpage.limit"/>
-		<item value="1000" key="org.eclipse.jdt.search.resultpage.limit"/>
-		<item value="TRUE" key="org.eclipse.jdt.search.resultpage.limit_enabled"/>
 	</section>
 	<section name="">
-		<item value="1000" key="org.eclipse.search.resultpage.limit"/>
+		<item value="1000" key="org.eclipse.wst.jsdt.search.resultpage.limit"/>
+		<item value="TRUE" key="org.eclipse.wst.jsdt.search.resultpage.limit_enabled"/>
 	</section>
 	<section name="TextSearchPage">
 		<item value="2" key="HISTORY_SIZE"/>
@@ -70,7 +69,7 @@
 		</list>
 	</section>
 	<section name="SearchDialog">
-		<item value="org.eclipse.search.internal.ui.text.TextSearchPage" key="PREVIOUS_PAGE"/>
+		<item value="org.eclipse.wst.jsdt.ui.JavaSearchPage" key="PREVIOUS_PAGE"/>
 	</section>
 	<section name="org.eclipse.jdt.ui.JavaSearchResultPage">
 		<item value="4" key="org.eclipse.jdt.search.resultpage.grouping"/>
@@ -83,5 +82,9 @@
 		<item value="471" key="DIALOG_HEIGHT"/>
 		<item value="715" key="DIALOG_X_ORIGIN"/>
 		<item value="214" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="org.eclipse.wst.jsdt.ui.JavaSearchResultPage">
+		<item value="1000" key="org.eclipse.wst.jsdt.search.resultpage.limit"/>
+		<item value="TRUE" key="org.eclipse.wst.jsdt.search.resultpage.limit_enabled"/>
 	</section>
 </section>

@@ -1,0 +1,51 @@
+#postTbl {
+    width: 743px;
+    margin: 0px auto;
+	table-layout: fixed;
+}
+
+#postTbl th {
+	width: 100px;
+    text-align: center;
+	vertical-align: middle;
+	background-color: #eeeeee;
+	height: 40px;
+}
+
+#postTbl td {
+	text-align: left;
+}
+
+#postTbl tr:NTH-CHILD(4) td {
+	padding: 0px;
+}
+
+#btnDiv {
+	margin-top: 20px;
+}
+
+#backBtn {
+	display: inline-block;
+	background-color: red;
+	width: 78px;
+	height: 34px;
+	color: #333;
+}
+
+
+#allowUserBtn {
+	width: 743px;
+	margin: 10px auto;
+	text-align: right;
+}
+
+#cont_inner > h2 {
+	margin-bottom: 40px;
+}
+
+#contentDiv {
+	width:741px;
+	overflow-y: scroll;
+	height: 295px;
+	padding: 10px 10px;
+}

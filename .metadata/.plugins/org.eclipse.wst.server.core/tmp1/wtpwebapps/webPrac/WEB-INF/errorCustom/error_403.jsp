@@ -45,18 +45,18 @@
 	<input type="hidden" id="loginStatus" value="${empty sessionScope.loginStatus }"> 
 
 	<script>
-		function movePage(){
-		    $("#emoneyLogo").click(function(){
-			    movePage();
-			});
-		    
-		    if($("#loginStatus") == "true") {
-				location.href="main.do";
-		    } else {
-				alert("로그인을 먼저 진행해주세요");
-				location.href="login.do";
-		    }
-		}
+	$("#emoneyLogo").click(function(){
+	    movePage();
+	});
+	
+	function movePage(){
+	    if($("#loginStatus").val() == "false") {
+			location.href="main.do";
+	    } else {
+			alert("로그인을 먼저 진행해주세요");
+			location.href="login.do";
+	    }
+	}
 		
 	</script>
 </body>

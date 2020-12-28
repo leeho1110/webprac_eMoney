@@ -50,7 +50,7 @@
 		});
 		
 		function movePage(){
-		    if($("#loginStatus") == "true") {
+		    if($("#loginStatus").val() == "false") {
 				location.href="main.do";
 		    } else {
 				alert("로그인을 먼저 진행해주세요");
